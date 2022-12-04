@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-12-04 Sun 17:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Makefile: Towards Reproducible Research-based Programming</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jay Morgan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 class="title">Makefile: Towards Reproducible Research-based Programming</h1>
+          <p class="subtitle">05-03-2020</p>
+</div>
+<div id="content">
+<h1 class="title">Makefile: Towards Reproducible Research-based Programming</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6a26bb1">1. Problems that arise during the course of research</a></li>
+<li><a href="#orgdceaf75">2. What is Make and Makefile?</a></li>
+<li><a href="#org5326a3b">3. Using Makefile for research programming</a>
+<ul>
+<li><a href="#org02ea59f">3.1. A simple example</a></li>
+<li><a href="#org62542f8">3.2. A more complicated example</a></li>
+<li><a href="#orge0da1c7">3.3. Multistage processing</a></li>
+<li><a href="#org9ff6971">3.4. Creating a summarised report</a></li>
+</ul>
+</li>
+<li><a href="#org313eb61">4. Variables and writing less code</a></li>
+<li><a href="#orgc631609">5. Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="topbar">
+<h3>Jay Morgan's Blog</h3>
+<a href="/">Blog Posts</a>
+<a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr">Publications</a>
+<a href="https://github.com/jaypmorgan">Git</a>
+<a href="https://pageperso.lis-lab.fr/~jay.morgan/">Teaching</a>
+</div>
+
+<p>
+I've been experimenting with <code>make</code> to deliver research projects. It has been to
+be a great way to alleviate some particular pain points that
+arise from these types of projects. Sufficed to say, the <code>make</code> tool has
+been an excellent addition to my workflow, one that I shall continue
+to use and experiment with.
+</p>
+
+<p>
+In this post, I would like to introduce you to <code>make</code> and how it can be used to
+help make research more reproducible and, ultimately, easier to manage
+complicated experiments. We shall first look at the problems that normally
+appear in research programming to give adequate background reason as to why
+<code>make</code> may be useful in this area. Then, after these problems have been
+understood, we will look at the basics of <code>make</code> and the construction of
+makefiles to both quickly automate our research while making it more
+reproducible for others.
+</p>
+
+<p>
+<span class="underline">DISCLAIMER:</span> I am by no means an expert in writing makefiles. And if
+you are, you may think some of the examples are not the optimal way to
+encode makefile rules. Indeed, many of the makefile examples will be
+somewhat more verbose than what you would want to use in
+production-grade products. However, for the purpose of this discussion,
+optimal and efficient makefiles are not conducive for learning about
+the basics. It may be better to create simple rules that work first, then once
+you're comfortable, making the makefile more complicated yet concise
+in the name of efficiency.
+</p>
+
+<div id="outline-container-org6a26bb1" class="outline-2">
+<h2 id="org6a26bb1"><span class="section-number-2">1</span> Problems that arise during the course of research</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+When conducting a research project, though the objective or hypothesis will be
+clearly defined, the steps involved to answer research questions are usually not. In
+essence, during the course of the project, the code-base, and even the data
+itself, will undergo several iterations of changes and
+experimentation with different methodologies. The consequence being
+that you'll rarely run through the project from start to finish, let alone the
+project structure before hand.
+</p>
+
+<p>
+Change is not inherently a problem, indeed, it is a necessity for
+research and experimentation. But, the issue lies in change that
+is not properly managed.
+</p>
+
+<p>
+When the data changes, any existing experiments will have to be re-run, or else,
+the results reported on the data should be considered <i>stale</i>. Changes to data
+occur frequently. Though raw data will never be modified in place, part of the
+research will involve cleaning, transforming, and potentially summarising the
+data before any method is applied to it. In principle, it would be ideal for the
+data to be completely clean and ready before any methods are used. However,
+problems do occur, and you may find yourself going back to the original data
+source and further accounting for some edge case that your current data cleaning
+does not catch. If you have already run experiments on the previous iteration of
+the 'cleaned' data, they will need to be re-run. Moreover, any other sources
+that directly depends on this data, such as summarised statistics, will also
+have to be recalculated. There is a significant overhead in remembering what
+needs to be updated at the moment of any change to the underlying data.
+</p>
+
+<p>
+CHANGE also has an effect on your code-base. Whether it is because of parameter
+tuning, bug fixes, or performance improvements, any change to the code-base
+could have both visible and invisible effects to the performance of the
+methodologies you are testing. To account for change (such as bug fixing or
+refactoring) in your program, it is desirable to construct unit tests. But while
+unit tests are a good and common practice, they may miss use cases and silent
+errors that come from integrating multiple scripts that you write throughout the
+project. Changes to your code base should be recorded, tested, and if possible,
+experiments should be re-done to ensure that the results you are reporting are
+the true results of the program.
+</p>
+
+<p>
+When these multiple factors of change are combined, it can be very difficult for
+others to reproduce your results. <code>make</code> can help with some of these issues
+by keeping track of what files have been changed, in addition to understanding
+the dependencies between files. We may use <code>make</code> to 'compile'
+our research project, allow others to easily reproduce our results, as well
+as automate our workflow.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdceaf75" class="outline-2">
+<h2 id="orgdceaf75"><span class="section-number-2">2</span> What is Make and Makefile?</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="https://www.gnu.org/software/make/manual/html_node/index.html#Top">Make</a> is a application often used to compile other larger and complex
+applications. By keeping track of dependencies, in addition to working on
+what needs to be recompiled, it can make compilation of software
+easy. 
+</p>
+
+<p>
+The input to <code>make</code> is a Makefile. A Makefile simply tells <code>make</code> what to do. In
+this file, we have a list of targets, which when provided to <code>make</code> as an
+argument, will execute the rules for this target, in addition to executing rules
+that this current target depends on.
+</p>
+
+<p>
+Typically, the makefile contains the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">target: dependancies # optional
+	rule to make target
+</pre>
+</div>
+
+<p>
+Our target is something we wish to create, and may depend on a number of
+different files. To make the target, we apply one or more rules such as
+executing a python program.
+</p>
+
+<p>
+We shall discuss how to use <code>make</code> and indeed write makefiles in order to make
+our research project for us.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5326a3b" class="outline-2">
+<h2 id="org5326a3b"><span class="section-number-2">3</span> Using Makefile for research programming</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Using make may then change the way we view our project, from a process
+where developing the code and algorithms are objective, to one where
+the result our output of said algorithm is the objective. Indeed, we
+may view our research as the application, and both our code and data
+as something that needs to be compiled in order to produce our output, the
+report on the research.
+</p>
+</div>
+
+<div id="outline-container-org02ea59f" class="outline-3">
+<h3 id="org02ea59f"><span class="section-number-3">3.1</span> A simple example</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Let us begin with a very basic example. Our project is going to be very
+simple: we have a simple data source, a CSV file. With this data, we
+need to measure the mean and standard deviation. Not a very exciting
+example, and it certainly won't win you a noble prize, but it will
+highlight how we might create our simple makefile to automate this
+process.
+</p>
+
+
+<div id="org21bc32d" class="figure">
+<p><img src="./images/makefile_process_1.png" alt="makefile_process_1.png" />
+</p>
+</div>
+
+<p>
+In this example, we have two starting files: (1) our data source &#x2013;
+<code>data.csv</code>; and (2) our program with which we can import the data source and
+compute the mean and standard deviation, aptly named <code>stats.py</code>. This
+program needs no command line arguments, but when called it simply
+looks for <code>data.csv</code>, computes the statistics and writes a new file
+<code>output.csv</code>.
+</p>
+
+<p>
+In the same directory, we shall create a new file
+called <code>Makefile</code>. The contents of our makefile are going look like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">output.csv: data.csv stats.py
+	python stats.py 
+</pre>
+</div>
+
+<p>
+This simple example includes the majority of what you will be doing in
+makefiles. We have a <b>target</b> in this case <code>output.csv</code>. We can tell
+its a target because it is followed by a colon ':'. This is the command
+we will pass to <code>make</code> when we wish to execute our make file.
+</p>
+
+<p>
+Next, we specify our (optional) <b>dependencies</b>. Our target depends on
+two files: <code>data.csv</code> and <code>stats.py</code>. This is simple a space
+delimited list of files after our target. Simply stated, we are
+telling <code>make</code> that in order to create our CSV file, both <code>data.csv</code>
+and <code>stats.py</code> must exist. But there's more: <code>make</code> is smart and by
+listing the dependencies, we are telling <code>make</code> that if
+either our data or our program changes then <code>output.csv</code> will need to be
+re-made. If they haven't change and <code>output.csv</code> already exists, make
+will tell us that nothing more needs to be done (it doesn't bother
+executing the program twice).
+</p>
+
+<p>
+The next line tells make what to do in order to create our target, our
+<b>rule</b>. In this case we call <code>python stats.py</code>. Like python, makefiles
+are indentation delimited. But unlike python where this indentation
+can be done either with tabs or spaces (but definitely not both),
+<b>makefiles are always indented with tabs</b>.
+</p>
+
+<p>
+To run this makefile, we type <code>make output.csv</code> into the command
+line. If everything is setup correctly, make will run <code>python
+stats.py</code> and our <code>output.csv</code> will be created.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org62542f8" class="outline-3">
+<h3 id="org62542f8"><span class="section-number-3">3.2</span> A more complicated example</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Suppose we have two algorithms and we wish
+to generate some comparative metrics. Like the previous example, we
+have a single data source called <code>data.csv</code>, but this time, we have
+two python programs: one for each algorithm. Each of these programs
+will create its own CSV file output. The process flow will look like
+this:
+</p>
+
+<p>
+In this case, we wish to execute both python programs to create both
+outputs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py 
+	python algorithm_1.py
+
+output_2.csv: data.csv algorithm_2.py
+	python algorithm_2.py 
+</pre>
+</div>
+
+<p>
+This time we have created two targets, one for each of our output csv
+files. Each target has their own dependencies and the rule to create the different
+outputs.
+</p>
+
+<p>
+In order to actually create the CSV files, we will type:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">make output_1.csv
+make output_2.csv
+</pre>
+</div>
+
+<p>
+into the command line. <code>make</code> is of course happy to take these two
+requests, but there is more onerous on us to make sure to execute
+both commands. While this is okay for these two CSVs, it will become
+more laborious when we have more.
+</p>
+
+<p>
+To overcome this issue, we can use a <code>PHONY</code> target. A phony target
+is one that won't exist but serves as a alias to provide <code>make</code> with
+a command we can type. In our previous example, both <code>output_1.csv</code>
+and <code>output_2.csv</code> were files that will exist after make has executed
+the two rules. With a phony target, however, make won't bother to look
+for the target's existence.
+</p>
+
+<p>
+We can create a phony target with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">.PHONY: output
+output: output_1.csv output_2.csv
+</pre>
+</div>
+
+<p>
+Our phony target, named <code>output</code>, depends on both our CSV
+files. Now, we can get <code>make</code> to create both of these output files with a
+single command: <code>make output</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge0da1c7" class="outline-3">
+<h3 id="orge0da1c7"><span class="section-number-3">3.3</span> Multistage processing</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Our previous examples have consisted of only one processing step, we
+take our input data, and produce an output. In these cases, keeping
+track of what is up-to-date and what still needs to be executed is
+easy enough. But when we introduce processing pipelines where the
+output of one program feeds into another, things can get a little more
+complicated.
+</p>
+
+<p>
+We have introduced a significantly more complicated process. We use a
+c++ program <code>squares.cpp</code> to take all of the data in the CSV, square it, and save
+the intermediate version as <code>squared_data.csv</code>. Processes such as this may occur
+when the dataset is large enough that we apply computations in batches or jobs
+via high-performance computing. In these cases, it is better to keep the
+original data source and preserve its mutability.
+</p>
+
+<p>
+With this squared data, our third algorithm &#x2013; <code>algorithm_3.py</code> &#x2013; is executed to
+produce output<sub>3.csv</sub>. To automate this process, we will add the following rule
+to our makefile:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py
+	python algorithm_1.py
+
+output_2.csv: data.csv algorithm_2.py
+	python algorithm_2.py
+
+output_3.csv: data.csv squares.cpp
+	g++ -i squares.cpp squares.o
+	./squares.o 
+	python algorithm_3.py
+
+.PHONY: outputs
+outputs: output_1.csv output_2.csv output_3.csv
+</pre>
+</div>
+
+<p>
+and all outputs can be made with <code>make outputs</code>.
+</p>
+
+<p>
+Both algorithm 1 and 2 are the same as the previous examples, but
+algorithm 3 has more computation steps. First, we must ensure that our c++
+code is compiled, then we must produce the <code>squares_data.csv</code> (done by
+<code>./squares</code> in this example), and then finally run <code>python algorithm_3.py</code> to
+produce the results.
+</p>
+
+<p>
+This is great, but what if algorithm 2 depended on both <code>data.csv</code> and <code>squared_data.csv</code>?
+</p>
+
+<p>
+We could change our <code>output_2.csv</code> target to something like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">output_2.csv: data.csv squared_data.csv algorithm_2.py 
+	g++ -i squares.cpp squares.o 
+	./squares.o 
+	python algorithm_2.py 
+</pre>
+</div>
+
+<p>
+But we may notice that the compilation of the c++ program occurs
+twice. So, instead, lets make the executable a target within its own
+right:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">squares.o: squares.cpp 
+	g++ -i squares.cpp squares.o 
+</pre>
+</div>
+
+<p>
+In addition, we can also create a target for the <code>squared_data.csv</code> as
+we only with to create it once.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">squared_data.csv: squares.o 
+	./squares.o
+</pre>
+</div>
+
+<p>
+and we'll amend our previous versions of targets <code>output_2.csv</code> and
+<code>output_3.csv</code> to depend on this executable already existing and being
+up-to-date.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">output_2.csv: data.csv algorithm_2.py squared_data.csv
+	python algorithm_2.py
+
+output_3.csv: data.csv algorithm_3.py squared_data.csv
+	python algorithm_3.py 
+</pre>
+</div>
+
+<p>
+This way, both the compilation and creation of <code>squared_data.csv</code>
+happens once.
+</p>
+
+<p>
+Our final makefile shall look like the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py
+	python algorithm_1.py
+
+output_2.csv: data.csv algorithm_2.py squared_data.csv
+	python algorithm_2.py
+
+output_3.csv: data.csv algorithm_3.py squared_data.csv 
+	python algorithm_3.py
+
+squares.o: squares.cpp 
+	g++ -i squares.cpp squares.o
+
+squared_data.csv: squares.o 
+	./squares.o
+
+.PHONY: outputs 
+outputs: output_1.csv output_2.csv output_3.csv
+</pre>
+</div>
+
+<p>
+and all output CSV files can still be created with one single command:
+<code>make outputs</code>. If we wish to just execute one pathway or algorithm,
+we can just specify that particular target. For example, if we just
+wish to run algorithm 1, we can run <code>make output_1.csv</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9ff6971" class="outline-3">
+<h3 id="org9ff6971"><span class="section-number-3">3.4</span> Creating a summarised report</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+We can go further and improve our process of research. Now that we have our
+outputs from each of the algorithm, we may summarise them and produce a final
+CSV file to present in a report.
+</p>
+
+<p>
+Our <code>summarise.py</code> takes all the results from each algorithm, provides some
+summary statistics, and outputs a single CSV file that is suitable for a
+report.
+</p>
+
+<p>
+If we use latex, and the PGFplotstable package, we can also automate the process
+of getting these results into our report.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-latex">\documentclass{article}
+
+\usepackage{pgfplotstable} % must use this package
+
+\title{Report}
+
+\begin{document}
+
+% import our table from the CSV file
+\begin{table}
+\centering
+\caption{My table}
+\label{tab:my_table}
+\pgfplotstableread[col sep=comma]{final_results.csv}\data
+\pgfplotstypeset[
+    % column options
+]{\data}
+\end{table}
+
+\end{document}
+</pre>
+</div>
+
+<p>
+Now, every time our results file changes, either because we added more
+algorithms, or we have modified the code or data, our report will always be up
+to date.
+</p>
+
+<p>
+<a href="http://pgfplots.sourceforge.net/pgfplotstable.pdf">PGFPlotstable</a> is a very
+useful package for importing, formatting, and even doing basic evaluations of
+data. Moreover, if you combine this package with the regular PGFplots, you data
+tables and plots can be automatically kept in sync with one another.
+</p>
+
+<p>
+We can go further and add the compilation of this latex document to our
+makefile:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">.PHONY: report
+report: final_results.csv report.tex
+	pdflatex report.tex
+</pre>
+</div>
+
+<p>
+And compile it using <code>make report</code>. These is an added benefit here that we may
+also add the recompilation rules for if our document contains a bibliography:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">.PHONY: report
+report: final_results.csv report.tex references.bib
+	pdflatex report.tex
+	bibtex report.aux
+	pdflatex report.tex
+	pdflatex report.tex
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org313eb61" class="outline-2">
+<h2 id="org313eb61"><span class="section-number-2">4</span> Variables and writing less code</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Our final makefile has a lot of repeated content:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py
+	python algorithm_1.py
+
+output_2.csv: data.csv algorithm_2.py squared_data.csv
+	python algorithm_2.py
+
+output_3.csv: data.csv algorithm_3.py squared_data.csv 
+	python algorithm_3.py
+
+squares.o: squares.cpp 
+	g++ -i squares.cpp squares.o
+
+squared_data.csv: squares.o 
+	./squares.o
+
+.PHONY: outputs 
+outputs: output_1.csv output_2.csv output_3.csv
+
+final_results.csv: output_1.csv output_2.csv output_3.csv
+	python summarise.py
+
+.PHONY: report
+report: report.tex final_results.csv references.bib
+	pdflatex report.tex
+	bibtex report.aux
+	pdflatex report.tex
+	pdflatex report.tex
+</pre>
+</div>
+
+<p>
+and if we wish to, for example, change the name of the original input data source from
+<code>data.csv</code> to <code>input_data.csv</code>, we must in fact change this name in multiple
+places in the makefile, ensuring that all of the dependencies are up to date.
+</p>
+
+<p>
+In a makefile, using
+<a href="https://ftp.gnu.org/old-gnu/Manuals/make-3.79.1/html_chapter/make_6.html">variables</a> may overcome this limitation. Let's begin by first defining a number of variables
+to remove the duplicated content.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile"># our new variables
+DATA = data.csv
+SQDR_DATA = squared_data.csv
+PYTHON_EXE = python
+RESULTS = output_1.csv output_2.csv output_3.csv
+
+output_1.csv: $(DATA) algorithm_1.py
+	$(PYTHON_EXE) algorithm_1.py
+
+output_2.csv: $(DATA) algorithm_2.py $(SQRD_DATA)
+	$(PYTHON_EXE) algorithm_2.py
+
+output_3.csv: $(DATA) algorithm_3.py $(SQRD_DATA) 
+	$(PYTHON_EXE) algorithm_3.py
+
+squares.o: squares.cpp 
+	g++ -i squares.cpp squares.o
+
+squared_data.csv: squares.o 
+	./squares.o
+
+.PHONY: outputs 
+outputs: $(RESULTS)
+
+final_results.csv: $(RESULTS)
+	$(PYTHON_EXE) summarise.py
+
+.PHONY: report
+report: report.tex final_results.csv references.bib
+	pdflatex report.tex
+	bibtex report.aux
+	pdflatex report.tex
+	pdflatex report.tex
+</pre>
+</div>
+
+<p>
+Variables are declared and used much like in bash, where the <code>=</code> is used to
+assign a value to the variable name and <code>$(...)</code> uses the value of the
+variable.
+</p>
+
+<p>
+If we now wish to change the name of <code>data.csv</code> we only need to change it in one
+place of the makefile. We have also replaced the name of the python executable
+so if we decide, for example, should we wish to use a 'virtualenv' version of python, we
+can quickly change this too.
+</p>
+
+<p>
+In addition to regular variables, make includes a number of <i>magic</i> or automatic
+variables to further reduce the amount of duplication in our makefile. Two of
+the automatic variables you will find yourself frequently using is <code>$@</code> and
+<code>$&lt;</code>. The first, <code>$@</code> is an automatic variable for the <i>target</i>, and <code>$&lt;</code> is the
+<i>first dependency</i>. We can use both of these in the following way:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-makefile">squares.o: squares.cpp
+	g++ -i $&lt; $@
+
+.PHONY: report
+report: report.tex final_results.csv references.bib
+	pdflatex $&lt;
+	bibtex $@.aux
+	pdflatex $&lt;
+	pdflatex $&lt;
+</pre>
+</div>
+
+<p>
+In the example above, we compiled our c++ program using <code>g++</code>, specifying
+the input file with the <code>$&lt;</code> variable that references the first dependency for
+our target, which in this case is <code>squares.cpp</code>. We've told <code>g++</code> that we wish
+for the output executable to be called <code>squares.o</code> using our target variable,
+<code>$@</code>.
+</p>
+
+<p>
+We have used a similar methodology for compiling our latex file.
+</p>
+
+<p>
+<code>make</code> includes a number of automatic variables to help reduce the size of your
+makefile. You can find the list and their usage here: <a href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html</a>
+</p>
+
+<p>
+Our final makefile is:
+</p>
+<div class="org-src-container">
+<pre class="src src-makefile"># our new variables
+DATA = data.csv
+SQDR_DATA = squared_data.csv
+PYTHON_EXE = python
+RESULTS = output_1.csv output_2.csv output_3.csv
+
+output_1.csv: $(DATA) algorithm_1.py
+	$(PYTHON_EXE) algorithm_1.py
+
+output_2.csv: $(DATA) algorithm_2.py $(SQRD_DATA)
+	$(PYTHON_EXE) algorithm_2.py
+
+output_3.csv: $(DATA) algorithm_3.py $(SQRD_DATA) 
+	$(PYTHON_EXE) algorithm_3.py
+
+squares.o: squares.cpp 
+	g++ -i squares.cpp squares.o
+
+squares.o: squares.cpp
+	g++ -i $&lt; $@
+
+.PHONY: outputs 
+outputs: $(RESULTS)
+
+final_results.csv: $(RESULTS)
+	$(PYTHON_EXE) summarise.py
+
+.PHONY: report
+report: report.tex final_results.csv references.bib
+	pdflatex $&lt;
+	bibtex $@.aux
+	pdflatex $&lt;
+	pdflatex $&lt;
+</pre>
+</div>
+
+<p>
+which automates our research process:
+</p>
+
+
+<p>
+Even if we move or send our files to a different computer, all we have
+to do to run our project from start to finish is <code>make report</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc631609" class="outline-2">
+<h2 id="orgc631609"><span class="section-number-2">5</span> Conclusion</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<code>make</code> can be an excellent addition to any research project. It tracks
+dependencies between files, only re-executes what is considered <i>stale</i> and all
+the while providing the developer with a simple interface to execute multiple
+commands with just a single target.
+</p>
+
+<p>
+If you use <code>make</code> and create a simple but yet powerful makefile, you can
+automate many of the laborious tasks that come with organising research-based projects.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 05-03-2020</p>
+<p class="author">Author: Jay Morgan</p>
+<p class="date">Created: 2022-12-04 Sun 17:08</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
