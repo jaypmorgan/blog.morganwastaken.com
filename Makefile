@@ -4,7 +4,7 @@ all: publish
 
 publish: publish.el
 	@echo "Publishing... with --no-init."
-	emacs --batch --no-init --load publish.el --funcall org-publish-all
+	emacs --batch --no-init --eval '(setq org-confirm-babel-evaluate nil)' --load publish.el --funcall org-publish-all
 
 clean:
 	@echo "Cleaning up.."
