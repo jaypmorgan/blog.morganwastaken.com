@@ -9,7 +9,7 @@
    (lambda (files filepath)
      (let ((filename (car (last (split-string filepath "/")))))
        (if (string= filename "index.org")
-	   files;	   (or (and (atom files) (list files)) files)
+	   files
 	 (cons filepath files))))
    (directory-files-recursively dir ".*\.org")
    :initial-value nil))
