@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-12-07 Wed 13:07 -->
+<!-- 2022-12-07 Wed 13:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Makefile: Towards Reproducible Research-based Programming</title>
@@ -230,18 +230,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf9c2cc5">1. Problems that arise during the course of research</a></li>
-<li><a href="#org9a20f3a">2. What is Make and Makefile?</a></li>
-<li><a href="#orgbc68433">3. Using Makefile for research programming</a>
+<li><a href="#orgc07384f">1. Problems that arise during the course of research</a></li>
+<li><a href="#org4f4f723">2. What is Make and Makefile?</a></li>
+<li><a href="#orge5bfb9f">3. Using Makefile for research programming</a>
 <ul>
-<li><a href="#orgeeb426c">3.1. A simple example</a></li>
-<li><a href="#org8e01fec">3.2. A more complicated example</a></li>
-<li><a href="#orgfa53a46">3.3. Multistage processing</a></li>
-<li><a href="#orgbb50d09">3.4. Creating a summarised report</a></li>
+<li><a href="#org8fbefb5">3.1. A simple example</a></li>
+<li><a href="#orgb7e916e">3.2. A more complicated example</a></li>
+<li><a href="#org42ac9b1">3.3. Multistage processing</a></li>
+<li><a href="#org07bcc72">3.4. Creating a summarised report</a></li>
 </ul>
 </li>
-<li><a href="#org34dd68a">4. Variables and writing less code</a></li>
-<li><a href="#org319decf">5. Conclusion</a></li>
+<li><a href="#orgcedb9a5">4. Variables and writing less code</a></li>
+<li><a href="#org6fbfbe6">5. Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -284,8 +284,8 @@ you're comfortable, making the makefile more complicated yet concise
 in the name of efficiency.
 </p>
 
-<div id="outline-container-orgf9c2cc5" class="outline-2">
-<h2 id="orgf9c2cc5"><span class="section-number-2">1</span> Problems that arise during the course of research</h2>
+<div id="outline-container-orgc07384f" class="outline-2">
+<h2 id="orgc07384f"><span class="section-number-2">1</span> Problems that arise during the course of research</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 When conducting a research project, though the objective or hypothesis will be
@@ -343,8 +343,8 @@ as automate our workflow.
 </div>
 </div>
 
-<div id="outline-container-org9a20f3a" class="outline-2">
-<h2 id="org9a20f3a"><span class="section-number-2">2</span> What is Make and Makefile?</h2>
+<div id="outline-container-org4f4f723" class="outline-2">
+<h2 id="org4f4f723"><span class="section-number-2">2</span> What is Make and Makefile?</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <a href="https://www.gnu.org/software/make/manual/html_node/index.html#Top">Make</a> is a application often used to compile other larger and complex
@@ -365,8 +365,8 @@ Typically, the makefile contains the following:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">target: dependancies # optional
-	rule to make target
+<pre class="src src-makefile"><span style="font-weight: bold;">target</span>: dependancies <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">optional</span>
+        rule to make target
 </pre>
 </div>
 
@@ -383,8 +383,8 @@ our research project for us.
 </div>
 </div>
 
-<div id="outline-container-orgbc68433" class="outline-2">
-<h2 id="orgbc68433"><span class="section-number-2">3</span> Using Makefile for research programming</h2>
+<div id="outline-container-orge5bfb9f" class="outline-2">
+<h2 id="orge5bfb9f"><span class="section-number-2">3</span> Using Makefile for research programming</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Using make may then change the way we view our project, from a process
@@ -396,8 +396,8 @@ report on the research.
 </p>
 </div>
 
-<div id="outline-container-orgeeb426c" class="outline-3">
-<h3 id="orgeeb426c"><span class="section-number-3">3.1</span> A simple example</h3>
+<div id="outline-container-org8fbefb5" class="outline-3">
+<h3 id="org8fbefb5"><span class="section-number-3">3.1</span> A simple example</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Let us begin with a very basic example. Our project is going to be very
@@ -409,7 +409,7 @@ process.
 </p>
 
 
-<div id="org9991c28" class="figure">
+<div id="orgdbbeec5" class="figure">
 <p><img src="./images/makefile_process_1.png" alt="makefile_process_1.png" />
 </p>
 </div>
@@ -429,8 +429,8 @@ called <code>Makefile</code>. The contents of our makefile are going look like t
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">output.csv: data.csv stats.py
-	python stats.py 
+<pre class="src src-makefile"><span style="font-weight: bold;">output.csv</span>: data.csv stats.py
+        python stats.py 
 </pre>
 </div>
 
@@ -470,8 +470,8 @@ stats.py</code> and our <code>output.csv</code> will be created.
 </div>
 </div>
 
-<div id="outline-container-org8e01fec" class="outline-3">
-<h3 id="org8e01fec"><span class="section-number-3">3.2</span> A more complicated example</h3>
+<div id="outline-container-orgb7e916e" class="outline-3">
+<h3 id="orgb7e916e"><span class="section-number-3">3.2</span> A more complicated example</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Suppose we have two algorithms and we wish
@@ -488,11 +488,11 @@ outputs.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py 
-	python algorithm_1.py
+<pre class="src src-makefile"><span style="font-weight: bold;">output_1.csv</span>: data.csv algorithm_1.py 
+        python algorithm_1.py
 
-output_2.csv: data.csv algorithm_2.py
-	python algorithm_2.py 
+<span style="font-weight: bold;">output_2.csv</span>: data.csv algorithm_2.py
+        python algorithm_2.py 
 </pre>
 </div>
 
@@ -533,8 +533,8 @@ We can create a phony target with:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">.PHONY: output
-output: output_1.csv output_2.csv
+<pre class="src src-makefile"><span style="font-weight: bold;">.PHONY</span>: output
+<span style="font-weight: bold;">output</span>: output_1.csv output_2.csv
 </pre>
 </div>
 
@@ -546,8 +546,8 @@ single command: <code>make output</code>.
 </div>
 </div>
 
-<div id="outline-container-orgfa53a46" class="outline-3">
-<h3 id="orgfa53a46"><span class="section-number-3">3.3</span> Multistage processing</h3>
+<div id="outline-container-org42ac9b1" class="outline-3">
+<h3 id="org42ac9b1"><span class="section-number-3">3.3</span> Multistage processing</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Our previous examples have consisted of only one processing step, we
@@ -574,19 +574,19 @@ to our makefile:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py
-	python algorithm_1.py
+<pre class="src src-makefile"><span style="font-weight: bold;">output_1.csv</span>: data.csv algorithm_1.py
+        python algorithm_1.py
 
-output_2.csv: data.csv algorithm_2.py
-	python algorithm_2.py
+<span style="font-weight: bold;">output_2.csv</span>: data.csv algorithm_2.py
+        python algorithm_2.py
 
-output_3.csv: data.csv squares.cpp
-	g++ -i squares.cpp squares.o
-	./squares.o 
-	python algorithm_3.py
+<span style="font-weight: bold;">output_3.csv</span>: data.csv squares.cpp
+        g++ -i squares.cpp squares.o
+        ./squares.o 
+        python algorithm_3.py
 
-.PHONY: outputs
-outputs: output_1.csv output_2.csv output_3.csv
+<span style="font-weight: bold;">.PHONY</span>: outputs
+<span style="font-weight: bold;">outputs</span>: output_1.csv output_2.csv output_3.csv
 </pre>
 </div>
 
@@ -611,10 +611,10 @@ We could change our <code>output_2.csv</code> target to something like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">output_2.csv: data.csv squared_data.csv algorithm_2.py 
-	g++ -i squares.cpp squares.o 
-	./squares.o 
-	python algorithm_2.py 
+<pre class="src src-makefile"><span style="font-weight: bold;">output_2.csv</span>: data.csv squared_data.csv algorithm_2.py 
+        g++ -i squares.cpp squares.o 
+        ./squares.o 
+        python algorithm_2.py 
 </pre>
 </div>
 
@@ -625,8 +625,8 @@ right:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">squares.o: squares.cpp 
-	g++ -i squares.cpp squares.o 
+<pre class="src src-makefile"><span style="font-weight: bold;">squares.o</span>: squares.cpp 
+        g++ -i squares.cpp squares.o 
 </pre>
 </div>
 
@@ -636,8 +636,8 @@ we only with to create it once.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">squared_data.csv: squares.o 
-	./squares.o
+<pre class="src src-makefile"><span style="font-weight: bold;">squared_data.csv</span>: squares.o 
+        ./squares.o
 </pre>
 </div>
 
@@ -648,11 +648,11 @@ up-to-date.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">output_2.csv: data.csv algorithm_2.py squared_data.csv
-	python algorithm_2.py
+<pre class="src src-makefile"><span style="font-weight: bold;">output_2.csv</span>: data.csv algorithm_2.py squared_data.csv
+        python algorithm_2.py
 
-output_3.csv: data.csv algorithm_3.py squared_data.csv
-	python algorithm_3.py 
+<span style="font-weight: bold;">output_3.csv</span>: data.csv algorithm_3.py squared_data.csv
+        python algorithm_3.py 
 </pre>
 </div>
 
@@ -666,23 +666,23 @@ Our final makefile shall look like the following:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py
-	python algorithm_1.py
+<pre class="src src-makefile"><span style="font-weight: bold;">output_1.csv</span>: data.csv algorithm_1.py
+        python algorithm_1.py
 
-output_2.csv: data.csv algorithm_2.py squared_data.csv
-	python algorithm_2.py
+<span style="font-weight: bold;">output_2.csv</span>: data.csv algorithm_2.py squared_data.csv
+        python algorithm_2.py
 
-output_3.csv: data.csv algorithm_3.py squared_data.csv 
-	python algorithm_3.py
+<span style="font-weight: bold;">output_3.csv</span>: data.csv algorithm_3.py squared_data.csv 
+        python algorithm_3.py
 
-squares.o: squares.cpp 
-	g++ -i squares.cpp squares.o
+<span style="font-weight: bold;">squares.o</span>: squares.cpp 
+        g++ -i squares.cpp squares.o
 
-squared_data.csv: squares.o 
-	./squares.o
+<span style="font-weight: bold;">squared_data.csv</span>: squares.o 
+        ./squares.o
 
-.PHONY: outputs 
-outputs: output_1.csv output_2.csv output_3.csv
+<span style="font-weight: bold;">.PHONY</span>: outputs 
+<span style="font-weight: bold;">outputs</span>: output_1.csv output_2.csv output_3.csv
 </pre>
 </div>
 
@@ -695,8 +695,8 @@ wish to run algorithm 1, we can run <code>make output_1.csv</code>.
 </div>
 </div>
 
-<div id="outline-container-orgbb50d09" class="outline-3">
-<h3 id="orgbb50d09"><span class="section-number-3">3.4</span> Creating a summarised report</h3>
+<div id="outline-container-org07bcc72" class="outline-3">
+<h3 id="org07bcc72"><span class="section-number-3">3.4</span> Creating a summarised report</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 We can go further and improve our process of research. Now that we have our
@@ -716,26 +716,26 @@ of getting these results into our report.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-latex">\documentclass{article}
+<pre class="src src-latex"><span style="font-weight: bold;">\documentclass</span>{<span style="font-weight: bold;">article</span>}
 
-\usepackage{pgfplotstable} % must use this package
+<span style="font-weight: bold;">\usepackage</span>{<span style="font-weight: bold;">pgfplotstable</span>} <span style="font-weight: bold; font-style: italic;">% must use this package</span>
 
-\title{Report}
+<span style="font-weight: bold;">\title</span>{<span style="font-weight: bold;">Report</span>}
 
-\begin{document}
+<span style="font-weight: bold;">\begin</span>{<span style="font-weight: bold;">document</span>}
 
-% import our table from the CSV file
-\begin{table}
-\centering
-\caption{My table}
-\label{tab:my_table}
-\pgfplotstableread[col sep=comma]{final_results.csv}\data
-\pgfplotstypeset[
-    % column options
-]{\data}
-\end{table}
+<span style="font-weight: bold; font-style: italic;">% </span><span style="font-weight: bold; font-style: italic;">import our table from the CSV file</span>
+<span style="font-weight: bold;">\begin</span>{<span style="font-weight: bold;">table</span>}
+<span style="font-weight: bold;">\centering</span>
+<span style="font-weight: bold;">\caption</span>{My table}
+<span style="font-weight: bold;">\label</span>{<span style="font-weight: bold; text-decoration: underline;">tab:my_table</span>}
+<span style="font-weight: bold;">\pgfplotstableread</span>[col sep=comma]{final_results.csv}<span style="font-weight: bold;">\data</span>
+<span style="font-weight: bold;">\pgfplotstypeset</span>[
+    <span style="font-weight: bold; font-style: italic;">% column options</span>
+]{<span style="font-weight: bold;">\data</span>}
+<span style="font-weight: bold;">\end</span>{<span style="font-weight: bold;">table</span>}
 
-\end{document}
+<span style="font-weight: bold;">\end</span>{<span style="font-weight: bold;">document</span>}
 </pre>
 </div>
 
@@ -758,9 +758,9 @@ makefile:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">.PHONY: report
-report: final_results.csv report.tex
-	pdflatex report.tex
+<pre class="src src-makefile"><span style="font-weight: bold;">.PHONY</span>: report
+<span style="font-weight: bold;">report</span>: final_results.csv report.tex
+        pdflatex report.tex
 </pre>
 </div>
 
@@ -770,52 +770,52 @@ also add the recompilation rules for if our document contains a bibliography:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">.PHONY: report
-report: final_results.csv report.tex references.bib
-	pdflatex report.tex
-	bibtex report.aux
-	pdflatex report.tex
-	pdflatex report.tex
+<pre class="src src-makefile"><span style="font-weight: bold;">.PHONY</span>: report
+<span style="font-weight: bold;">report</span>: final_results.csv report.tex references.bib
+        pdflatex report.tex
+        bibtex report.aux
+        pdflatex report.tex
+        pdflatex report.tex
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org34dd68a" class="outline-2">
-<h2 id="org34dd68a"><span class="section-number-2">4</span> Variables and writing less code</h2>
+<div id="outline-container-orgcedb9a5" class="outline-2">
+<h2 id="orgcedb9a5"><span class="section-number-2">4</span> Variables and writing less code</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Our final makefile has a lot of repeated content:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">output_1.csv: data.csv algorithm_1.py
-	python algorithm_1.py
+<pre class="src src-makefile"><span style="font-weight: bold;">output_1.csv</span>: data.csv algorithm_1.py
+        python algorithm_1.py
 
-output_2.csv: data.csv algorithm_2.py squared_data.csv
-	python algorithm_2.py
+<span style="font-weight: bold;">output_2.csv</span>: data.csv algorithm_2.py squared_data.csv
+        python algorithm_2.py
 
-output_3.csv: data.csv algorithm_3.py squared_data.csv 
-	python algorithm_3.py
+<span style="font-weight: bold;">output_3.csv</span>: data.csv algorithm_3.py squared_data.csv 
+        python algorithm_3.py
 
-squares.o: squares.cpp 
-	g++ -i squares.cpp squares.o
+<span style="font-weight: bold;">squares.o</span>: squares.cpp 
+        g++ -i squares.cpp squares.o
 
-squared_data.csv: squares.o 
-	./squares.o
+<span style="font-weight: bold;">squared_data.csv</span>: squares.o 
+        ./squares.o
 
-.PHONY: outputs 
-outputs: output_1.csv output_2.csv output_3.csv
+<span style="font-weight: bold;">.PHONY</span>: outputs 
+<span style="font-weight: bold;">outputs</span>: output_1.csv output_2.csv output_3.csv
 
-final_results.csv: output_1.csv output_2.csv output_3.csv
-	python summarise.py
+<span style="font-weight: bold;">final_results.csv</span>: output_1.csv output_2.csv output_3.csv
+        python summarise.py
 
-.PHONY: report
-report: report.tex final_results.csv references.bib
-	pdflatex report.tex
-	bibtex report.aux
-	pdflatex report.tex
-	pdflatex report.tex
+<span style="font-weight: bold;">.PHONY</span>: report
+<span style="font-weight: bold;">report</span>: report.tex final_results.csv references.bib
+        pdflatex report.tex
+        bibtex report.aux
+        pdflatex report.tex
+        pdflatex report.tex
 </pre>
 </div>
 
@@ -832,39 +832,39 @@ to remove the duplicated content.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile"># our new variables
-DATA = data.csv
-SQDR_DATA = squared_data.csv
-PYTHON_EXE = python
-RESULTS = output_1.csv output_2.csv output_3.csv
+<pre class="src src-makefile"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">our new variables</span>
+<span style="font-weight: bold; font-style: italic;">DATA</span> = data.csv
+<span style="font-weight: bold; font-style: italic;">SQDR_DATA</span> = squared_data.csv
+<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span> = python
+<span style="font-weight: bold; font-style: italic;">RESULTS</span> = output_1.csv output_2.csv output_3.csv
 
-output_1.csv: $(DATA) algorithm_1.py
-	$(PYTHON_EXE) algorithm_1.py
+<span style="font-weight: bold;">output_1.csv</span>: $(<span style="font-weight: bold; font-style: italic;">DATA</span>) algorithm_1.py
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) algorithm_1.py
 
-output_2.csv: $(DATA) algorithm_2.py $(SQRD_DATA)
-	$(PYTHON_EXE) algorithm_2.py
+<span style="font-weight: bold;">output_2.csv</span>: $(<span style="font-weight: bold; font-style: italic;">DATA</span>) algorithm_2.py $(<span style="font-weight: bold; font-style: italic;">SQRD_DATA</span>)
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) algorithm_2.py
 
-output_3.csv: $(DATA) algorithm_3.py $(SQRD_DATA) 
-	$(PYTHON_EXE) algorithm_3.py
+<span style="font-weight: bold;">output_3.csv</span>: $(<span style="font-weight: bold; font-style: italic;">DATA</span>) algorithm_3.py $(<span style="font-weight: bold; font-style: italic;">SQRD_DATA</span>) 
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) algorithm_3.py
 
-squares.o: squares.cpp 
-	g++ -i squares.cpp squares.o
+<span style="font-weight: bold;">squares.o</span>: squares.cpp 
+        g++ -i squares.cpp squares.o
 
-squared_data.csv: squares.o 
-	./squares.o
+<span style="font-weight: bold;">squared_data.csv</span>: squares.o 
+        ./squares.o
 
-.PHONY: outputs 
-outputs: $(RESULTS)
+<span style="font-weight: bold;">.PHONY</span>: outputs 
+<span style="font-weight: bold;">outputs</span>: $(<span style="font-weight: bold; font-style: italic;">RESULTS</span>)
 
-final_results.csv: $(RESULTS)
-	$(PYTHON_EXE) summarise.py
+<span style="font-weight: bold;">final_results.csv</span>: $(<span style="font-weight: bold; font-style: italic;">RESULTS</span>)
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) summarise.py
 
-.PHONY: report
-report: report.tex final_results.csv references.bib
-	pdflatex report.tex
-	bibtex report.aux
-	pdflatex report.tex
-	pdflatex report.tex
+<span style="font-weight: bold;">.PHONY</span>: report
+<span style="font-weight: bold;">report</span>: report.tex final_results.csv references.bib
+        pdflatex report.tex
+        bibtex report.aux
+        pdflatex report.tex
+        pdflatex report.tex
 </pre>
 </div>
 
@@ -890,15 +890,15 @@ the automatic variables you will find yourself frequently using is <code>$@</cod
 </p>
 
 <div class="org-src-container">
-<pre class="src src-makefile">squares.o: squares.cpp
-	g++ -i $&lt; $@
+<pre class="src src-makefile"><span style="font-weight: bold;">squares.o</span>: squares.cpp
+        g++ -i $<span style="font-weight: bold; text-decoration: underline;">&lt;</span> <span style="font-weight: bold;">$</span><span style="font-weight: bold; text-decoration: underline;">@</span>
 
-.PHONY: report
-report: report.tex final_results.csv references.bib
-	pdflatex $&lt;
-	bibtex $@.aux
-	pdflatex $&lt;
-	pdflatex $&lt;
+<span style="font-weight: bold;">.PHONY</span>: report
+<span style="font-weight: bold;">report</span>: report.tex final_results.csv references.bib
+        pdflatex $<span style="font-weight: bold; text-decoration: underline;">&lt;</span>
+        bibtex <span style="font-weight: bold;">$</span><span style="font-weight: bold; text-decoration: underline;">@</span>.aux
+        pdflatex $<span style="font-weight: bold; text-decoration: underline;">&lt;</span>
+        pdflatex $<span style="font-weight: bold; text-decoration: underline;">&lt;</span>
 </pre>
 </div>
 
@@ -923,39 +923,39 @@ makefile. You can find the list and their usage here: <a href="https://www.gnu.o
 Our final makefile is:
 </p>
 <div class="org-src-container">
-<pre class="src src-makefile"># our new variables
-DATA = data.csv
-SQDR_DATA = squared_data.csv
-PYTHON_EXE = python
-RESULTS = output_1.csv output_2.csv output_3.csv
+<pre class="src src-makefile"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">our new variables</span>
+<span style="font-weight: bold; font-style: italic;">DATA</span> = data.csv
+<span style="font-weight: bold; font-style: italic;">SQDR_DATA</span> = squared_data.csv
+<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span> = python
+<span style="font-weight: bold; font-style: italic;">RESULTS</span> = output_1.csv output_2.csv output_3.csv
 
-output_1.csv: $(DATA) algorithm_1.py
-	$(PYTHON_EXE) algorithm_1.py
+<span style="font-weight: bold;">output_1.csv</span>: $(<span style="font-weight: bold; font-style: italic;">DATA</span>) algorithm_1.py
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) algorithm_1.py
 
-output_2.csv: $(DATA) algorithm_2.py $(SQRD_DATA)
-	$(PYTHON_EXE) algorithm_2.py
+<span style="font-weight: bold;">output_2.csv</span>: $(<span style="font-weight: bold; font-style: italic;">DATA</span>) algorithm_2.py $(<span style="font-weight: bold; font-style: italic;">SQRD_DATA</span>)
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) algorithm_2.py
 
-output_3.csv: $(DATA) algorithm_3.py $(SQRD_DATA) 
-	$(PYTHON_EXE) algorithm_3.py
+<span style="font-weight: bold;">output_3.csv</span>: $(<span style="font-weight: bold; font-style: italic;">DATA</span>) algorithm_3.py $(<span style="font-weight: bold; font-style: italic;">SQRD_DATA</span>) 
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) algorithm_3.py
 
-squares.o: squares.cpp 
-	g++ -i squares.cpp squares.o
+<span style="font-weight: bold;">squares.o</span>: squares.cpp 
+        g++ -i squares.cpp squares.o
 
-squares.o: squares.cpp
-	g++ -i $&lt; $@
+<span style="font-weight: bold;">squares.o</span>: squares.cpp
+        g++ -i $<span style="font-weight: bold; text-decoration: underline;">&lt;</span> <span style="font-weight: bold;">$</span><span style="font-weight: bold; text-decoration: underline;">@</span>
 
-.PHONY: outputs 
-outputs: $(RESULTS)
+<span style="font-weight: bold;">.PHONY</span>: outputs 
+<span style="font-weight: bold;">outputs</span>: $(<span style="font-weight: bold; font-style: italic;">RESULTS</span>)
 
-final_results.csv: $(RESULTS)
-	$(PYTHON_EXE) summarise.py
+<span style="font-weight: bold;">final_results.csv</span>: $(<span style="font-weight: bold; font-style: italic;">RESULTS</span>)
+        $(<span style="font-weight: bold; font-style: italic;">PYTHON_EXE</span>) summarise.py
 
-.PHONY: report
-report: report.tex final_results.csv references.bib
-	pdflatex $&lt;
-	bibtex $@.aux
-	pdflatex $&lt;
-	pdflatex $&lt;
+<span style="font-weight: bold;">.PHONY</span>: report
+<span style="font-weight: bold;">report</span>: report.tex final_results.csv references.bib
+        pdflatex $<span style="font-weight: bold; text-decoration: underline;">&lt;</span>
+        bibtex <span style="font-weight: bold;">$</span><span style="font-weight: bold; text-decoration: underline;">@</span>.aux
+        pdflatex $<span style="font-weight: bold; text-decoration: underline;">&lt;</span>
+        pdflatex $<span style="font-weight: bold; text-decoration: underline;">&lt;</span>
 </pre>
 </div>
 
@@ -971,8 +971,8 @@ to do to run our project from start to finish is <code>make report</code>.
 </div>
 </div>
 
-<div id="outline-container-org319decf" class="outline-2">
-<h2 id="org319decf"><span class="section-number-2">5</span> Conclusion</h2>
+<div id="outline-container-org6fbfbe6" class="outline-2">
+<h2 id="org6fbfbe6"><span class="section-number-2">5</span> Conclusion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <code>make</code> can be an excellent addition to any research project. It tracks
@@ -991,7 +991,7 @@ automate many of the laborious tasks that come with organising research-based pr
 <div id="postamble" class="status">
 <p class="date">Date: 05-03-2020</p>
 <p class="author">Author: Jay Morgan</p>
-<p class="date">Created: 2022-12-07 Wed 13:07</p>
+<p class="date">Created: 2022-12-07 Wed 13:20</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

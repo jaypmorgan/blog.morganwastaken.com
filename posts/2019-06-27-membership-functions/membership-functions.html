@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-12-07 Wed 13:07 -->
+<!-- 2022-12-07 Wed 13:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fuzzy Logic Membership Functions</title>
@@ -252,10 +252,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9ae442a">1. Triangluar Function</a></li>
-<li><a href="#orgc968be2">2. Gaussian Membership Function</a></li>
-<li><a href="#orgece222e">3. Sigmoidal Membership Function</a></li>
-<li><a href="#org3233598">4. Multi-Dimensional Functions</a></li>
+<li><a href="#org67787fe">1. Triangluar Function</a></li>
+<li><a href="#orgad2e206">2. Gaussian Membership Function</a></li>
+<li><a href="#orgd4bbcbc">3. Sigmoidal Membership Function</a></li>
+<li><a href="#org95a6a5d">4. Multi-Dimensional Functions</a></li>
 </ul>
 </div>
 </div>
@@ -286,39 +286,39 @@ To make these MFs, we will use the <a href="https://gitlab.com/jaymorgan/fuzzyto
 
 
 <div class="org-src-container">
-<pre class="src src-python">import os; os.chdir("../")
+<pre class="src src-python"><span style="font-weight: bold;">import</span> os; os.chdir(<span style="font-style: italic;">"../"</span>)
 </pre>
 </div>
 
 
 <div class="org-src-container">
-<pre class="src src-python">from functools import partial
+<pre class="src src-python"><span style="font-weight: bold;">from</span> functools <span style="font-weight: bold;">import</span> partial
 
-import torch
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import seaborn as sns
+<span style="font-weight: bold;">import</span> torch
+<span style="font-weight: bold;">import</span> numpy <span style="font-weight: bold;">as</span> np
+<span style="font-weight: bold;">import</span> matplotlib.pyplot <span style="font-weight: bold;">as</span> plt
+<span style="font-weight: bold;">from</span> mpl_toolkits.mplot3d <span style="font-weight: bold;">import</span> Axes3D
+<span style="font-weight: bold;">import</span> seaborn <span style="font-weight: bold;">as</span> sns
 
-# Our Membership Functions import
-from src.functional.membership import *
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Our Membership Functions import</span>
+<span style="font-weight: bold;">from</span> src.functional.membership <span style="font-weight: bold;">import</span> *
 </pre>
 </div>
 
 
 <div class="org-src-container">
-<pre class="src src-python">x = torch.linspace(0, 100, 100).view(-1, 1)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">x</span> = torch.linspace(0, 100, 100).view(-1, 1)
 
-def draw_function(func):
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">draw_function</span>(func):
     sns.lineplot(x.flatten().numpy(), func.flatten())
-    plt.xlabel("$$x_i$$")
-    plt.ylabel("Membership Value")
+    plt.xlabel(<span style="font-style: italic;">"$$x_i$$"</span>)
+    plt.ylabel(<span style="font-style: italic;">"Membership Value"</span>)
     plt.grid()
 </pre>
 </div>
 
-<div id="outline-container-org9ae442a" class="outline-2">
-<h2 id="org9ae442a"><span class="section-number-2">1</span> Triangluar Function</h2>
+<div id="outline-container-org67787fe" class="outline-2">
+<h2 id="org67787fe"><span class="section-number-2">1</span> Triangluar Function</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A triangular MF is created using three parameters \(\{a, b, c\}, a < b < c\):
@@ -333,11 +333,11 @@ A triangular MF is created using three parameters \(\{a, b, c\}, a < b < c\):
 
 
 <div class="org-src-container">
-<pre class="src src-python">help(triangle)
+<pre class="src src-python"><span style="font-weight: bold;">help</span>(triangle)
 </pre>
 </div>
 
-<pre class="example" id="orgeaa652c">
+<pre class="example" id="orgaa0a854">
 Help on function triangle in module src.functional.membership:
 
 triangle(x, a, b, c)
@@ -352,13 +352,13 @@ triangle(x, a, b, c)
 
 
 <div class="org-src-container">
-<pre class="src src-python">tri = partial(triangle, a=20, b=60, c=80)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">tri</span> = partial(triangle, a=20, b=60, c=80)
 
 draw_function(tri(x))
 
-plt.text(22, tri(20), "a")
-plt.text(62, tri(60), "b")
-plt.text(82, tri(80), "c")
+plt.text(22, tri(20), <span style="font-style: italic;">"a"</span>)
+plt.text(62, tri(60), <span style="font-style: italic;">"b"</span>)
+plt.text(82, tri(80), <span style="font-style: italic;">"c"</span>)
 </pre>
 </div>
 
@@ -373,7 +373,7 @@ Text(82, tensor([0.]), 'c')
 
 
 
-<div id="org2aac47c" class="figure">
+<div id="org9e6394d" class="figure">
 <p><img src="images/output_6_1.png" alt="output_6_1.png" />
 </p>
 </div>
@@ -391,11 +391,11 @@ Trapezoid Membership Function
 
 
 <div class="org-src-container">
-<pre class="src src-python">help(trapezoid)
+<pre class="src src-python"><span style="font-weight: bold;">help</span>(trapezoid)
 </pre>
 </div>
 
-<pre class="example" id="org3f453d2">
+<pre class="example" id="org60f96a0">
 Help on function trapezoid in module src.functional.membership:
 
 trapezoid(x, a, b, c, d)
@@ -411,14 +411,14 @@ trapezoid(x, a, b, c, d)
 
 
 <div class="org-src-container">
-<pre class="src src-python">trap = partial(trapezoid, a=10, b=20, c=60, d=95)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">trap</span> = partial(trapezoid, a=10, b=20, c=60, d=95)
 
 draw_function(trap(x))
 
-plt.text(11, trap(10), "a")
-plt.text(21, trap(20), "b")
-plt.text(61, trap(60), "c")
-plt.text(96, trap(95), "d")
+plt.text(11, trap(10), <span style="font-style: italic;">"a"</span>)
+plt.text(21, trap(20), <span style="font-style: italic;">"b"</span>)
+plt.text(61, trap(60), <span style="font-style: italic;">"c"</span>)
+plt.text(96, trap(95), <span style="font-style: italic;">"d"</span>)
 </pre>
 </div>
 
@@ -433,7 +433,7 @@ Text(96, tensor([0.]), 'd')
 
 
 
-<div id="orgfa2c631" class="figure">
+<div id="orgf63c312" class="figure">
 <p><img src="images/output_9_1.png" alt="output_9_1.png" />
 </p>
 </div>
@@ -441,8 +441,8 @@ Text(96, tensor([0.]), 'd')
 </div>
 
 
-<div id="outline-container-orgc968be2" class="outline-2">
-<h2 id="orgc968be2"><span class="section-number-2">2</span> Gaussian Membership Function</h2>
+<div id="outline-container-orgad2e206" class="outline-2">
+<h2 id="orgad2e206"><span class="section-number-2">2</span> Gaussian Membership Function</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 \[
@@ -452,11 +452,11 @@ Text(96, tensor([0.]), 'd')
 
 
 <div class="org-src-container">
-<pre class="src src-python">help(gaussian)
+<pre class="src src-python"><span style="font-weight: bold;">help</span>(gaussian)
 </pre>
 </div>
 
-<pre class="example" id="org8f227fb">
+<pre class="example" id="org59579cf">
 Help on function gaussian in module src.functional.membership:
 
 gaussian(x, a, b)
@@ -473,12 +473,12 @@ gaussian(x, a, b)
 
 
 <div class="org-src-container">
-<pre class="src src-python">gaus = partial(gaussian, a=50, b=20)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">gaus</span> = partial(gaussian, a=50, b=20)
 
 draw_function(gaus(x))
 
-plt.text(50-5, gaus(50)-0.1, "Mean")
-plt.text(50+22, gaus(50+20), "Standard Deviation")
+plt.text(50-5, gaus(50)-0.1, <span style="font-style: italic;">"Mean"</span>)
+plt.text(50+22, gaus(50+20), <span style="font-style: italic;">"Standard Deviation"</span>)
 </pre>
 </div>
 
@@ -493,7 +493,7 @@ Text(72, tensor([0.6065]), 'Standard Deviation')
 
 
 
-<div id="org5aef56c" class="figure">
+<div id="org1123972" class="figure">
 <p><img src="images/output_12_1.png" alt="output_12_1.png" />
 </p>
 </div>
@@ -511,11 +511,11 @@ General Bell Curve Membership Function
 
 
 <div class="org-src-container">
-<pre class="src src-python">help(bell)
+<pre class="src src-python"><span style="font-weight: bold;">help</span>(bell)
 </pre>
 </div>
 
-<pre class="example" id="org76f6643">
+<pre class="example" id="org0e9a780">
 Help on function bell in module src.functional.membership:
 
 bell(x, a, b, c)
@@ -530,7 +530,7 @@ bell(x, a, b, c)
 
 
 <div class="org-src-container">
-<pre class="src src-python">bellf = partial(bell, a=20, b=4, c=50)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">bellf</span> = partial(bell, a=20, b=4, c=50)
 
 draw_function(bellf(x))
 </pre>
@@ -538,7 +538,7 @@ draw_function(bellf(x))
 
 
 
-<div id="orgec4dd87" class="figure">
+<div id="org6238b56" class="figure">
 <p><img src="images/output_15_0.png" alt="output_15_0.png" />
 </p>
 </div>
@@ -546,8 +546,8 @@ draw_function(bellf(x))
 </div>
 
 
-<div id="outline-container-orgece222e" class="outline-2">
-<h2 id="orgece222e"><span class="section-number-2">3</span> Sigmoidal Membership Function</h2>
+<div id="outline-container-orgd4bbcbc" class="outline-2">
+<h2 id="orgd4bbcbc"><span class="section-number-2">3</span> Sigmoidal Membership Function</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 \[
@@ -557,11 +557,11 @@ draw_function(bellf(x))
 
 
 <div class="org-src-container">
-<pre class="src src-python">help(sigmoid)
+<pre class="src src-python"><span style="font-weight: bold;">help</span>(sigmoid)
 </pre>
 </div>
 
-<pre class="example" id="org4332813">
+<pre class="example" id="orgc8cbda5">
 Help on function sigmoid in module src.functional.membership:
 
 sigmoid(x, a, b)
@@ -575,7 +575,7 @@ sigmoid(x, a, b)
 
 
 <div class="org-src-container">
-<pre class="src src-python">sig = partial(sigmoid, a=1, b=50)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">sig</span> = partial(sigmoid, a=1, b=50)
 
 draw_function(sig(x))
 </pre>
@@ -583,7 +583,7 @@ draw_function(sig(x))
 
 
 
-<div id="org80429a2" class="figure">
+<div id="org490dd08" class="figure">
 <p><img src="images/output_18_0.png" alt="output_18_0.png" />
 </p>
 </div>
@@ -610,11 +610,11 @@ where \(F_L(x)\) and \(F_R(x)\) are monotonically decreasing functions. Let
 
 
 <div class="org-src-container">
-<pre class="src src-python">help(lr)
+<pre class="src src-python"><span style="font-weight: bold;">help</span>(lr)
 </pre>
 </div>
 
-<pre class="example" id="org4e85cdf">
+<pre class="example" id="org2cb7415">
 Help on function lr in module src.functional.membership:
 
 lr(x, a, b, c)
@@ -629,14 +629,14 @@ lr(x, a, b, c)
 
 
 <div class="org-src-container">
-<pre class="src src-python">lr1 = partial(lr, a=65, b=60, c=10)
-lr2 = partial(lr, a=25, b=10, c=40)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">lr1</span> = partial(lr, a=65, b=60, c=10)
+<span style="font-weight: bold; font-style: italic;">lr2</span> = partial(lr, a=25, b=10, c=40)
 
 draw_function(lr1(x))
 draw_function(lr2(x))
 
 plt.grid()
-plt.legend(["a = 65, b = 60, c = 10", "a = 25, b = 10, c = 40"])
+plt.legend([<span style="font-style: italic;">"a = 65, b = 60, c = 10"</span>, <span style="font-style: italic;">"a = 25, b = 10, c = 40"</span>])
 </pre>
 </div>
 
@@ -651,7 +651,7 @@ plt.legend(["a = 65, b = 60, c = 10", "a = 25, b = 10, c = 40"])
 
 
 
-<div id="org160b2c3" class="figure">
+<div id="orgf1260d7" class="figure">
 <p><img src="images/output_21_1.png" alt="output_21_1.png" />
 </p>
 </div>
@@ -659,8 +659,8 @@ plt.legend(["a = 65, b = 60, c = 10", "a = 25, b = 10, c = 40"])
 </div>
 
 
-<div id="outline-container-org3233598" class="outline-2">
-<h2 id="org3233598"><span class="section-number-2">4</span> Multi-Dimensional Functions</h2>
+<div id="outline-container-org95a6a5d" class="outline-2">
+<h2 id="org95a6a5d"><span class="section-number-2">4</span> Multi-Dimensional Functions</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The combination of different functions can be applied to many inputs. Here, we shall consider two variables \(x, y\) to demonstrate how MFs can be used with AND, OR operations.
@@ -668,9 +668,9 @@ The combination of different functions can be applied to many inputs. Here, we s
 
 
 <div class="org-src-container">
-<pre class="src src-python"># Our two variables
-x = torch.linspace(-5, 5, 50)
-y = torch.linspace(-5, 5, 50)
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Our two variables</span>
+<span style="font-weight: bold; font-style: italic;">x</span> = torch.linspace(-5, 5, 50)
+<span style="font-weight: bold; font-style: italic;">y</span> = torch.linspace(-5, 5, 50)
 </pre>
 </div>
 
@@ -686,11 +686,11 @@ The single dimension function can be referred to as a \(\textit{base set}\).
 
 
 <div class="org-src-container">
-<pre class="src src-python">fig = plt.figure()
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">fig</span> = plt.figure()
 
 draw_function(gaussian(x, 0, 1.5))
 
-plt.title("Base set of A")
+plt.title(<span style="font-style: italic;">"Base set of A"</span>)
 </pre>
 </div>
 
@@ -705,7 +705,7 @@ Text(0.5, 1.0, 'Base set of A')
 
 
 
-<div id="org5a0c631" class="figure">
+<div id="org6b8f278" class="figure">
 <p><img src="images/output_25_1.png" alt="output_25_1.png" />
 </p>
 </div>
@@ -727,19 +727,19 @@ where c(A) is our cylindrical extension.
 
 
 <div class="org-src-container">
-<pre class="src src-python">fig = plt.figure()
-ax = fig.add_subplot(111, projection="3d")
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">fig</span> = plt.figure()
+<span style="font-weight: bold; font-style: italic;">ax</span> = fig.add_subplot(111, projection=<span style="font-style: italic;">"3d"</span>)
 
-xx, yy = np.meshgrid(x.numpy(), y.numpy())
+<span style="font-weight: bold; font-style: italic;">xx</span>, <span style="font-weight: bold; font-style: italic;">yy</span> = np.meshgrid(x.numpy(), y.numpy())
 
 ax.plot_surface(xx, 
-		yy,
-		gaussian(torch.Tensor(xx), 0., 1.5).numpy(),
-		cmap="jet")
+                yy,
+                gaussian(torch.Tensor(xx), 0., 1.5).numpy(),
+                cmap=<span style="font-style: italic;">"jet"</span>)
 
-ax.set_xlabel("x input")
-ax.set_ylabel("y input")
-ax.set_zlabel("Membership Value")
+ax.set_xlabel(<span style="font-style: italic;">"x input"</span>)
+ax.set_ylabel(<span style="font-style: italic;">"y input"</span>)
+ax.set_zlabel(<span style="font-style: italic;">"Membership Value"</span>)
 </pre>
 </div>
 
@@ -754,7 +754,7 @@ Text(0.5, 0, 'Membership Value')
 
 
 
-<div id="orge1b16f6" class="figure">
+<div id="org90e0c29" class="figure">
 <p><img src="images/output_27_1.png" alt="output_27_1.png" />
 </p>
 </div>
@@ -782,19 +782,19 @@ and the logical `or` is:
 
 
 <div class="org-src-container">
-<pre class="src src-python">fig = plt.figure()
-ax = fig.add_subplot(111, projection="3d")
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">fig</span> = plt.figure()
+<span style="font-weight: bold; font-style: italic;">ax</span> = fig.add_subplot(111, projection=<span style="font-style: italic;">"3d"</span>)
 
-xx, yy = np.meshgrid(x.numpy(), y.numpy())
+<span style="font-weight: bold; font-style: italic;">xx</span>, <span style="font-weight: bold; font-style: italic;">yy</span> = np.meshgrid(x.numpy(), y.numpy())
 
-andOp = torch.max(gaussian(torch.Tensor(xx), 0, 1.5), gaussian(torch.Tensor(yy), 0, 1.5))
+<span style="font-weight: bold; font-style: italic;">andOp</span> = torch.<span style="font-weight: bold;">max</span>(gaussian(torch.Tensor(xx), 0, 1.5), gaussian(torch.Tensor(yy), 0, 1.5))
 
-ax.plot_surface(xx, yy, andOp.numpy(), cmap="jet")
+ax.plot_surface(xx, yy, andOp.numpy(), cmap=<span style="font-style: italic;">"jet"</span>)
 </pre>
 </div>
 
 
-<div id="org88e018b" class="figure">
+<div id="org5ef1158" class="figure">
 <p><img src="images/output_29_1.png" alt="output_29_1.png" />
 </p>
 </div>
@@ -802,18 +802,18 @@ ax.plot_surface(xx, yy, andOp.numpy(), cmap="jet")
 
 
 <div class="org-src-container">
-<pre class="src src-python">fig = plt.figure()
-ax = fig.add_subplot(111, projection="3d")
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">fig</span> = plt.figure()
+<span style="font-weight: bold; font-style: italic;">ax</span> = fig.add_subplot(111, projection=<span style="font-style: italic;">"3d"</span>)
 
-orOp = torch.min(gaussian(torch.Tensor(xx), 0, 1.5), gaussian(torch.Tensor(yy), 0, 1.5))
+<span style="font-weight: bold; font-style: italic;">orOp</span> = torch.<span style="font-weight: bold;">min</span>(gaussian(torch.Tensor(xx), 0, 1.5), gaussian(torch.Tensor(yy), 0, 1.5))
 
-ax.plot_surface(xx, yy, orOp.numpy(), cmap="jet")
+ax.plot_surface(xx, yy, orOp.numpy(), cmap=<span style="font-style: italic;">"jet"</span>)
 </pre>
 </div>
 
 
 
-<div id="org3009d22" class="figure">
+<div id="org34db98e" class="figure">
 <p><img src="images/output_30_1.png" alt="output_30_1.png" />
 </p>
 </div>
@@ -823,7 +823,7 @@ ax.plot_surface(xx, yy, orOp.numpy(), cmap="jet")
 <div id="postamble" class="status">
 <p class="date">Date: 2019-06-27</p>
 <p class="author">Author: Jay Morgan</p>
-<p class="date">Created: 2022-12-07 Wed 13:07</p>
+<p class="date">Created: 2022-12-07 Wed 13:20</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
