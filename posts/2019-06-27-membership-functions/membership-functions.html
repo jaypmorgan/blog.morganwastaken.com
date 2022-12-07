@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-12-07 Wed 13:07 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fuzzy Logic Membership Functions</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jay Morgan" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="https://blog.morganwastaken.com/css/general.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 class="title">Fuzzy Logic Membership Functions</h1>
+          <p class="subtitle">2019-06-27</p>
+</div>
+<div id="content">
+<h1 class="title">Fuzzy Logic Membership Functions</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9ae442a">1. Triangluar Function</a></li>
+<li><a href="#orgc968be2">2. Gaussian Membership Function</a></li>
+<li><a href="#orgece222e">3. Sigmoidal Membership Function</a></li>
+<li><a href="#org3233598">4. Multi-Dimensional Functions</a></li>
+</ul>
+</div>
+</div>
+<div id="topbar">
+<h3>Jay Morgan's Blog</h3>
+<a href="/">Blog Posts</a>
+<a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr">Publications</a>
+<a href="https://github.com/jaypmorgan">Git</a>
+<a href="https://pageperso.lis-lab.fr/~jay.morgan/">Teaching</a>
+</div>
+<p>
+A membership function is a method of translating a crisp value \(x \in \mathbb{R}\) into a fuzzy set. In other words, we can find the membership grade (the amount of membership) for x with a value between 0 and 1. If the membership grade is only 0 or 1, then we are using classical sets.
+</p>
+
+<p>
+\[
+A = \{(x, \mu_A(x)) | x \in X\},
+\]
+</p>
+
+<p>
+where \(\mu_A(x)\) is the Membership function (MF) for the fuzzy set \(A\).
+</p>
+
+<p>
+To make these MFs, we will use the <a href="https://gitlab.com/jaymorgan/fuzzytorch">FuzzyTorch</a> library.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">import os; os.chdir("../")
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python">from functools import partial
+
+import torch
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import seaborn as sns
+
+# Our Membership Functions import
+from src.functional.membership import *
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python">x = torch.linspace(0, 100, 100).view(-1, 1)
+
+def draw_function(func):
+    sns.lineplot(x.flatten().numpy(), func.flatten())
+    plt.xlabel("$$x_i$$")
+    plt.ylabel("Membership Value")
+    plt.grid()
+</pre>
+</div>
+
+<div id="outline-container-org9ae442a" class="outline-2">
+<h2 id="org9ae442a"><span class="section-number-2">1</span> Triangluar Function</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+A triangular MF is created using three parameters \(\{a, b, c\}, a < b < c\):
+</p>
+
+<p>
+\[
+\operatorname{triangle}(x ; a, b, c)=\left\{\begin{array}{cc}{0,} & {x \leq a} \\ {\frac{x-a}{b-a},} & {a \leq x \leq b} \\ {\frac{c-x}{c-b},} & {b \leq x \leq c} \\ {0,} & {c \leq x}\end{array}\right.
+\]
+</p>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">help(triangle)
+</pre>
+</div>
+
+<pre class="example" id="orgeaa652c">
+Help on function triangle in module src.functional.membership:
+
+triangle(x, a, b, c)
+    Triangular Membership Function
+
+    :param x: input value
+    :param a: start point where membership is 0
+    :param b: center point where membership is 1
+    :param c: end point where membership is 0
+</pre>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">tri = partial(triangle, a=20, b=60, c=80)
+
+draw_function(tri(x))
+
+plt.text(22, tri(20), "a")
+plt.text(62, tri(60), "b")
+plt.text(82, tri(80), "c")
+</pre>
+</div>
+
+
+
+
+<p>
+Text(82, tensor([0.]), 'c')
+</p>
+
+
+
+
+
+<div id="org2aac47c" class="figure">
+<p><img src="images/output_6_1.png" alt="output_6_1.png" />
+</p>
+</div>
+
+
+<p>
+Trapezoid Membership Function
+</p>
+
+<p>
+\[
+\operatorname{trapezoid}(x ; a, b, c, d)=\left\{\begin{array}{ll}{0,} & {x \leq a} \\ {\frac{x-a}{b-a},} & {a \leq x \leq b} \\ {\frac{d-x}{d-c},} & {c \leq x \leq d} \\ {0,} & {d \leq x}\end{array}\right.
+\]
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">help(trapezoid)
+</pre>
+</div>
+
+<pre class="example" id="org3f453d2">
+Help on function trapezoid in module src.functional.membership:
+
+trapezoid(x, a, b, c, d)
+    Trapezoidal Membership Function
+
+    :param x: input value
+    :param a: bottom left point where membership is 0
+    :param b: top left point where membership is 1
+    :param c: top right point where membership is 1
+    :param d: bottom right point where membership is 0
+</pre>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">trap = partial(trapezoid, a=10, b=20, c=60, d=95)
+
+draw_function(trap(x))
+
+plt.text(11, trap(10), "a")
+plt.text(21, trap(20), "b")
+plt.text(61, trap(60), "c")
+plt.text(96, trap(95), "d")
+</pre>
+</div>
+
+
+
+
+<p>
+Text(96, tensor([0.]), 'd')
+</p>
+
+
+
+
+
+<div id="orgfa2c631" class="figure">
+<p><img src="images/output_9_1.png" alt="output_9_1.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc968be2" class="outline-2">
+<h2 id="orgc968be2"><span class="section-number-2">2</span> Gaussian Membership Function</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+\[
+\operatorname{gaussian}(x ; c, \sigma)=e^{-\frac{1}{2}\left(\frac{x-c}{\sigma}\right)^{2}}
+\]
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">help(gaussian)
+</pre>
+</div>
+
+<pre class="example" id="org8f227fb">
+Help on function gaussian in module src.functional.membership:
+
+gaussian(x, a, b)
+    Gaussian Membership Function
+
+    :param x: input value
+    :param a: The mean of the Gaussian Distribution
+    :param b: The standard deviation of the Distribution
+
+    Usage: gaussian(40, a=50, b=20)
+           gaussian(torch.Tensor([[20],[30]]), a=50, b=20)
+</pre>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">gaus = partial(gaussian, a=50, b=20)
+
+draw_function(gaus(x))
+
+plt.text(50-5, gaus(50)-0.1, "Mean")
+plt.text(50+22, gaus(50+20), "Standard Deviation")
+</pre>
+</div>
+
+
+
+
+<p>
+Text(72, tensor([0.6065]), 'Standard Deviation')
+</p>
+
+
+
+
+
+<div id="org5aef56c" class="figure">
+<p><img src="images/output_12_1.png" alt="output_12_1.png" />
+</p>
+</div>
+
+
+<p>
+General Bell Curve Membership Function
+</p>
+
+<p>
+\[
+\operatorname{bell}(x ; a, b, c)=\frac{1}{1+\left|\frac{x-c}{a}\right|^{2 b}}
+\]
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">help(bell)
+</pre>
+</div>
+
+<pre class="example" id="org76f6643">
+Help on function bell in module src.functional.membership:
+
+bell(x, a, b, c)
+    General Bell Curve Membership Function
+
+    :param x: input value
+    :param a: width of bell curve.
+    :param b: slop of the curve, lower values = curvier
+    :param c: centre of the curve.
+</pre>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">bellf = partial(bell, a=20, b=4, c=50)
+
+draw_function(bellf(x))
+</pre>
+</div>
+
+
+
+<div id="orgec4dd87" class="figure">
+<p><img src="images/output_15_0.png" alt="output_15_0.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgece222e" class="outline-2">
+<h2 id="orgece222e"><span class="section-number-2">3</span> Sigmoidal Membership Function</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+\[
+\operatorname{sigmoid}(x ; a, c)=\frac{1}{1+\exp [-a(x-c)]}
+\]
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">help(sigmoid)
+</pre>
+</div>
+
+<pre class="example" id="org4332813">
+Help on function sigmoid in module src.functional.membership:
+
+sigmoid(x, a, b)
+    Sigmoidal Membership Function
+
+    :param x: input value
+    :param a: amount of curvature, higher values = unit step
+    :param b: 0.5 centre posistion
+</pre>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">sig = partial(sigmoid, a=1, b=50)
+
+draw_function(sig(x))
+</pre>
+</div>
+
+
+
+<div id="org80429a2" class="figure">
+<p><img src="images/output_18_0.png" alt="output_18_0.png" />
+</p>
+</div>
+
+
+<p>
+Left-Right (LR) Membership Function
+</p>
+
+<p>
+\[
+\operatorname{lr}(x ; c, \alpha, \beta)=\left\{\begin{array}{ll}{F_{L}} & {\left(\frac{c-x}{\alpha}\right), \quad x \leq c} \\ {F_{R}} & {\left(\frac{x-c}{\beta}\right), \quad x \geq c}\end{array}\right.
+\]
+</p>
+
+<p>
+where \(F_L(x)\) and \(F_R(x)\) are monotonically decreasing functions. Let 
+</p>
+
+
+<p>
+\[\begin{aligned} F_{L}(x) &=\max \left(0, \sqrt{1-x^{2}}\right) \\ F_{R}(x) &=e^{-|x|^{3}} \end{aligned}\]
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">help(lr)
+</pre>
+</div>
+
+<pre class="example" id="org4e85cdf">
+Help on function lr in module src.functional.membership:
+
+lr(x, a, b, c)
+    Left-Right (LR) Membership Function
+
+    :param x: input value
+    :param a: centre point of change
+    :param b: rate of decay after change
+    :param c: length of decay
+</pre>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">lr1 = partial(lr, a=65, b=60, c=10)
+lr2 = partial(lr, a=25, b=10, c=40)
+
+draw_function(lr1(x))
+draw_function(lr2(x))
+
+plt.grid()
+plt.legend(["a = 65, b = 60, c = 10", "a = 25, b = 10, c = 40"])
+</pre>
+</div>
+
+
+
+
+<p>
+&lt;matplotlib.legend.Legend at 0x7f37d3458048&gt;
+</p>
+
+
+
+
+
+<div id="org160b2c3" class="figure">
+<p><img src="images/output_21_1.png" alt="output_21_1.png" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3233598" class="outline-2">
+<h2 id="org3233598"><span class="section-number-2">4</span> Multi-Dimensional Functions</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+The combination of different functions can be applied to many inputs. Here, we shall consider two variables \(x, y\) to demonstrate how MFs can be used with AND, OR operations.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python"># Our two variables
+x = torch.linspace(-5, 5, 50)
+y = torch.linspace(-5, 5, 50)
+</pre>
+</div>
+
+<p>
+The single dimension function can be referred to as a \(\textit{base set}\).
+</p>
+
+<p>
+\[
+\operatorname{Base Set} = \mu_A(x) = \operatorname{gaussian}(x; a, b)
+\]
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">fig = plt.figure()
+
+draw_function(gaussian(x, 0, 1.5))
+
+plt.title("Base set of A")
+</pre>
+</div>
+
+
+
+
+<p>
+Text(0.5, 1.0, 'Base set of A')
+</p>
+
+
+
+
+
+<div id="org5a0c631" class="figure">
+<p><img src="images/output_25_1.png" alt="output_25_1.png" />
+</p>
+</div>
+
+
+<p>
+This can be turned into a cylindrical extension through:
+</p>
+
+<p>
+\[
+    c(A) = \int_{X \times Y} \mu_A(X) / (x, y)
+\]
+</p>
+
+<p>
+where c(A) is our cylindrical extension.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+
+xx, yy = np.meshgrid(x.numpy(), y.numpy())
+
+ax.plot_surface(xx, 
+		yy,
+		gaussian(torch.Tensor(xx), 0., 1.5).numpy(),
+		cmap="jet")
+
+ax.set_xlabel("x input")
+ax.set_ylabel("y input")
+ax.set_zlabel("Membership Value")
+</pre>
+</div>
+
+
+
+
+<p>
+Text(0.5, 0, 'Membership Value')
+</p>
+
+
+
+
+
+<div id="orge1b16f6" class="figure">
+<p><img src="images/output_27_1.png" alt="output_27_1.png" />
+</p>
+</div>
+
+
+<p>
+To use AND and OR operations, we can use the min and max respectively of two MF functions for each input dimension. The logical `and` is:
+</p>
+
+<p>
+\[
+\mu_A(x) \land \mu_A(y) = max(\mu_A(x), \mu_A(y))
+\]
+</p>
+
+<p>
+and the logical `or` is:
+</p>
+
+<p>
+\[
+\mu_A(x) \lor \mu_A(y) = min(\mu_A(x), \mu_A(y))
+\]
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+
+xx, yy = np.meshgrid(x.numpy(), y.numpy())
+
+andOp = torch.max(gaussian(torch.Tensor(xx), 0, 1.5), gaussian(torch.Tensor(yy), 0, 1.5))
+
+ax.plot_surface(xx, yy, andOp.numpy(), cmap="jet")
+</pre>
+</div>
+
+
+<div id="org88e018b" class="figure">
+<p><img src="images/output_29_1.png" alt="output_29_1.png" />
+</p>
+</div>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python">fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+
+orOp = torch.min(gaussian(torch.Tensor(xx), 0, 1.5), gaussian(torch.Tensor(yy), 0, 1.5))
+
+ax.plot_surface(xx, yy, orOp.numpy(), cmap="jet")
+</pre>
+</div>
+
+
+
+<div id="org3009d22" class="figure">
+<p><img src="images/output_30_1.png" alt="output_30_1.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019-06-27</p>
+<p class="author">Author: Jay Morgan</p>
+<p class="date">Created: 2022-12-07 Wed 13:07</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
