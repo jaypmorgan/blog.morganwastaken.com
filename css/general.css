@@ -40,6 +40,7 @@ p {
 div#content {
     padding-top: 40px;
     max-width: 70ch;
+    margin: 0 auto;
 }
 
 div#sidebar {
