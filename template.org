@@ -1,6 +1,7 @@
 #+HTML_HEAD: <meta name="viewport" content="width=device-width, initial-scale=1.0">
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/css/general.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://blog.morganwastaken.com/css/general.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/general.css"/>
 
 #+begin_export html
 <div id="topbar">
