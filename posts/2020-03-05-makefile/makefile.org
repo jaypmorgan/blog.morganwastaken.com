@@ -186,6 +186,9 @@ P2 [label="algorithm_2.py"]; O1 [label="output_1.csv"]; O2
     D->P1->O1; D->P2->O2; } 
 #+end_src
 
+#+RESULTS[1568ac68dd605bc37a5f1505ff0434eb2f9c4773]:
+[[file:./images/makefile_process_2.png]]
+
 In this case, we wish to execute both python programs to create both
 outputs.
 
@@ -250,6 +253,9 @@ digraph graphname { D1 [label="data.csv"]; A1
     D1->A1->O1; D1->A2->O2; D1->D2->D3->A3->O3; }
 #+end_src
 
+#+RESULTS[e59b4c78bec08c2b443bc6026941c3b04e9eb162]:
+[[file:./images/makefile_process_3.png]]
+
 We have introduced a significantly more complicated process. We use a
 c++ program =squares.cpp= to take all of the data in the CSV, square it, and save
 the intermediate version as =squared_data.csv=. Processes such as this may occur
@@ -296,6 +302,9 @@ digraph graphname { D1 [label="data.csv"]; A1
 
     D1->A1->O1; D1->A2->O2; D3->A2; D1->D2->D3->A3->O3; } 
 #+end_src
+
+#+RESULTS[7e20a23458ea9cc13a39c4961bb0f218be14a6be]:
+[[file:./images/makefile_process_4.png]]
 
 We could change our =output_2.csv= target to something like this:
 
@@ -397,6 +406,9 @@ digraph graphname {
     S1->FO;
 } 
 #+end_src
+
+#+RESULTS[6310dc3f9000ed89e0a7f932b94c8a3e1cf70eec]:
+[[file:./images/makefile_process_5.png]]
 
 Our =summarise.py= takes all the results from each algorithm, provides some
 summary statistics, and outputs a single CSV file that is suitable for a
@@ -646,6 +658,9 @@ digraph graphname {
     L2->L1;
 } 
 #+end_src
+
+#+RESULTS[ecd838c9ad10692d043276fa49b5c3216c6183f1]:
+[[file:./images/makefile_process_6.png]]
 
 Even if we move or send our files to a different computer, all we have
 to do to run our project from start to finish is =make report=.
