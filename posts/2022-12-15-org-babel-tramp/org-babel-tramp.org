@@ -1,0 +1,131 @@
+#+TITLE: Using a remote Python process in Org-mode files
+#+AUTHOR: Jay Morgan
+#+DATE: 2022-12-15
+#+include: ../../template.org
+
+* Introduction
+
+Sometimes the work we do requires a lot of horse-power -- a lot of compute
+resource. Perhaps more than what we can do locally. In these cases, we might need to
+use a remote server.
+
+In this blog post, I wanted to demonstrate how I've used a local org-mode file to
+execute computations via a remote python process.
+
+* Setup
+
+First, we setup the location of remote server, and where the python process will be
+started. I do this within the top of the org-mode file so that all python code blocks
+will use this location by default. We set this up using the =#+PROPERTY:= argument:
+
+#+begin_example
+#+PROPERTY: header-args:python :dir /ssh:<server>:/path/to/dir
+#+end_example
+
+We've added =:dir= that specifies the remote path using tramp. Whenever a python code
+block is executed normally with =C-c C-c=, it will connect to =<server>= and navigate to
+the =/path/to/dir= directory, start a python process, execute the source code and
+return the results.
+
+We can verify that the code block is being executed on the remote server, and find
+out which python is being used by printing the hostname of the machine running the
+python process, and the path to the python executable:
+
+#+begin_example
+#+begin_src python :results output
+import sys
+import socket
+print(socket.gethostname())
+print(sys.executable)
+#+end_src
+#+end_example
+
+* Changing the Python Interpreter
+
+By default, the python code blocks will be executed using the first "python" command
+found on the remote server's path. Often, when working with Python, we have virtual
+environments.
+
+The best (hacky) solution I've got to use the correct python environment is to
+manually change the =org-babel-python-command= to the path of the virtual environment
+to use:
+
+#+begin_example
+#+begin_src emacs-lisp
+(setq org-babel-python-command "venv/bin/python")
+#+end_src
+#+end_example
+
+We can then confirm that the correct virtual environment is being used by printing
+the path to the executable again.
+
+#+begin_example
+#+begin_src python :results output
+import socket
+print(sys.executable)
+#+end_src
+#+end_example
+
+* Plotting
+
+Alas there is still a pain point: plotting. When we execute a code block and specify
+that it returns a file (the path to the newly created plot), it will return a path on
+the local machine. Of course, this doesn't exist as it was executed on the remote
+server. Take for example:
+
+#+begin_example
+#+begin_src python :results file
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.arange(0, 10)
+y = np.random.randn(*x.shape) + x
+plt.plot(x, y, 'r--')
+plt.savefig("/tmp/test.png")
+"/tmp/test.png"
+#+end_src
+
+#+RESULTS:
+file:/tmp/testplot.png
+#+end_example
+
+This will not work. Instead, a workaround I've created is creating a named code block
+to save and return the remote path:
+
+#+begin_example
+#+name: savefig
+#+begin_src python :session testing :var filename="/tmp/plot.png"
+f"""
+plt.savefig('{filename}')
+plt.close()
+'/ssh:<server>:{filename}'
+"""
+#+end_src
+
+#+RESULTS: savefig
+
+: plt.savefig('/tmp/plot.png')
+: plt.close()
+: '/ssh:lis.me|ssh:presage1:/tmp/plot.png'
+#+end_example
+
+Then when we want to create a plot:
+
+#+begin_example
+#+begin_src python :results file :noweb strip-export
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.arange(0, 10)
+y = np.random.randn(*x.shape) + x
+plt.plot(x, y, 'r--')
+<<savefig(filename="/tmp/testplot.png")>>
+#+end_src
+
+#+RESULTS:
+file:/ssh:<server>:/tmp/testplot.png]]
+#+end_example
+
+We won't be able to see the image within the notebook itself, but we can use =C-c C-o=
+to open the file into it's own buffer, which is the best solution I've come up with
+for the moment.
+
+ 
