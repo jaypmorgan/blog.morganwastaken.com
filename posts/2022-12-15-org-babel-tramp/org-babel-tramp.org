@@ -105,7 +105,7 @@ plt.close()
 
 : plt.savefig('/tmp/plot.png')
 : plt.close()
-: '/ssh:lis.me|ssh:presage1:/tmp/plot.png'
+: '/ssh:<server>:/tmp/plot.png'
 #+end_example
 
 Then when we want to create a plot:
