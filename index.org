@@ -1,5 +1,5 @@
 #+TITLE: Blog Posts
-#+author: Jay Morgan
+#+author: Jay Paul Morgan
 #+include: ./template.org
 
 #+begin_src emacs-lisp :results output raw :exports results :eval yes

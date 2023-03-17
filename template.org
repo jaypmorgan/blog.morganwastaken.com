@@ -5,7 +5,7 @@
 
 #+begin_export html
 <div id="topbar">
-<h3>Jay Morgan's Blog</h3>
+<h3>Dr. Jay Paul Morgan</h3>
 <a href="/">Blog Posts</a>
 <a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr">Publications</a>
 <a href="https://github.com/jaypmorgan">Git</a>
