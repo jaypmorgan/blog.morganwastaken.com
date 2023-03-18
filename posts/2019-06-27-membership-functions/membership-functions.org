@@ -4,13 +4,18 @@
 #+include: ../../template.org
 #+PROPERTY: header-args:python :eval never-export
 
-A membership function is a method of translating a crisp value $x \in \mathbb{R}$ into a fuzzy set. In other words, we can find the membership grade (the amount of membership) for x with a value between 0 and 1. If the membership grade is only 0 or 1, then we are using classical sets.
+A membership function is a method of translating a crisp value $x \in
+\mathbb{R}$ into a fuzzy set. In other words, we can find the
+membership grade (the amount of membership) for x with a value between
+0 and 1. If the membership grade is only 0 or 1, then we are using
+classical sets.
 
 \[
 A = \{(x, \mu_A(x)) | x \in X\},
 \]
 
-where $\mu_A(x)$ is the Membership function (MF) for the fuzzy set $A$.
+where $\mu_A(x)$ is the Membership function (MF) for the fuzzy set
+$A$.
 
 To make these MFs, we will use the [[https://gitlab.com/jaymorgan/fuzzytorch][FuzzyTorch]] library.
 
@@ -382,7 +387,8 @@ ax.set_zlabel("Membership Value")
 [[file:images/output_27_1.png]]
 
 
-To use AND and OR operations, we can use the min and max respectively of two MF functions for each input dimension. The logical `and` is:
+To use AND and OR operations, we can use the min and max respectively
+of two MF functions for each input dimension. The logical `and` is:
 
 \[
 \mu_A(x) \land \mu_A(y) = max(\mu_A(x), \mu_A(y))
