@@ -1,0 +1,41 @@
+#+TITLE: Displaying remote images in Org-mode
+#+AUTHOR: Jay Paul Morgan
+#+DATE: 2023-03-18 Sat
+#+INCLUDE: ../../template.org
+
+In one of my [[file:~/workspace/blog.morganwastaken.com/posts/2022-12-15-org-babel-tramp/org-babel-tramp.org][previous posts]], I explained how a remote python process
+can be setup in an org-mode documents. Therefore, allowing you to
+offload any large compute to a remote server.
+
+However, in the previous post, I mentioned how I was unable to get
+images created as a result of a remote process (i.e. plotting with
+matplotlib) to display inline. My workaround was just to visit the
+remote file in a separate buffer using =C-c C-o=. But today, I chanced
+upon this stackoverflow [[https://stackoverflow.com/a/75086516][answer]] that exactly solves my issue.
+
+Unbeknownst to me, there is an variable that specifies how org-mode
+should handle remote paths. This variable, aptly named
+=org-display-remote-inline-images= (perhaps I should have searched in
+emacs's variable list for some combination of these keywords), can be
+change from =skip= (which ignores any remote paths), to =download=
+which will display the image inline!
+
+This is the documentation for this variable.
+
+#+begin_src example
+org-display-remote-inline-images is a variable defined in ‘org.el’.
+
+Its value is ‘skip’
+
+How to display remote inline images.
+Possible values of this option are:
+
+skip        Don’t display remote images.
+download    Always download and display remote images.
+cache       Display remote images, and open them in separate buffers
+            for caching.  Silently update the image buffer when a file
+            change is detected.
+#+end_src
+
+By setting this variable appropriately, working with a remote process
+in org-mode is just as it is with a local process -- seamless.
