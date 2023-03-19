@@ -18,6 +18,11 @@
 	 :base-extension "xml"
 	 :publishing-directory "./public/"
 	 :publishing-function org-publish-attachment)
+	("robots"
+	 :base-directory "./"
+	 :base-extension "txt"
+	 :publishing-directory "./public/"
+	 :publishing-function org-publish-attachment)
 	("news"
 	 :base-directory "./news"
 	 :base-extension "org"
