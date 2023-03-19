@@ -13,6 +13,11 @@
 	 :recursive t
 	 :include ("sitemap.org")
 	 :publishing-function org-html-publish-to-html)
+	("sitemap"
+	 :base-directory "./"
+	 :base-extension "xml"
+	 :publishing-directory "./public/"
+	 :publishing-function org-publish-attachment)
 	("news"
 	 :base-directory "./news"
 	 :base-extension "org"
