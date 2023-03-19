@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-19 Sun 09:37 -->
+<!-- 2023-03-19 Sun 09:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Fuzzy Logic Membership Functions</title>
@@ -253,10 +253,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga292f7b">1. Triangluar Function</a></li>
-<li><a href="#org5fca3c6">2. Gaussian Membership Function</a></li>
-<li><a href="#org84ef563">3. Sigmoidal Membership Function</a></li>
-<li><a href="#org005ebc5">4. Multi-Dimensional Functions</a></li>
+<li><a href="#org519a39b">1. Triangluar Function</a></li>
+<li><a href="#org42ce325">2. Gaussian Membership Function</a></li>
+<li><a href="#org7919dc9">3. Sigmoidal Membership Function</a></li>
+<li><a href="#org45fb9ac">4. Multi-Dimensional Functions</a></li>
 </ul>
 </div>
 </div>
@@ -324,8 +324,8 @@ To make these MFs, we will use the <a href="https://gitlab.com/jaymorgan/fuzzyto
 </pre>
 </div>
 
-<div id="outline-container-orga292f7b" class="outline-2">
-<h2 id="orga292f7b"><span class="section-number-2">1</span> Triangluar Function</h2>
+<div id="outline-container-org519a39b" class="outline-2">
+<h2 id="org519a39b"><span class="section-number-2">1</span> Triangluar Function</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 A triangular MF is created using three parameters \(\{a, b, c\}, a < b < c\):
@@ -344,7 +344,7 @@ A triangular MF is created using three parameters \(\{a, b, c\}, a < b < c\):
 </pre>
 </div>
 
-<pre class="example" id="org1213159">
+<pre class="example" id="org0aaba55">
 Help on function triangle in module src.functional.membership:
 
 triangle(x, a, b, c)
@@ -380,7 +380,7 @@ Text(82, tensor([0.]), 'c')
 
 
 
-<div id="org336039e" class="figure">
+<div id="org0445c58" class="figure">
 <p><img src="images/output_6_1.png" alt="output_6_1.png" />
 </p>
 </div>
@@ -402,7 +402,7 @@ Trapezoid Membership Function
 </pre>
 </div>
 
-<pre class="example" id="orgfebc6e6">
+<pre class="example" id="orgfe4091e">
 Help on function trapezoid in module src.functional.membership:
 
 trapezoid(x, a, b, c, d)
@@ -440,7 +440,7 @@ Text(96, tensor([0.]), 'd')
 
 
 
-<div id="org2f2d99a" class="figure">
+<div id="org2f27edd" class="figure">
 <p><img src="images/output_9_1.png" alt="output_9_1.png" />
 </p>
 </div>
@@ -448,8 +448,8 @@ Text(96, tensor([0.]), 'd')
 </div>
 
 
-<div id="outline-container-org5fca3c6" class="outline-2">
-<h2 id="org5fca3c6"><span class="section-number-2">2</span> Gaussian Membership Function</h2>
+<div id="outline-container-org42ce325" class="outline-2">
+<h2 id="org42ce325"><span class="section-number-2">2</span> Gaussian Membership Function</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 \[
@@ -463,7 +463,7 @@ Text(96, tensor([0.]), 'd')
 </pre>
 </div>
 
-<pre class="example" id="org513ea33">
+<pre class="example" id="org9c48f58">
 Help on function gaussian in module src.functional.membership:
 
 gaussian(x, a, b)
@@ -500,7 +500,7 @@ Text(72, tensor([0.6065]), 'Standard Deviation')
 
 
 
-<div id="org31755e3" class="figure">
+<div id="orgcdcd4f3" class="figure">
 <p><img src="images/output_12_1.png" alt="output_12_1.png" />
 </p>
 </div>
@@ -522,7 +522,7 @@ General Bell Curve Membership Function
 </pre>
 </div>
 
-<pre class="example" id="org5414848">
+<pre class="example" id="org9bdbdd5">
 Help on function bell in module src.functional.membership:
 
 bell(x, a, b, c)
@@ -545,7 +545,7 @@ draw_function(bellf(x))
 
 
 
-<div id="orga21263f" class="figure">
+<div id="orgb2b5ff1" class="figure">
 <p><img src="images/output_15_0.png" alt="output_15_0.png" />
 </p>
 </div>
@@ -553,8 +553,8 @@ draw_function(bellf(x))
 </div>
 
 
-<div id="outline-container-org84ef563" class="outline-2">
-<h2 id="org84ef563"><span class="section-number-2">3</span> Sigmoidal Membership Function</h2>
+<div id="outline-container-org7919dc9" class="outline-2">
+<h2 id="org7919dc9"><span class="section-number-2">3</span> Sigmoidal Membership Function</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 \[
@@ -568,7 +568,7 @@ draw_function(bellf(x))
 </pre>
 </div>
 
-<pre class="example" id="orgc771471">
+<pre class="example" id="org1152273">
 Help on function sigmoid in module src.functional.membership:
 
 sigmoid(x, a, b)
@@ -590,7 +590,7 @@ draw_function(sig(x))
 
 
 
-<div id="org506dcdf" class="figure">
+<div id="orgdfe6c28" class="figure">
 <p><img src="images/output_18_0.png" alt="output_18_0.png" />
 </p>
 </div>
@@ -621,7 +621,7 @@ where \(F_L(x)\) and \(F_R(x)\) are monotonically decreasing functions. Let
 </pre>
 </div>
 
-<pre class="example" id="org5cb1874">
+<pre class="example" id="org0c2311e">
 Help on function lr in module src.functional.membership:
 
 lr(x, a, b, c)
@@ -658,7 +658,7 @@ plt.legend([<span style="font-style: italic;">"a = 65, b = 60, c = 10"</span>, <
 
 
 
-<div id="org240ce72" class="figure">
+<div id="org100d6c7" class="figure">
 <p><img src="images/output_21_1.png" alt="output_21_1.png" />
 </p>
 </div>
@@ -666,8 +666,8 @@ plt.legend([<span style="font-style: italic;">"a = 65, b = 60, c = 10"</span>, <
 </div>
 
 
-<div id="outline-container-org005ebc5" class="outline-2">
-<h2 id="org005ebc5"><span class="section-number-2">4</span> Multi-Dimensional Functions</h2>
+<div id="outline-container-org45fb9ac" class="outline-2">
+<h2 id="org45fb9ac"><span class="section-number-2">4</span> Multi-Dimensional Functions</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 The combination of different functions can be applied to many inputs. Here, we shall consider two variables \(x, y\) to demonstrate how MFs can be used with AND, OR operations.
@@ -712,7 +712,7 @@ Text(0.5, 1.0, 'Base set of A')
 
 
 
-<div id="org94c3fa6" class="figure">
+<div id="org9f0b618" class="figure">
 <p><img src="images/output_25_1.png" alt="output_25_1.png" />
 </p>
 </div>
@@ -761,7 +761,7 @@ Text(0.5, 0, 'Membership Value')
 
 
 
-<div id="org6c7e172" class="figure">
+<div id="orgc475044" class="figure">
 <p><img src="images/output_27_1.png" alt="output_27_1.png" />
 </p>
 </div>
@@ -802,7 +802,7 @@ ax.plot_surface(xx, yy, andOp.numpy(), cmap=<span style="font-style: italic;">"j
 </div>
 
 
-<div id="org729201e" class="figure">
+<div id="org8dd497f" class="figure">
 <p><img src="images/output_29_1.png" alt="output_29_1.png" />
 </p>
 </div>
@@ -821,7 +821,7 @@ ax.plot_surface(xx, yy, orOp.numpy(), cmap=<span style="font-style: italic;">"je
 
 
 
-<div id="org9e37843" class="figure">
+<div id="org447363f" class="figure">
 <p><img src="images/output_30_1.png" alt="output_30_1.png" />
 </p>
 </div>
@@ -831,7 +831,7 @@ ax.plot_surface(xx, yy, orOp.numpy(), cmap=<span style="font-style: italic;">"je
 <div id="postamble" class="status">
 <p class="date">Date: 2019-06-27</p>
 <p class="author">Author: Jay Morgan</p>
-<p class="date">Created: 2023-03-19 Sun 09:37</p>
+<p class="date">Created: 2023-03-19 Sun 09:39</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
