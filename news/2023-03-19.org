@@ -1,0 +1,12 @@
+#+title: Machine Learning and Computer Vision in Heliophysics
+#+author: Jay Morgan
+#+date: <2023-03-19 Sun>
+
+We'll be presenting a poster at the [[https://mosaiics.astro.bas.bg/?page_id=165][Machine Learning and Computer
+Vision in Heliophysics international workshop]], Sofia, Bulgaria.
+
+The poster concerns the our work on improving the down-stream feature
+detection of solar features by removing the contanimation of clouds
+from ground-based observations. We've started to open-source our
+[[https://github.com/jaypmorgan/cloud-removal][program code on github]], but please come and ask some questions if
+you're at the conference!

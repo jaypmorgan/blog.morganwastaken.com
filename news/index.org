@@ -1,0 +1,34 @@
+#+title: News
+#+include: ../template.org
+
+#+begin_src emacs-lisp :results output raw :exports results :eval yes
+  (defvar files (directory-files "./" nil "[0-9]+\\.org"))
+
+  (defun read-summary (filepath)
+    (with-temp-buffer
+      (insert-file-contents filepath)
+      (format "%s..."
+       (substring
+	(string-trim
+	 (replace-regexp-in-string
+	  "\\*+ " ""
+	  (replace-regexp-in-string "#\\+\\(TITLE\\|AUTHOR\\|DATE\\|INCLUDE\\):.*\n" "" (buffer-string))))
+	0
+	300))))
+
+  (defun read-title (filepath)
+    (with-temp-buffer
+      (insert-file-contents filepath)
+      (re-search-forward "^#\\+\\(TITLE\\|title\\):")
+      (buffer-substring-no-properties (1+ (point)) (point-at-eol))))
+
+  (defun print-summary (filepath)
+    (let ((date (substring filepath 0 -4))
+	  (summary (read-summary filepath))
+	  (title (read-title filepath)))
+      (format "- %s -- [[file:%s][%s]]\n\n#+begin_quote\n%s\n#+end_quote\n\n" date filepath title summary)))
+
+  (dolist (el (mapcar 'print-summary files))
+    (princ el))
+#+end_src
+

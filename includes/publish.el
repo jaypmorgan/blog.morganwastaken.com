@@ -13,6 +13,11 @@
 ;	 :exclude ".*/public/.*"
 	 :recursive t
 	 :publishing-function org-html-publish-to-html)
+	("news"
+	 :base-directory "./news"
+	 :base-extension "org"
+	 :publishing-directory "./public/news"
+	 :publishing-function org-html-publish-to-html)
 	("css"
 	 :base-directory "css/"
 	 :base-extension "css"
