@@ -10,8 +10,10 @@
 	 :base-directory "./"
 	 :base-extension "org"
 	 :publishing-directory "./public/"
-;	 :exclude ".*/public/.*"
 	 :recursive t
+	 :auto-sitemap t
+	 :sitemap-filename "sitemap.org"
+	 :sitemap-title "Sitemap"
 	 :publishing-function org-html-publish-to-html)
 	("news"
 	 :base-directory "./news"
@@ -27,7 +29,6 @@
 	 :base-directory "./"
 	 :base-extension "png\\|jpg\\jpeg"
 	 :recursive t
-;	 :exclude "./public/.*"
 	 :publishing-function org-publish-attachment
 	 :publishing-directory "./public/")
-	("all" :components ("posts" "css" "images"))))
+	("all" :components ("posts" "news" "css" "images"))))
