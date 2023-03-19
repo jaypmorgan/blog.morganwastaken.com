@@ -11,9 +11,7 @@
 	 :base-extension "org"
 	 :publishing-directory "./public/"
 	 :recursive t
-	 :auto-sitemap t
-	 :sitemap-filename "sitemap.org"
-	 :sitemap-title "Sitemap"
+	 :include ("sitemap.org")
 	 :publishing-function org-html-publish-to-html)
 	("news"
 	 :base-directory "./news"
