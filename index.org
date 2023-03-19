@@ -4,6 +4,7 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://blog.morganwastaken.com/css/index.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/index.css"/>
+#+HTML_HEAD: <meta name="description" content="A collection of blog posts and articles published by Dr. Jay Paul Morgan.">
 
 #+begin_src emacs-lisp :results output raw :exports results :eval yes
   (defun get-posts (dir)
