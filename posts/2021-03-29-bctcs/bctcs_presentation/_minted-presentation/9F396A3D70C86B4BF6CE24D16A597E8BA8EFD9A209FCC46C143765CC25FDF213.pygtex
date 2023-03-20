@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{adv\PYGZus{}examples} \PYG{o}{=} \PYG{p}{[]}
+
+\PYG{k}{for} \PYG{p}{(}\PYG{n}{idx}\PYG{p}{,} \PYG{p}{(}\PYG{n}{x\PYGZus{}i}\PYG{p}{,} \PYG{n}{r\PYGZus{}i}\PYG{p}{))} \PYG{k+kp}{in} \PYG{n}{enumerate}\PYG{p}{(}\PYG{n}{zip}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{r}\PYG{p}{))}
+    \PYG{n}{m} \PYG{o}{=} \PYG{n}{Optimize}\PYG{p}{()}  \PYG{c}{\PYGZsh{} create an optimisation procedure (model)}
+
+    \PYG{n}{add!}\PYG{p}{(}\PYG{n}{m}\PYG{p}{,} \PYG{p}{(}\PYG{n}{eps} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{0}\PYG{p}{)} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{p}{(}\PYG{n}{eps} \PYG{o}{\PYGZlt{}=} \PYG{n}{r\PYGZus{}i}\PYG{p}{))}
+
+    \PYG{n}{y} \PYG{o}{=} \PYG{n}{encoding}\PYG{p}{(}\PYG{n}{x\PYGZus{}i}\PYG{p}{)}  \PYG{c}{\PYGZsh{} get initial condition of y given our encoding}
+
+    \PYG{n}{add!}\PYG{p}{(}\PYG{n}{m}\PYG{p}{,} \PYG{n}{y} \PYG{o}{!=} \PYG{n}{f}\PYG{p}{(}\PYG{n}{xi}\PYG{p}{))} \PYG{c}{\PYGZsh{} add the adversarial example condition}
+
+    \PYG{n}{minimize!}\PYG{p}{(}\PYG{n}{m}\PYG{p}{,} \PYG{n}{eps}\PYG{p}{)}  \PYG{c}{\PYGZsh{} find the smallest eps}
+
+    \PYG{n}{check}\PYG{p}{(}\PYG{n}{m}\PYG{p}{)} \PYG{c}{\PYGZsh{} check for satisfiability}
+
+    \PYG{k}{if} \PYG{n}{m}\PYG{o}{.}\PYG{n}{is\PYGZus{}sat} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}sat\PYGZdq{}}
+        \PYG{n}{push!}\PYG{p}{(}\PYG{n}{adv\PYGZus{}examples}\PYG{p}{,} \PYG{p}{[}\PYG{n}{variable}\PYG{p}{(}\PYG{n}{m}\PYG{p}{,} \PYG{n}{var}\PYG{p}{)} \PYG{k}{for} \PYG{n}{var} \PYG{k+kp}{in} \PYG{n}{vars}\PYG{p}{])}
+        \PYG{n+nd}{@info} \PYG{l+s}{\PYGZdq{}Input number: }\PYG{l+s+si}{\PYGZdl{}}\PYG{p}{(}\PYG{n}{idx}\PYG{p}{)}\PYG{l+s}{, Adversarial found!\PYGZdq{}}
+    \PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Trustable Machine Learning Systems</title>
+<meta name="author" content="(Jay Morgan)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js-master/dist/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js-master/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="./presentation.css"/>
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js-master/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Trustable Machine Learning Systems</h1><h2 class="author">Jay Morgan</h2><h2 class="date">30th March 2021</h2>
+</section>
+<aside class="notes">
+<p>
+Hello, and thank you for joining me today. My name is Jay Morgan, I'm a doctoral
+candidate at swansea university, and today I will be talking about one research
+method to create trustable machine learning systems.
+</p>
+
+</aside>
+
+<section>
+<section id="slide-orgc6e8052">
+<h2 id="orgc6e8052"><span class="section-number-2">1</span> - The Good, the bad, and the ugly</h2>
+
+<div id="org4d33c6e" class="figure">
+<p><img src="./images/thegoodbadugly-ml.png" alt="thegoodbadugly-ml.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+Or perhaps as I will put it today: the good, bad and ugly of Machine Learning
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf434b1e">
+<h2 id="orgf434b1e"><span class="section-number-2">2</span> - Machine Learning at its "Good"</h2>
+
+<div id="org32c5ed1" class="figure">
+<p><img src="./images/self-driving-car.gif" alt="self-driving-car.gif" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+Let us begin with the good.
+</p>
+
+<p>
+Machine Learning, and specifically Deep Learning, has achieved a level of speed of
+computation, a level of accuracy, and perceived intelligence, that its actually
+becoming very useful in our daily lives.
+</p>
+
+<p>
+Over the last few years we're seeing a transformation the automotive industry, where
+a big few car manufacturers are rushing to bring us unprecidented levels of
+autonomous driving.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orge38607e">
+<h2 id="orge38607e"><span class="section-number-2">3</span> - Machine Learning at its "Ugly"</h2>
+
+<div id="orge772116" class="figure">
+<p><img src="./images/fgsm_panda_image.png" alt="fgsm_panda_image.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span><a href="https://pytorch.org/tutorials/beginner/fgsm_tutorial.html">https://pytorch.org/tutorials/beginner/fgsm_tutorial.html</a></p>
+</div>
+
+<aside class="notes">
+<p>
+But theres a twist. And the twist is this: Machine Learning and the 'intelligent'
+models they create are not intelligent, and are subject to some various forms of attacks.
+</p>
+
+<p>
+These attacks occur when specially crafted modifications are made to the input of the
+image. When these modifications are applied, the ML model will usually output a
+miss-classification with high confidence.
+</p>
+
+<p>
+These types of attacks, adversarial attacks, have been shown to be very
+effective at reducing even the-state-of-art classifier models to almost 0 zero accuracy.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org4b9d028">
+<h2 id="org4b9d028"><span class="section-number-2">4</span> - Machine Learning at its "Bad"</h2>
+
+<div id="org779bdd4" class="figure">
+<p><img src="./images/signs.png" alt="signs.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>Huang, X., Kwiatkowska, M., Wang, S., &amp; Wu, M. (2017, July). Safety verification of deep neural networks. In International conference on computer aided verification (pp. 3-29). Springer, Cham.</p>
+</div>
+
+<aside class="notes">
+<p>
+This presents a very serious problem for the use of ML in systems, like fully
+autonomous vehicles, where safety is paramount.
+</p>
+
+<p>
+If such a modification is made to the input used by these ML models, even as a result
+of sensor defects, the result could cost human lives.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org6a5d1d6">
+<h2 id="org6a5d1d6"><span class="section-number-2">5</span> - A life with formal methods</h2>
+
+<div id="org5c46629" class="figure">
+<p><img src="./images/thegoodgoodgood-ml.png" alt="thegoodgoodgood-ml.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+I hope that our future aspirations that, not just of our project, but with Machine
+Learning in general, that formal methods can become the norm and uncover the
+uglyniness and so that we can transform it into all positives, all goods.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf495470">
+<h2 id="orgf495470"><span class="section-number-2">6</span> - What's in todays talk</h2>
+<ol>
+<li>Explanation of Adversarial examples</li>
+<li>Defining the upper-bounds on where to search for these examples</li>
+<li>Creating Neural Networks and searching for adversarial examples using
+satisfiability theories. How this can be implemented to enable verification of
+Neural Network properties.</li>
+
+</ol>
+
+<aside class="notes">
+<p>
+So in today's talk, I will give a description of what adversarial examples are, then
+a method for defining a search space in which to find them. Finally, I will introduce
+you to an open-source project to verify the existence of adversarial examples using
+satisfiability testing.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org9117e87">
+<h2 id="org9117e87"><span class="section-number-2">7</span> - Adversarial examples (mathematical formalisation)</h2>
+
+<div id="org58e6412" class="figure">
+<p><img src="./images/perturbation.png" alt="perturbation.png" height="200px" />
+</p>
+</div>
+
+<p>
+Given some classifier model \(\mathcal{F}: \mathbb{R}^{n \times m} \rightarrow Y, \ Y
+\in \{0, 1, ..., k-1\}\) and some input \(\textbf{x}\), and adversarial is created by
+the modification \(\epsilon\) within the range of \(r\) (i.e. \(\epsilon \leq r\)) that
+will result in a miss-classification: \(\mathcal{F}(\textbf{x}) \neq
+\mathcal{F}(\textbf{x} + \epsilon)\).
+</p>
+
+<aside class="notes">
+<p>
+Here we have a more formal definition of what an adversarial is. If we have some
+classifier F. This classifier takes a vector, or in this case, a matrix input
+representation of a image \(x\). The output of this function is a single class label
+from \(k\) classes.
+</p>
+
+<p>
+An adversarial example will then be some modification &epsilon; to this x where the
+result will be a different output from the classifier. Typically, this &epsilon; value
+will be bounded by some norm value. In this example we have an \(r\). I.e. this maximum
+amount of change to pixels will be bounded by this \(r\).
+</p>
+
+<p>
+In other words, to create an adversarial, it is necessary to find some, suitably
+small, modification to the original input image, i.e. change of pixels, that will
+result in the model outputing an incorrect class.
+</p>
+
+<p>
+Often, we find that the modifications are not noticable to the human observer, but
+yet, the model has a high degree of confidence in its incorrect prediction.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgeec32a7">
+<h2 id="orgeec32a7"><span class="section-number-2">8</span> - How do we choose an \(r\)</h2>
+
+<div id="org845af40" class="figure">
+<p><img src="./images/eos.png" alt="eos.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+And by modifying the amount of perturbation one can apply to the input, we have more
+destructive modifications. But as you can see in these examples, each image still
+looks like their respective number, despite any perturbation is applied.
+</p>
+
+<p>
+Two things to note:
+</p>
+<ul>
+<li>the less perturbed cases are included in the bigger r scenario</li>
+<li>the potential amount of adversarials probably increases with r</li>
+
+</ul>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgccfe9a6">
+<h2 id="orgccfe9a6"><span class="section-number-2">9</span> - Less clear with non-image data</h2>
+<p>
+Iris dataset - classifier aim: predict type of flower from 4 dimensional vector of
+Sepal Length, Sepal Width, Petal Length, and Petal Width.
+I.e. \(\mathcal{F}: \mathbb{R}^4 \rightarrow Y, \ Y \in \{0, 1, 2\}\).
+</p>
+
+
+<div id="org83bbabf" class="figure">
+<p><img src="./images/iris.png" alt="iris.png" height="400px" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+However, for non-image data, we must ask how much modification can we apply in order
+to search for adversarial examples?
+</p>
+
+<p>
+In this toy example we have the Iris dataset. Called so because we have 3 different
+types of plant species indicated by the different coloured points. In this plot we
+have plotted the Sepal Width against the Sepal Length. A Neural Network will take
+these features such as Sepal Length or Width, and output a classification such as
+Setosa.
+</p>
+
+<p>
+For these two out of four total features, the Setosa class may be almost linearly
+separated, the Versicolor and virginica classes are interdispersed using these two
+Sepal features.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org800b080">
+<h2 id="org800b080"><span class="section-number-2">10</span> - Applying a 'small' \(r\) can lead to overlaps of true class boundaries</h2>
+
+<div id="org3e0740a" class="figure">
+<p><img src="./images/iris-boundaries.png" alt="iris-boundaries.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+In this plot we have added a red outline to each point in the training data. This red
+outline represents the maximum amount of perturbation, our \(r\) bound we talked about
+before.
+</p>
+
+<p>
+Even in this case where \(r\) is roughly 0.1, many modifications of the each point
+would push across potential class boundaries. This may be certainly true for the
+versicolor and viriginica classes. Yet for the Setosa class, we can be more sure that
+we have not passed any class boundaries.
+</p>
+
+<p>
+So we may once again ask the question: which $r$-bound should we use when search for
+adversarial examples.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org0c1de28">
+<h2 id="org0c1de28"><span class="section-number-2">11</span> - Generate a individual \(r\) for each data point</h2>
+
+<div id="org2d7a25e" class="figure">
+<p><img src="./images/boundary.png" alt="boundary.png" />
+</p>
+<p><span class="figure-number">Figure 10: </span>geometric complexity of class boundaries</p>
+</div>
+
+
+<div id="orgf1c6cfd" class="figure">
+<p><img src="./images/deceptive.png" alt="deceptive.png" />
+</p>
+<p><span class="figure-number">Figure 11: </span>sparsity/density of sampling from data manifold that consistutes the training data.</p>
+</div>
+
+<aside class="notes">
+<p>
+Some of my research aims to answer this question, using the information presented in
+the available data. Given a set of data, a individual $r$-bound will be computed for each
+data point that will take into consideration the estimated class bounds, and how much
+information there is present in the data.
+</p>
+
+<p>
+We consider two properties of the data in the process of generating these
+neighbourhoods. These are:
+</p>
+
+<p>
+situations where differently labelled data points lay close together in
+the topological space, and therefore any perturbation of the data points could result
+in passing the class boundaries, while wrongly labelling the perturbation the same as
+the original. We have just seen this with the previous plots of the Iris data.
+</p>
+
+<p>
+Our second property is shown in figure 2. It concerns the number of samples from
+different regions of the data manifold. In sparse regions (small numbers of samples),
+estimated class boundaries mayseem deceivingly simple, e.g. linear with a wide
+margin.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb1c0b0c">
+<h2 id="orgb1c0b0c"><span class="section-number-2">12</span> - Iterative expansion</h2>
+
+<div id="org4c153cc" class="figure">
+<p><img src="./images/expansion.png" alt="expansion.png" />
+</p>
+</div>
+
+<p>
+In our method we provide an algorithm to iteratively expand the maximum \(r\) bound.
+</p>
+
+<aside class="notes">
+<p>
+Our method consists of iteratively expanding the maximum \(r\) bounds for each data
+point simulateanously. If the bound intersects with a bound of data point from a
+different class, then these two data points will stop expanding.
+</p>
+
+<p>
+In this example we can see 3 data points, x<sub>1</sub>, x<sub>2</sub>, and x<sub>3</sub>. Where x<sub>1</sub>, and x<sub>3</sub>, are
+from one class, and x<sub>2</sub> is from another. There are iterative steps for the expansion
+of x<sub>1</sub> until it collides with the bound of x<sub>2</sub>. The bound of x<sub>3</sub> is ignored as its
+from the same class.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org0fee890">
+<h2 id="org0fee890"><span class="section-number-2">13</span> - Modulating by density</h2>
+<p>
+Expansion is modulated by the estimated density of data samples. Using an inverse multiquadric
+radial basis function (RBF) to estimate the density at a given location.
+</p>
+
+<p>
+\[
+    \varphi(x; \overline{x}) =  \frac{1}{\sqrt{1 + (\varepsilon r)^2}},\; \text{where}\; r = \parallel \overline{x} - x \parallel
+\]
+</p>
+
+<p>
+The estimated density for a single point is the sum of RBFS, centered on each point,
+at this location.
+</p>
+
+<p>
+\[
+    \rho_c(x) = \sum_{x_j \in X^c} \varphi(x; x_j)
+\]
+</p>
+
+<aside class="notes">
+<p>
+As we noted before, we may not have a lot of information in which to estimate the
+class boundaries. This lack of information occurs due to the lack of sampling of
+data. Therefore, we use this information of density of sampling to account for the
+lack of information of class boundaries.
+</p>
+
+<p>
+This density modulates the expansion of the $r$-bound. If there is not lots of
+information about class boundaries, then the $r$-bound expansion will be a lot
+smaller.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orga116242">
+<h2 id="orga116242"><span class="section-number-2">14</span> - Final result: individual \(r\) value for each data point</h2>
+
+<div id="orga4a99f0" class="figure">
+<p><img src="./images/iris-2.png" alt="iris-2.png" />
+</p>
+</div>
+
+<p>
+Morgan, J., Paiement, A., Pauly, A., &amp; Seisenberger, M. (2021). Adaptive
+neighbourhoods for the discovery of adversarial examples. arXiv preprint
+arXiv:2101.09108.
+</p>
+
+<aside class="notes">
+<p>
+After computing the density of each data point and expanding the neighbourhoods, then
+we will have an individual $r$-bound for each data point. This \(r\) provides the
+upper-bound with which to search for adversarial examples.
+</p>
+
+<p>
+We can seen this plot, that the black points have grown much larger due to the large
+amounts of information about neighbours of the same class. While other points in the
+top right have not grown much at all. In this plot we can still see overlaps, but
+this is only because the neighbourhoods were computed at a higher number of
+dimensions while this plot only shows 2 dimensions. At these higher dimensions the
+neighbourhoods are not overlapping.
+</p>
+
+<p>
+Here today, I have provided the iterative method to compute $r$-bounds, but we also
+provide another method using langrangian multipliers to directly compute these
+bounds. You can find the method in the paper "Adaptive neighbourhoods for the
+discovery of adversarial examples".
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org069f700">
+<h2 id="org069f700"><span class="section-number-2">15</span> - Now we must find \(\textbf{x} + \epsilon\)</h2>
+
+<div id="orgb72d88e" class="figure">
+<p><img src="./images/perturbation.png" alt="perturbation.png" height="300px" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+From the result of this iterative algorithm, we have an upper bound \(r\) value for
+each data point. However, we have not yet found an adversarial example. To find such
+an example, we must find some \(x + \epsilon\) where the model outputs a
+miss-classification.
+</p>
+
+<p>
+To find these examples, we can use our open-source platform.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc42231c">
+<h2 id="orgc42231c"><span class="section-number-2">16</span> - Searching for the existence of adversarial examples</h2>
+
+<div id="org2cddc14" class="figure">
+<p><img src="./images/neuralverifier.png" alt="neuralverifier.png" />
+</p>
+</div>
+
+<p>
+<a href="https://github.com/jaypmorgan/NeuralVerifier.jl">https://github.com/jaypmorgan/NeuralVerifier.jl</a> - built on top of Z3 solver to
+provide an interface to verify Neural Network properties, such as: output bounds
+checking and adversarial robustness.
+</p>
+
+<aside class="notes">
+<p>
+Our open-source platform is called NeuralVerifier. It allows use to verify certain
+properties of Neural Networks using Satisfiability Modulo Theories or SMT. We build
+ontop of an existing and highly used SMT solver called Z3, which allows us to provide
+more complex formulas to solve.
+</p>
+
+<p>
+This next part of the talk will describe how we can create Neural Networks inside an
+SMT solver, and then how NeuralVerifier abstracts away the work to make searching for
+adversarial examples easier.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgff7ebb8">
+<h2 id="orgff7ebb8"><span class="section-number-2">17</span> - Application of using NeuralVerifier</h2>
+
+<div id="org230221f" class="figure">
+<p><img src="./images/NN.png" alt="NN.png" height="400px" />
+</p>
+</div>
+
+<p>
+Take a very simple example of a 3-layer neural network.
+</p>
+
+<aside class="notes">
+<p>
+To motivate the explanation, take this very simple example of a 3 layer neural
+network, with a single hidden layer in the middle.
+</p>
+
+<p>
+This network takes in 3 inputs and produces three class outputs.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org5d11328">
+<h2 id="org5d11328"><span class="section-number-2">18</span> - Simple Arithmetic</h2>
+<p>
+\[
+z = \sigma(Wx + b)
+\]
+</p>
+
+
+<div id="orgfd0541e" class="figure">
+<p><img src="./images/neuron.png" alt="neuron.png" height="200px" />
+</p>
+</div>
+
+<p>
+Where \(\sigma\) is some non-linear function to increase the model's complexity to
+allow it to model non-linear relationships. One of the most common non-linear
+functions when training neural networks is the Rectified Linear activation function
+(ReLU): \(\max(Wx+ b, 0)\).
+</p>
+
+<aside class="notes">
+<p>
+At a microlevel, the neural network performs a very simple equation, a Weight matrix
+multiplied against the input vector, and the addition of the bias. A function is then
+applied to the the result of this expression. This activation function in a
+non-linearity which increases the learning capability of the network.
+</p>
+
+<p>
+A very frequently used non-linear activation function is the ReLU activation function
+which simply computes the maximum between the input and 0.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org6c7101c">
+<h2 id="org6c7101c"><span class="section-number-2">19</span> - Encoding arithmetic</h2>
+<p>
+Z3 provides support for real linear arithmetic and provides operations for the basic
+multiplication and addition. Thus, we need only to apply these elementwise.
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-julia"><code trim><span style="color: #5317ac;">function</span> <span style="color: #721045;">dense</span>(x, W, b)
+    out = fill!(Array(<span style="color: #0000bb;">undef</span>, size(W,1), size(x,2)), 0)
+
+    <span style="color: #5317ac;">for</span> i <span style="color: #5317ac;">=</span> 1:size(out,1), j = 1:size(W,2)
+        out[i] += W[i,j] * x[j]
+    <span style="color: #5317ac;">end</span>
+
+    out = out .+ b
+    <span style="color: #5317ac;">return</span> out
+<span style="color: #5317ac;">end</span>
+</code></pre>
+</div>
+
+<aside class="notes">
+<p>
+As NeuralVerifier is built ontop of Z3, we can simply apply the arithmetic of this
+neuron using constants in the network. So each layer of the neural network is just
+the combination of the predefined weight matrix, the input and the bias.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org164874e">
+<h2 id="org164874e"><span class="section-number-2">20</span> - ReLU</h2>
+<p>
+Moving onto non-linear functions, we must consider how such non-linearities are
+encoded in the model. For some of the activation functions, it could be as easy as
+simple boolean logic.
+</p>
+
+<p>
+<code>If(x &gt; 0, x, 0)</code>
+</p>
+
+
+<div id="orge4136fe" class="figure">
+<p><img src="./images/relu.jpg" alt="relu.jpg" height="300px" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8cef60a">
+<h2 id="org8cef60a"><span class="section-number-2">21</span> - More complex Sigmoid function (using piecewise linear approximation)</h2>
+<aside class="notes">
+<p>
+However, encoding more complex activation functions can be reduced via piecewise
+linear approximation with the same boolean arithmetic. Increasing the precision of
+approximation will make satisfiability slower, but the encoding will be more true
+with the original network.
+</p>
+
+</aside>
+
+
+<div id="org680bcd3" class="figure">
+<p><img src="./images/sigmoid.jpg" alt="sigmoid.jpg" height="300px" />
+</p>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="src src-julia"><code trim><span style="color: #5317ac;">function</span> <span style="color: #721045;">sigmoid</span>(x)
+    If(x &lt; 0,
+        If(x &lt; -2, 0.0, 0.4),
+        If(x &gt;  2, 1.0, 0.6))
+<span style="color: #5317ac;">end</span>
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org7574afc">
+<h2 id="org7574afc"><span class="section-number-2">22</span> - Putting together a simple layer</h2>
+<div class="org-src-container">
+
+<pre  class="src src-julia"><code trim><span style="color: #5317ac;">function</span> <span style="color: #721045;">dense</span>(x, W, b)
+    out = fill!(Array(<span style="color: #0000bb;">undef</span>, size(W,1), size(x,2)), 0)
+
+    <span style="color: #5317ac;">for</span> i <span style="color: #5317ac;">=</span> 1:size(out,1), j = 1:size(W,2)
+        out[i] += W[i,j] * x[j]
+    <span style="color: #5317ac;">end</span>
+
+    out = out .+ b
+    <span style="color: #5317ac;">return</span> out
+<span style="color: #5317ac;">end</span>
+
+<span style="color: #5317ac;">function</span> <span style="color: #721045;">relu</span>(x)
+    If(x &gt; 0, x, 0)
+<span style="color: #5317ac;">end</span>
+
+y = relu(dense(x, W, b))
+</code></pre>
+</div>
+
+<aside class="notes">
+<p>
+We can now compose these functions together in order to produce the result of a
+single layer of the neural network.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgef437ea">
+<h2 id="orgef437ea"><span class="section-number-2">23</span> - Building an entire model with NeuralVerifier</h2>
+<div class="org-src-container">
+
+<pre  class="src src-julia"><code trim><span style="color: #721045;">encoding</span>(x) = <span style="color: #5317ac;">begin</span>
+    y = dense(x,
+              neural_network[1].W,
+              neural_network[1].b) |&gt; relu;
+    y = dense(y,
+              neural_network[2].W,
+              neural_network[2].b) |&gt; relu;
+    y = dense(y,
+              neural_network[3].W,
+              neural_network[3].b) |&gt; softmax;
+<span style="color: #5317ac;">end</span>
+</code></pre>
+</div>
+
+<aside class="notes">
+<p>
+In NeuralVerifier, this is all done for you. All you need to do is create a function
+that takes some input \(x\), and apply the dense and non-linearity functions mimicing
+the architectural design of your original network.
+</p>
+
+<p>
+You can see we have passed the pretrained or prelearned weights and biases for each
+layer of the network.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf268b0d">
+<h2 id="orgf268b0d"><span class="section-number-2">24</span> - Setting up search for adversarial examples</h2>
+<p>
+\[
+\min_{\epsilon} (\mathcal{F}(x) \neq \mathcal{F}(x + \epsilon)), \ \epsilon \leq r
+\]
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-julia"><code trim><span style="color: #5317ac;">for</span> (idx, (x_i, r_i)) <span style="color: #5317ac;">in</span> enumerate(zip(x, r))
+    m = Optimize()  <span style="color: #505050;"># </span><span style="color: #505050;">create an optimisation procedure (model)</span>
+
+    add!(m, (eps &gt; 0) &#8743; (eps &lt;= r_i)) <span style="color: #505050;"># </span><span style="color: #505050;">bound condition on epsilon</span>
+
+    y = encoding(x_i)  <span style="color: #505050;"># </span><span style="color: #505050;">get initial condition of y in our encoding</span>
+
+    add!(m, y != f(xi)) <span style="color: #505050;"># </span><span style="color: #505050;">add the adversarial example condition</span>
+
+    minimize!(m, eps)  <span style="color: #505050;"># </span><span style="color: #505050;">find the smallest eps</span>
+
+    check(m) <span style="color: #505050;"># </span><span style="color: #505050;">check for satisfiability</span>
+
+    m.is_sat == <span style="color: #223fbf;">"sat"</span> &amp;&amp; <span style="color: #721045;">@info</span> <span style="color: #223fbf;">"#$(idx): Adversarial found!"</span>
+<span style="color: #5317ac;">end</span>
+</code></pre>
+</div>
+
+<aside class="notes">
+<p>
+To finalise we must add some conditions to specify we wish to search for adversarial
+examples. In this case we setup an Optimisation model in Z3, we add the bounds
+condition on epsilon being above 0, and less than or equal to r. We get the initial y
+given our encoding function that we made earlier. Finally we add our adversarial
+condition that the application of our classifier should not be equal to y.
+</p>
+
+<p>
+We wish to finish epsilon here to find the closest possible adversarial example to
+our original input.
+</p>
+
+<p>
+Finally, we begin the search by using check, and print out if we have found an
+adversarial example.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org7badb60">
+<h2 id="org7badb60"><span class="section-number-2">25</span> - In NeuralVerifier</h2>
+<div class="org-src-container">
+
+<pre  class="src src-julia"><code trim>r = epsilon_expand(x_train', y_train;
+    &#1013; = 1e-7,                    <span style="color: #505050;"># </span><span style="color: #505050;">the initial step size</span>
+    &#949; = 1.0,                     <span style="color: #505050;"># </span><span style="color: #505050;">RBF width parameter</span>
+    func = inverse_multiquadric, <span style="color: #505050;"># </span><span style="color: #505050;">RBF function to use</span>
+    decay = exponential_decay)   <span style="color: #505050;"># </span><span style="color: #505050;">Decay function based on density</span>
+
+stable_area, adv_examples = stable_region(Optimize, f, x_train', r;
+                                          timeout = 100,
+                                          build_fn = encoding)
+</code></pre>
+</div>
+
+<aside class="notes">
+<p>
+In NeuralVerifier, we have abstracted all these details away and use higher order
+functions. We have a function called epsilon<sub>expand</sub> which takes some density metric
+and computes our upper-bounds for each data point in the data.
+</p>
+
+<p>
+Then we use the stable region function, passing in our model, our data, and our
+computed upper-bounds. The return of this function are the adversarial examples that
+are found, and stable area. The stable area is a distance metric of how close to the
+original inputs the model is robust against adversarial attacks. This kind of metric
+might be useful for checking against specifications of using Neural Networks in
+safety-critical systems.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgca9c56c">
+<h2 id="orgca9c56c"><span class="section-number-2">26</span> - Adversarial Examples Found!</h2>
+<p>
+Running on MNIST dataset.
+</p>
+
+<pre class="example" id="org2bf954c">
+[ Info: #1: Adversarial found!
+[ Info: #3: Adversarial found!
+[ Info: #4: Adversarial found!
+[ Info: #5: Adversarial found!
+[ Info: #7: Adversarial found!
+...
+</pre>
+
+
+<div id="org49af450" class="figure">
+<p><img src="./images/example.png" alt="example.png" />
+</p>
+</div>
+
+<aside class="notes">
+<p>
+When we apply these functions to the MNIST dataset: a dataset of images of numbers,
+where each image is classified by the number present in the image. You can see when
+we run the stable<sub>area</sub> function it finds adversarial examples, and we can see just
+one of these examples where a number 5 is recognised as a 3 by the Neural Network
+when pixel modifications are applied.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbeee420">
+<h2 id="orgbeee420"><span class="section-number-2">27</span> - Main contributions</h2>
+<ol>
+<li>Using knowledge gleamed from the data manifold to generate individual \(r\) value
+for each data point.</li>
+<li>Open-source platform for verification of Neural Network properties using SMT solvers</li>
+
+</ol>
+
+<aside class="notes">
+<p>
+To summarise this talk, I have presented two main contributions: the first, more
+novel from a research perspective is the computation of upper-bounds for searching
+for adversarial examples. This is not only useful for our NeuralVerifier framework,
+but it also enables the use of existing adversarial generation techniques for
+non-image data.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org3092c08">
+<h2 id="org3092c08"><span class="section-number-2">28</span> - A thank you to my supervisors</h2>
+<ul>
+<li>Monika Seisenberger (Swansea University)</li>
+<li>Jane Williams (Swansea University)</li>
+<li>Adeline Paiement (Université de Toulon)</li>
+
+</ul>
+
+<aside class="notes">
+<p>
+Before I end my talk, its worth noting that this work is helped by supervisors and
+funded by Swansea University.
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org623eae0">
+<h2 id="org623eae0"><span class="section-number-2">29</span> - Contributions welcome!</h2>
+<p>
+You can find these slides on my personal website below. Additionally follow the github link for
+more documentation and usage on NeuralVerifier.jl
+</p>
+
+<ul>
+<li><a href="https://blog.morganwastaken.com">https://blog.morganwastaken.com</a></li>
+<li><a href="https://github.com/jaypmorgan/NeuralVerifier.jl">https://github.com/jaypmorgan/NeuralVerifier.jl</a></li>
+
+</ul>
+
+<aside class="notes">
+<p>
+The slides of this talk are available on my personal website linked here. And you can
+also find the link to the NeuralVerifier platform where you can learn about, use, and
+contribute to the development of the platform.
+</p>
+
+<p>
+That's it for me, thank you for your time today.
+</p>
+
+</aside>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js-master/dist/reveal.js"></script>
+<script src="./reveal.js-master/plugin/markdown/markdown.js"></script>
+<script src="./reveal.js-master/plugin/zoom/zoom.js"></script>
+<script src="./reveal.js-master/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown,RevealZoom,RevealNotes],
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+]
+});
+
+
+</script>
+</body>
+</html>
