@@ -32,4 +32,4 @@ architectures.
 
 **Presentation Slides**
 
-[[bctcs_presentation/presentation.html][Slides]]
+[[./bctcs_presentation/presentation.html][Slides]]
