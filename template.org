@@ -7,7 +7,7 @@
 <div id="topbar">
 <h3>Dr. Jay Paul Morgan</h3>
 <a href="/">Blog Posts</a>
-<a href="news">News & Announcements</a>
+<a href="/news">News & Announcements</a>
 <a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr">Publications</a>
 <a href="https://github.com/jaypmorgan">Git</a>
 <a href="https://pageperso.lis-lab.fr/~jay.morgan/">Teaching</a>
