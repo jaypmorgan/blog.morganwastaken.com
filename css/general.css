@@ -98,6 +98,18 @@ div#topbar > a {
     margin-top: 20px;
 }
 
+div#topbar > span {
+    flex: auto;
+    margin-right: 50px;
+    margin-top: 15px;
+}
+
+div#topbar > span > a {
+    float: right;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 #postamble {
     display: none;
 }

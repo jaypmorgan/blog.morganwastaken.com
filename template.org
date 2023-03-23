@@ -6,10 +6,16 @@
 #+begin_export html
 <div id="topbar">
 <h3>Dr. Jay Paul Morgan</h3>
-<a href="/">Blog Posts</a>
-<a href="/news">News & Announcements</a>
+<a href="/">About</a>
+<a href="/blog/">Blog Posts</a>
+<a href="/news/">News</a>
 <a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr">Publications</a>
-<a href="https://github.com/jaypmorgan">Git</a>
-<a href="https://pageperso.lis-lab.fr/~jay.morgan/">Teaching</a>
+<a href="https://pageperso.lis-lab.fr/jay.morgan/teaching.html">Teaching</a>
+<span id="social-links">
+<a href="https://emacs.ch/@jaymorgan"><img src="/images/mastodon.png" alt="Jay Paul Morgan Mastodon" width="30px" height="30px"/></a>
+<a href="https://github.com/jaypmorgan"><img src="/images/github.png" alt="Jay Paul Morgan jaypmorgan github link" width="30px" height="30px"/></a>
+<a href="https://orcid.org/my-orcid?orcid=0000-0003-3719-362X"><img src="/images/orcid.png" alt="Jay Paul Morgan orcid link" width="30px" height="30px"/></a>
+<a href="https://www.researchgate.net/profile/Jay-Morgan?ev=hdr_xprf"><img src="/images/researchgate.png" alt="Jay Paul Morgan research gate social link" width="30px" height="30px"/></a>
+</span>
 </div>
 #+end_export

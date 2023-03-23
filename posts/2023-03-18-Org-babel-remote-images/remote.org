@@ -3,7 +3,7 @@
 #+DATE: 2023-03-18 Sat
 #+INCLUDE: ../../template.org
 
-In one of my [[file:~/workspace/blog.morganwastaken.com/posts/news/2022-12-15-org-babel-tramp/org-babel-tramp.org][previous posts]], I explained how a remote python process
+In one of my [[https://blog.morganwastaken.com/posts/2022-12-15-org-babel-tramp/org-babel-tramp.html][previous posts]], I explained how a remote python process
 can be setup in an org-mode documents. Therefore, allowing you to
 offload any large compute to a remote server.
 

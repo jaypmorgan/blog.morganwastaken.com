@@ -1,0 +1,41 @@
+#+TITLE: Blog Posts
+#+author: Jay Paul Morgan
+#+include: ./template.org
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://blog.morganwastaken.com/css/index.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/index.css"/>
+#+HTML_HEAD: <meta name="description" content="A collection of blog posts and articles published by Dr. Jay Paul Morgan.">
+
+#+begin_src emacs-lisp :results output raw :exports results :eval yes
+  (defun get-posts (dir)
+    "Get a list of relative paths to the posts"
+    (cl-reduce
+     (lambda (files filepath)
+       (let ((filename (car (last (split-string filepath "/")))))
+	 (if (string= filename "index.org")
+	     files
+	   (cons filepath files))))
+     (directory-files-recursively dir ".*\.org")
+     :initial-value nil))
+
+  (defun read-title-from-post (filepath)
+    (with-temp-buffer
+      (insert-file-contents filepath)
+      (re-search-forward "^#\\+\\(TITLE\\|title\\):")
+      (buffer-substring-no-properties (1+ (point)) (point-at-eol))))
+
+  (defun read-summary-from-post (filepath)
+    (with-temp-buffer
+      (insert-file-contents filepath)
+      (format "%s..."
+       (substring
+	(string-trim
+	 (replace-regexp-in-string
+	  "\\*+ " ""
+	  (replace-regexp-in-string "#\\+\\(TITLE\\|AUTHOR\\|DATE\\|INCLUDE\\):.*\n" "" (buffer-string))))
+	0
+	300))))
+
+  (dolist (post (get-posts "./posts"))
+    (princ (format "- [[%s][%s]]\n\n#+begin_quote\n%s\n#+end_quote\n\n" post (read-title-from-post post) (read-summary-from-post post))))
+#+end_src
