@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-23 Thu 19:40 -->
+<!-- 2023-03-23 Thu 19:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Makefile: Towards Reproducible Research-based Programming</title>
@@ -231,18 +231,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgde0e149">1. Problems that arise during the course of research</a></li>
-<li><a href="#orgf58c47a">2. What is Make and Makefile?</a></li>
-<li><a href="#orgee5b876">3. Using Makefile for research programming</a>
+<li><a href="#org7364c90">1. Problems that arise during the course of research</a></li>
+<li><a href="#orge2a3288">2. What is Make and Makefile?</a></li>
+<li><a href="#org9a64757">3. Using Makefile for research programming</a>
 <ul>
-<li><a href="#orge4f0013">3.1. A simple example</a></li>
-<li><a href="#orgce91b54">3.2. A more complicated example</a></li>
-<li><a href="#org858b07b">3.3. Multistage processing</a></li>
-<li><a href="#orgd89bf00">3.4. Creating a summarised report</a></li>
+<li><a href="#org138bc5b">3.1. A simple example</a></li>
+<li><a href="#org5426a7d">3.2. A more complicated example</a></li>
+<li><a href="#orgc5c5ac1">3.3. Multistage processing</a></li>
+<li><a href="#orgd8079c0">3.4. Creating a summarised report</a></li>
 </ul>
 </li>
-<li><a href="#org2ca3e78">4. Variables and writing less code</a></li>
-<li><a href="#orgfe8fe05">5. Conclusion</a></li>
+<li><a href="#orgfe26822">4. Variables and writing less code</a></li>
+<li><a href="#orgca556c5">5. Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -292,8 +292,8 @@ you're comfortable, making the makefile more complicated yet concise
 in the name of efficiency.
 </p>
 
-<div id="outline-container-orgde0e149" class="outline-2">
-<h2 id="orgde0e149"><span class="section-number-2">1</span> Problems that arise during the course of research</h2>
+<div id="outline-container-org7364c90" class="outline-2">
+<h2 id="org7364c90"><span class="section-number-2">1</span> Problems that arise during the course of research</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 When conducting a research project, though the objective or hypothesis will be
@@ -351,8 +351,8 @@ as automate our workflow.
 </div>
 </div>
 
-<div id="outline-container-orgf58c47a" class="outline-2">
-<h2 id="orgf58c47a"><span class="section-number-2">2</span> What is Make and Makefile?</h2>
+<div id="outline-container-orge2a3288" class="outline-2">
+<h2 id="orge2a3288"><span class="section-number-2">2</span> What is Make and Makefile?</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <a href="https://www.gnu.org/software/make/manual/html_node/index.html#Top">Make</a> is a application often used to compile other larger and complex
@@ -391,8 +391,8 @@ our research project for us.
 </div>
 </div>
 
-<div id="outline-container-orgee5b876" class="outline-2">
-<h2 id="orgee5b876"><span class="section-number-2">3</span> Using Makefile for research programming</h2>
+<div id="outline-container-org9a64757" class="outline-2">
+<h2 id="org9a64757"><span class="section-number-2">3</span> Using Makefile for research programming</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Using make may then change the way we view our project, from a process
@@ -404,8 +404,8 @@ report on the research.
 </p>
 </div>
 
-<div id="outline-container-orge4f0013" class="outline-3">
-<h3 id="orge4f0013"><span class="section-number-3">3.1</span> A simple example</h3>
+<div id="outline-container-org138bc5b" class="outline-3">
+<h3 id="org138bc5b"><span class="section-number-3">3.1</span> A simple example</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Let us begin with a very basic example. Our project is going to be very
@@ -417,7 +417,7 @@ process.
 </p>
 
 
-<div id="orga4c84ce" class="figure">
+<div id="org3cc6b3b" class="figure">
 <p><img src="./images/makefile_process_1.png" alt="makefile_process_1.png" />
 </p>
 </div>
@@ -478,8 +478,8 @@ stats.py</code> and our <code>output.csv</code> will be created.
 </div>
 </div>
 
-<div id="outline-container-orgce91b54" class="outline-3">
-<h3 id="orgce91b54"><span class="section-number-3">3.2</span> A more complicated example</h3>
+<div id="outline-container-org5426a7d" class="outline-3">
+<h3 id="org5426a7d"><span class="section-number-3">3.2</span> A more complicated example</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Suppose we have two algorithms and we wish
@@ -491,7 +491,7 @@ this:
 </p>
 
 
-<div id="orgca6249a" class="figure">
+<div id="org75b8133" class="figure">
 <p><img src="./images/makefile_process_2.png" alt="makefile_process_2.png" />
 </p>
 </div>
@@ -560,8 +560,8 @@ single command: <code>make output</code>.
 </div>
 </div>
 
-<div id="outline-container-org858b07b" class="outline-3">
-<h3 id="org858b07b"><span class="section-number-3">3.3</span> Multistage processing</h3>
+<div id="outline-container-orgc5c5ac1" class="outline-3">
+<h3 id="orgc5c5ac1"><span class="section-number-3">3.3</span> Multistage processing</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Our previous examples have consisted of only one processing step, we
@@ -573,7 +573,7 @@ complicated.
 </p>
 
 
-<div id="org5e12257" class="figure">
+<div id="orga22e5c9" class="figure">
 <p><img src="./images/makefile_process_3.png" alt="makefile_process_3.png" />
 </p>
 </div>
@@ -627,7 +627,7 @@ This is great, but what if algorithm 2 depended on both <code>data.csv</code> an
 </p>
 
 
-<div id="org03ddb66" class="figure">
+<div id="orgff8ea52" class="figure">
 <p><img src="./images/makefile_process_4.png" alt="makefile_process_4.png" />
 </p>
 </div>
@@ -721,8 +721,8 @@ wish to run algorithm 1, we can run <code>make output_1.csv</code>.
 </div>
 </div>
 
-<div id="outline-container-orgd89bf00" class="outline-3">
-<h3 id="orgd89bf00"><span class="section-number-3">3.4</span> Creating a summarised report</h3>
+<div id="outline-container-orgd8079c0" class="outline-3">
+<h3 id="orgd8079c0"><span class="section-number-3">3.4</span> Creating a summarised report</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 We can go further and improve our process of research. Now that we have our
@@ -731,7 +731,7 @@ CSV file to present in a report.
 </p>
 
 
-<div id="org69e0bcb" class="figure">
+<div id="org29bfb6f" class="figure">
 <p><img src="./images/makefile_process_5.png" alt="makefile_process_5.png" />
 </p>
 </div>
@@ -813,8 +813,8 @@ also add the recompilation rules for if our document contains a bibliography:
 </div>
 </div>
 </div>
-<div id="outline-container-org2ca3e78" class="outline-2">
-<h2 id="org2ca3e78"><span class="section-number-2">4</span> Variables and writing less code</h2>
+<div id="outline-container-orgfe26822" class="outline-2">
+<h2 id="orgfe26822"><span class="section-number-2">4</span> Variables and writing less code</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Our final makefile has a lot of repeated content:
@@ -997,7 +997,7 @@ which automates our research process:
 
 
 
-<div id="orgc0a0147" class="figure">
+<div id="org290524f" class="figure">
 <p><img src="./images/makefile_process_6.png" alt="makefile_process_6.png" />
 </p>
 </div>
@@ -1009,8 +1009,8 @@ to do to run our project from start to finish is <code>make report</code>.
 </div>
 </div>
 
-<div id="outline-container-orgfe8fe05" class="outline-2">
-<h2 id="orgfe8fe05"><span class="section-number-2">5</span> Conclusion</h2>
+<div id="outline-container-orgca556c5" class="outline-2">
+<h2 id="orgca556c5"><span class="section-number-2">5</span> Conclusion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <code>make</code> can be an excellent addition to any research project. It tracks
@@ -1029,7 +1029,7 @@ automate many of the laborious tasks that come with organising research-based pr
 <div id="postamble" class="status">
 <p class="date">Date: 05-03-2020</p>
 <p class="author">Author: Jay Morgan</p>
-<p class="date">Created: 2023-03-23 Thu 19:40</p>
+<p class="date">Created: 2023-03-23 Thu 19:41</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
