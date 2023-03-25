@@ -35,7 +35,7 @@
 	 :publishing-function org-publish-attachment)
 	("images"
 	 :base-directory "./"
-	 :base-extension "png\\|jpg\\jpeg"
+	 :base-extension "png\\|jpg\\|jpeg"
 	 :recursive t
 	 :publishing-function org-publish-attachment
 	 :publishing-directory "./public/")

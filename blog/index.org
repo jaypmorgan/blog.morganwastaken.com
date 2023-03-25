@@ -1,6 +1,6 @@
 #+TITLE: Blog Posts
 #+author: Jay Paul Morgan
-#+include: ./template.org
+#+include: ../template.org
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/css/index.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://blog.morganwastaken.com/css/index.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/index.css"/>
@@ -36,6 +36,6 @@
 	0
 	300))))
 
-  (dolist (post (get-posts "./posts"))
+  (dolist (post (get-posts "./"))
     (princ (format "- [[%s][%s]]\n\n#+begin_quote\n%s\n#+end_quote\n\n" post (read-title-from-post post) (read-summary-from-post post))))
 #+end_src

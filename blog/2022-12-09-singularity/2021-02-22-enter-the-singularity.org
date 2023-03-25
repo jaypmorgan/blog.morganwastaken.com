@@ -1,0 +1,133 @@
+#+TITLE: Enter the Singularity Or Containers for Reproducible Research Environments
+#+AUTHOR: Jay Morgan
+#+DATE: 22-02-2021
+#+include: ../../template.org
+
+We must have all said at some point 'But it works on my machine'. The intricacies and
+details surrounding some program that /should/ work on another machines, but ultimately
+doesn't. Docker solves this problem in business environments by shipping your
+machine, and maybe this method is a brilliant stop-gap solution until something
+better comes on.
+
+Here in Academia, we face a similar issue with reproducility of results. In this blog
+post, I want to discuss one method to help us make our results /more/
+reproducible. This solution is not a panacea, not by any means.
+
+#+begin_src
+Bootstrap: docker
+From: nvidia/cuda:10.0-devel
+
+%help
+        A container for machine learning
+
+%labels
+        Maintainer Jay Morgan
+        Version v1.0.0
+
+%environment
+        export SHOME="/singularity-point";
+        export CUDA_HOME=/usr/local/cuda;
+        export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDA_HOME}/lib64;
+        PATH=${CUDA_HOME}/bin:${PATH};
+        export PATH;
+
+%files
+        environment.yml /home/
+	scripts/install-conda-environment.sh /home/
+
+%post
+        export SHOME="/singularity-point";
+        export TZ=Europe/London
+        export DEBIAN_FRONTEND=noninteractive
+        export LC_ALL=C.UTF-8
+
+        mkdir $SHOME && cd $SHOME;
+        mv /home/*.yml $SHOME/;
+	mv /home/*.sh $SHOME/;
+
+        apt-get update && apt-get -y upgrade
+        apt-get -y install \
+                build-essential \
+                software-properties-common \
+                dirmngr \
+                wget \
+                git \
+                curl \
+                cmake \
+                libxml2-dev \
+                libssl-dev \
+                libcurl4-openssl-dev \
+                libfontconfig1-dev \
+                libhdf5-dev \
+		libsm6
+        apt-get clean
+
+        # install miniconda
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+             && bash Miniconda3-latest-Linux-x86_64.sh -b -p "$SHOME/conda" \
+             && rm -f Miniconda3-latest-Linux-x86_64.sh
+        # create the python environment
+	export PATH=${SHOME}/conda/bin:${PATH}
+        bash $SHOME/install-conda-environment.sh
+
+%apprun python
+        export CUBLAS_WORKSPACE_CONFIG=:4096:8  # deterministic behaviour
+        # assumes project is mounted to /mnt
+        cd /mnt
+        exec /singularity-point/conda/envs/presage/bin/python "$@"
+
+%apprun ipython
+	cd /mnt
+        exec /singularity-point/conda/envs/presage/bin/ipython "$@"
+
+%runscript
+	shopt -s expand_aliases
+	cd /mnt
+	alias python="$SHOME/conda/envs/presage/bin/python"
+	alias ipython="$SHOME/conda/envs/presage/bin/ipython"
+	exec "$@"
+#+end_src
+
+* Why not Docker?
+
+Docker is great for business environments. In these environments, our builds,
+servers, are something that we own and have root access. 
+
+* COMMENT Framing the problem
+- Computational works becomes more critical for many aspects of scientific research.
+- Issues come down to:
+  + dependency hell
+  + Imprecise documentation
+  + Code rot
+  + Barriers to adoption and reuse existing solutions
+
+* COMMENT Many users adovate for Docker -- and this is a good thing
+- Shows users care about the environment in which they produce and share they code
+- Single and reproducible environment is good for the end-user
+- Can be annoying for the researcher however:
+  + A background daemon is required to run docker images
+  + Images are treated like a "service" instead of a executable
+  + Not good for HPC environments
+  + Requires administrator privelages
+
+* COMMENT Why Singularity is the solution
+- Designed for scientific research
+- If you use a HPC cluster, you don't need to install anything on it, copy the
+  singularity image to the cluster, and continue with your work!
+- you can import your docker images
+- No daemon processes or root escalation.
+- Easy to get GPU support with =--nv= flag
+- Treat your image like a simple executable
+- But also allow you to shell into the image and modify the environment
+
+* COMMENT Using Singularity
+- Installation
+- Using existing containers
+  + Downloading
+  + Executing commands
+- Creating a recipe -- you can use docker too! (definition file)
+- Bind Paths and Mounts
+- Nvidia support
+- Shell into container
+
+* COMMENT Conclusion

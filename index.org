@@ -1,9 +1,6 @@
 #+TITLE: About
 #+author: Jay Paul Morgan
 #+include: ./template.org
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/css/index.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://blog.morganwastaken.com/css/index.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/index.css"/>
 #+HTML_HEAD: <meta name="description" content="Dr. Jay Paul Morgan is a Machine Learning research currently in the University of Toulon France. I am focusing on using Machine Learning applications for Heliophyics problems.">
 
 Hello, my name is Jay Paul Morgan. I am a Machine Learning

@@ -1,22 +1,22 @@
 #+HTML_DOCTYPE: html5
+#+OPTIONS: html-style:nil
 #+HTML_HEAD: <meta name="viewport" content="width=device-width, initial-scale=1.0">
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="/css/general.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://blog.morganwastaken.com/css/general.css"/>
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/general.css"/>
 
 #+begin_export html
 <div id="topbar">
+<img id="profile-picture" src="/images/profile.jpg" alt="Jay Paul Morgan profile picture" width="200px"/>
 <h3>Dr. Jay Paul Morgan</h3>
 <a href="/">About</a>
 <a href="/blog">Blog Posts</a>
 <a href="/news">News</a>
-<a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr">Publications</a>
 <a href="https://pageperso.lis-lab.fr/jay.morgan/teaching.html">Teaching</a>
-<span id="social-links">
+<p id="social-links">
+<a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr"><img src="/images/google-scholar.png" alt="Jay Paul Morgan google scholar publication" width="30px" height="30px"/></a>
 <a href="https://emacs.ch/@jaymorgan"><img src="/images/mastodon.png" alt="Jay Paul Morgan Mastodon" width="30px" height="30px"/></a>
 <a href="https://github.com/jaypmorgan"><img src="/images/github.png" alt="Jay Paul Morgan jaypmorgan github link" width="30px" height="30px"/></a>
 <a href="https://orcid.org/my-orcid?orcid=0000-0003-3719-362X"><img src="/images/orcid.png" alt="Jay Paul Morgan orcid link" width="30px" height="30px"/></a>
 <a href="https://www.researchgate.net/profile/Jay-Morgan?ev=hdr_xprf"><img src="/images/researchgate.png" alt="Jay Paul Morgan research gate social link" width="30px" height="30px"/></a>
-</span>
+</p>
 </div>
 #+end_export
