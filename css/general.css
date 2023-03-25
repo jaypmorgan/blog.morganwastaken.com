@@ -1,144 +1,116 @@
-html {
-    background-color: #fbf8f8;
-}
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,500;1,800&display=swap');
 
-.title {
-    font-size: 2.5em;
-    margin-bottom: 1em;
-}
-
-#preamble {
-    max-width: 70ch;
-    padding-top: 100px;
-    margin: auto;
-}
-
-#preamble > .subtitle {
-    color: #767474;
-}
-
-#content > .title {
-    display: none;
-}
-
-h1,h2,h3,h4,h5 {
-    /* font-family: gill sans, sans-serif; */
-    font-weight: normal;
-}
-
-body {
-    font-family: gill sans, sans-serif;
-    margin: 0;
-}
-
-p {
-    line-height: 1.4em;
-    margin-block-start: 1.5em;
-    margin-block-end: 1.5em;
-}
-
-div#content {
-    padding-top: 40px;
-    max-width: 70ch;
-    margin: 0 auto;
-}
-
-div#sidebar {
-    position: fixed;
-    height: 100vh;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 200px;
-    background-color: white;
-    color: darkgray;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: right;
-    padding-top: 10px;
-    border-right: 1px solid lightgray;
-}
-
-div#sidebar > ul {
-    list-style-type: none;
+h1,h2,h3 {
+    font-style: italic;
 }
 
 a {
-    text-decoration: none;
-    color: #3F2B96;
+    color: #aa0000;
 }
 
-a:visited {
-    color: #3F2B96;
+html {
+    font-family: 'Barlow', sans-serif;
+    color: #222222;
+    background-color: #f9f9f9;
+    font-style: normal;
 }
 
-div#topbar {
-    position: fixed;
-    width: 100vw;
-    height: 60px;
-    /*background-color: darkcyan;*/
-    left: 0;
-    background: linear-gradient(90deg, #3F2B96 0%, #A8C0FF 100%);
-    top: 0;
-    color: white;
-    z-index: 100;
-    padding-left: 20px;
-    display: flex;
-    box-shadow: 0px 0px 5px gray;
+body {
+    width: 80%;
+    margin: 0 auto;
 }
 
-div#topbar > h3 {
-    margin-right: 40px;
-}
-
-div#topbar > a {
-    margin-left: 25px;
-    color: white;
-    font-weight: bold;
-    margin-top: 20px;
-}
-
-div#topbar > span {
-    flex: auto;
-    margin-right: 50px;
-    margin-top: 15px;
-}
-
-div#topbar > span > a {
-    float: right;
-    padding-left: 10px;
-    padding-right: 10px;
+#preamble {
+    display: none;
 }
 
 #postamble {
     display: none;
 }
 
-blockquote {
-    font-style: italic;
-    color: #4b4b4b;
-    border-left: 1px solid grey;
+#topbar {
+    position: fixed;
+    padding: 0;
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+    top: 120px;
+    left: calc(50% - 650px);
+}
+
+#content {
+    max-width: 70ch;
+    margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 100px;
+    line-height: 1.5em;
+}
+
+#social-links > a > img {
+    filter: brightness(20%);
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    
+}
+
+#topbar > a {
+    padding-left:2px;
+    padding-right:2px;
+}
+
+.org-src-container {
+    background: #f4f4f4;
+    padding: 10px;
     padding-left: 20px;
+    border-radius: 5px;
+    border: 1px solid #c5c4c4;
+    overflow-x: scroll;
 }
 
-@media only screen and (max-width: 600px) {
-  div#topbar > h3 {
-      display: none;
-  }
-
-  div#content {
-      padding-left: 5px;
-      padding-right: 5px;
-  }
+.example {
+    background: #f4f4f4;
+    padding: 10px;
+    padding-left: 20px;
+    border-radius: 5px;
+    border: 1px solid #c5c4c4;
+    overflow-x: scroll;
 }
 
-@media only screen and (max-width: 400px) {
-  div#topbar > a {
-      margin-left: 10px;
-  }
+#profile-picture {
+    border-radius: 500px;
+    width: 150px;
+}
 
-  div#content {
-      padding-left: 10px;
-      padding-right: 10px;
-  }
+
+@media only screen and (max-width: 1000px) {
+    body {
+	width: 100%;
+    }
+
+    #topbar {
+	position: absolute;
+	top: 0;
+	left: calc(50% - 150px);
+	border-bottom: 1px solid #b3b3b3;
+    }
+
+    #topbar > img#profile-picture {
+	display: none;
+    }
+
+    div#content {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 170px;
+    }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1500px) {
+    #content { 
+	margin-left: 30%;
+    }
+    #topbar {
+	left: calc(50% - 550px);
+    }
 }

@@ -4,8 +4,9 @@
 <!-- 2023-03-25 Sat 17:14 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>News</title>
+<title>Displaying remote images in Org-mode</title>
 <meta name="generator" content="Org mode">
+<meta name="author" content="Jay Paul Morgan">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/css/general.css"/>
 <script type="text/javascript">
@@ -33,11 +34,11 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<h1 class="title">News</h1>
-          <p class="subtitle"></p>
+<h1 class="title">Displaying remote images in Org-mode</h1>
+          <p class="subtitle">2023-03-18 Sat</p>
 </div>
 <div id="content">
-<h1 class="title">News</h1>
+<h1 class="title">Displaying remote images in Org-mode</h1>
 <div id="topbar">
 <img id="profile-picture" src="/images/profile.jpg" alt="Jay Paul Morgan profile picture" width="200px"/>
 <h3>Dr. Jay Paul Morgan</h3>
@@ -54,23 +55,57 @@
 </p>
 </div>
 
-<ul class="org-ul">
-<li>2023-03-19 &#x2013; <a href="2023-03-19.html">Machine Learning and Computer Vision in Heliophysics</a></li>
-</ul>
-
-<blockquote>
 <p>
-We'll be presenting a poster at the <a href="https://mosaiics.astro.bas.bg/?page_id=165">Machine Learning and Computer
-Vision in Heliophysics international workshop</a>, Sofia, Bulgaria.
+In one of my <a href="../2022-12-15-org-babel-tramp/org-babel-tramp.html">previous posts</a>, I explained how a remote python process
+can be setup in an org-mode documents. Therefore, allowing you to
+offload any large compute to a remote server.
 </p>
 
 <p>
-The poster concerns the our work on improving the down-stream feature
-detection of solar features by removing the contani&#x2026;
+However, in the previous post, I mentioned how I was unable to get
+images created as a result of a remote process (i.e. plotting with
+matplotlib) to display inline. My workaround was just to visit the
+remote file in a separate buffer using <code>C-c C-o</code>. But today, I chanced
+upon this stackoverflow <a href="https://stackoverflow.com/a/75086516">answer</a> that exactly solves my issue.
 </p>
-</blockquote>
+
+<p>
+Unbeknownst to me, there is an variable that specifies how org-mode
+should handle remote paths. This variable, aptly named
+<code>org-display-remote-inline-images</code> (perhaps I should have searched in
+emacs's variable list for some combination of these keywords), can be
+change from <code>skip</code> (which ignores any remote paths), to <code>download</code>
+which will display the image inline!
+</p>
+
+<p>
+This is the documentation for this variable.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-example">org-display-remote-inline-images is a variable defined in ‘org.el’.
+
+Its value is ‘skip’
+
+How to display remote inline images.
+Possible values of this option are:
+
+skip        Don’t display remote images.
+download    Always download and display remote images.
+cache       Display remote images, and open them in separate buffers
+	    for caching.  Silently update the image buffer when a file
+	    change is detected.
+</pre>
+</div>
+
+<p>
+By setting this variable appropriately, working with a remote process
+in org-mode is just as it is with a local process &#x2013; seamless.
+</p>
 </div>
 <div id="postamble" class="status">
+<p class="date">Date: 2023-03-18 Sat</p>
+<p class="author">Author: Jay Paul Morgan</p>
 <p class="date">Created: 2023-03-25 Sat 17:14</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

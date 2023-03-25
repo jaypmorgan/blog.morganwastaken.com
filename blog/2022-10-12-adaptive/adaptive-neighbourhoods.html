@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2023-03-25 Sat 17:14 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XTAI 2022 - Adaptive Neighbourhoods for the Discovery of Adversarial Examples</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Jay Morgan">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 class="title">XTAI 2022 - Adaptive Neighbourhoods for the Discovery of Adversarial Examples</h1>
+          <p class="subtitle">12-10-2022</p>
+</div>
+<div id="content">
+<h1 class="title">XTAI 2022 - Adaptive Neighbourhoods for the Discovery of Adversarial Examples</h1>
+<div id="topbar">
+<img id="profile-picture" src="/images/profile.jpg" alt="Jay Paul Morgan profile picture" width="200px"/>
+<h3>Dr. Jay Paul Morgan</h3>
+<a href="/">About</a>
+<a href="/blog">Blog Posts</a>
+<a href="/news">News</a>
+<a href="https://pageperso.lis-lab.fr/jay.morgan/teaching.html">Teaching</a>
+<p id="social-links">
+<a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr"><img src="/images/google-scholar.png" alt="Jay Paul Morgan google scholar publication" width="30px" height="30px"/></a>
+<a href="https://emacs.ch/@jaymorgan"><img src="/images/mastodon.png" alt="Jay Paul Morgan Mastodon" width="30px" height="30px"/></a>
+<a href="https://github.com/jaypmorgan"><img src="/images/github.png" alt="Jay Paul Morgan jaypmorgan github link" width="30px" height="30px"/></a>
+<a href="https://orcid.org/my-orcid?orcid=0000-0003-3719-362X"><img src="/images/orcid.png" alt="Jay Paul Morgan orcid link" width="30px" height="30px"/></a>
+<a href="https://www.researchgate.net/profile/Jay-Morgan?ev=hdr_xprf"><img src="/images/researchgate.png" alt="Jay Paul Morgan research gate social link" width="30px" height="30px"/></a>
+</p>
+</div>
+
+<p>
+Talk prepared for the AISB Workshop on Explainability and Transparency in AI,
+XTAI 2022.
+</p>
+
+<p>
+<b>Presentation Abstract</b>
+</p>
+
+<p>
+Machine Learning, in particular Deep Learning, has most recently
+provided the state-of-the-art results for many tasks such as object
+recognition, text-to-speech processing, and credit-card fraud
+detection. In many cases, Deep Learning has even out-performed human
+performance on these very same tasks. Despite this advance in
+performance, however, the existence of so-called adversarial examples
+is well known within the community. These adversarial examples are the
+metaphorical 'blind-spot' of Deep Learning models, where very small
+(often human-imperceptible) changes to model's input can result
+catastrophic miss-classifications. These adversarial examples then
+pose a great safety risk, especially in systems where safety is
+critical such as fully-automotive vehicles.
+</p>
+
+<p>
+To defend against and attempt to eradicate the existence of
+adversarial examples in Deep Learning models, principle works have
+sought to search for their existence within fixed-sized regions around
+training points, and use the found adversarial examples as a criterion
+for learning. These works have demonstrated how the robustness of Deep
+Learning models against adversarial examples improves through these
+training regimes.
+</p>
+
+<p>
+Our work means to compliment and improve on these existing approaches
+by adapting the size of the searchable regions around training points,
+based upon the complexity of the problem and data sampling
+density. The result is each training point has an adapted region
+around it to which adversarial examples can be searched for and found.
+</p>
+
+<p>
+We demonstrate how, through the development of uniquely-adaptive
+searchable regions, existing methods can help to further improve the
+robustness of Deep Learning models, and also make the existing methods
+applicable to non-image related tasks by providing an upper bound for
+discovering adversarial examples.
+</p>
+
+<p>
+In this presentation, we will explore how adversarial examples can be
+determined through the use of existing approaches. Further to these
+approaches, how our method allows us to generate unique and adapted
+region sizes for all training points in a dataset.
+</p>
+
+<p>
+<b>Presentation Slides</b>
+</p>
+
+<p>
+<a href="https://github.com/jaypmorgan/presentations/blob/main/2022-10-13-Adaptive%20Neighbourhoods/presentation.pdf">Slides</a>
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 12-10-2022</p>
+<p class="author">Author: Jay Morgan</p>
+<p class="date">Created: 2023-03-25 Sat 17:14</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
