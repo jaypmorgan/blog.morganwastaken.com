@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-03-28 Tue 08:15 -->
+<!-- 2023-04-10 Mon 15:35 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Using a remote Python process in Org-mode files</title>
@@ -43,10 +43,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb8f45cb">1. Introduction</a></li>
-<li><a href="#org3efcb84">2. Setup</a></li>
-<li><a href="#org08faab5">3. Changing the Python Interpreter</a></li>
-<li><a href="#orge025a9a">4. Plotting</a></li>
+<li><a href="#orgddecd69">1. Introduction</a></li>
+<li><a href="#orgdd7a5a9">2. Setup</a></li>
+<li><a href="#org7d118fe">3. Changing the Python Interpreter</a></li>
+<li><a href="#orgc0a252c">4. Plotting</a></li>
 </ul>
 </div>
 </div>
@@ -55,7 +55,6 @@
 <h3>Dr. Jay Paul Morgan</h3>
 <a href="/">About</a>
 <a href="/blog">Blog Posts</a>
-<a href="/news">News</a>
 <a href="https://pageperso.lis-lab.fr/jay.morgan/teaching.html">Teaching</a>
 <p id="social-links">
 <a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr"><img src="/images/google-scholar.png" alt="Jay Paul Morgan google scholar publication" width="30px" height="30px"/></a>
@@ -66,8 +65,8 @@
 </p>
 </div>
 
-<div id="outline-container-orgb8f45cb" class="outline-2">
-<h2 id="orgb8f45cb"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-orgddecd69" class="outline-2">
+<h2 id="orgddecd69"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Sometimes the work we do requires a lot of horse-power &#x2013; a lot of compute
@@ -82,8 +81,8 @@ execute computations via a remote python process.
 </div>
 </div>
 
-<div id="outline-container-org3efcb84" class="outline-2">
-<h2 id="org3efcb84"><span class="section-number-2">2</span> Setup</h2>
+<div id="outline-container-orgdd7a5a9" class="outline-2">
+<h2 id="orgdd7a5a9"><span class="section-number-2">2</span> Setup</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 First, we setup the location of remote server, and where the python process will be
@@ -91,7 +90,7 @@ started. I do this within the top of the org-mode file so that all python code b
 will use this location by default. We set this up using the <code>#+PROPERTY:</code> argument:
 </p>
 
-<pre class="example" id="org6997e25">
+<pre class="example" id="org9b4ec09">
 #+PROPERTY: header-args:python :dir /ssh:&lt;server&gt;:/path/to/dir
 </pre>
 
@@ -108,7 +107,7 @@ out which python is being used by printing the hostname of the machine running t
 python process, and the path to the python executable:
 </p>
 
-<pre class="example" id="org91ddbdb">
+<pre class="example" id="orgf89ca43">
 #+begin_src python :results output
 import sys
 import socket
@@ -119,8 +118,8 @@ print(sys.executable)
 </div>
 </div>
 
-<div id="outline-container-org08faab5" class="outline-2">
-<h2 id="org08faab5"><span class="section-number-2">3</span> Changing the Python Interpreter</h2>
+<div id="outline-container-org7d118fe" class="outline-2">
+<h2 id="org7d118fe"><span class="section-number-2">3</span> Changing the Python Interpreter</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 By default, the python code blocks will be executed using the first "python" command
@@ -134,7 +133,7 @@ manually change the <code>org-babel-python-command</code> to the path of the vir
 to use:
 </p>
 
-<pre class="example" id="orgcc7605d">
+<pre class="example" id="org484308d">
 #+begin_src emacs-lisp
 (setq org-babel-python-command "venv/bin/python")
 #+end_src
@@ -145,7 +144,7 @@ We can then confirm that the correct virtual environment is being used by printi
 the path to the executable again.
 </p>
 
-<pre class="example" id="org0947128">
+<pre class="example" id="orgf6f33b4">
 #+begin_src python :results output
 import socket
 print(sys.executable)
@@ -154,8 +153,8 @@ print(sys.executable)
 </div>
 </div>
 
-<div id="outline-container-orge025a9a" class="outline-2">
-<h2 id="orge025a9a"><span class="section-number-2">4</span> Plotting</h2>
+<div id="outline-container-orgc0a252c" class="outline-2">
+<h2 id="orgc0a252c"><span class="section-number-2">4</span> Plotting</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Alas there is still a pain point: plotting. When we execute a code block and specify
@@ -164,7 +163,7 @@ the local machine. Of course, this doesn't exist as it was executed on the remot
 server. Take for example:
 </p>
 
-<pre class="example" id="org641dd59">
+<pre class="example" id="org88890b1">
 #+begin_src python :results file
 import matplotlib.pyplot as plt
 import numpy as np
@@ -184,7 +183,7 @@ This will not work. Instead, a workaround I've created is creating a named code 
 to save and return the remote path:
 </p>
 
-<pre class="example" id="orge10d830">
+<pre class="example" id="orgbf69e65">
 #+name: savefig
 #+begin_src python :session testing :var filename="/tmp/plot.png"
 f"""
@@ -205,7 +204,7 @@ plt.close()
 Then when we want to create a plot:
 </p>
 
-<pre class="example" id="org3e50ad0">
+<pre class="example" id="org5fe7e38">
 #+begin_src python :results file :noweb strip-export
 import matplotlib.pyplot as plt
 import numpy as np
@@ -230,7 +229,7 @@ for the moment.
 <div id="postamble" class="status">
 <p class="date">Date: 2022-12-15</p>
 <p class="author">Author: Jay Morgan</p>
-<p class="date">Created: 2023-03-28 Tue 08:15</p>
+<p class="date">Created: 2023-04-10 Mon 15:35</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
