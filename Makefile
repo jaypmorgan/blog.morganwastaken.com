@@ -14,3 +14,6 @@ clean:
 	@rm -rvf *.elc
 	@rm -rvf public
 	@rm -rvf ~/.org-timestamps/*
+
+serve:
+	cd public && python -m http.server 8000

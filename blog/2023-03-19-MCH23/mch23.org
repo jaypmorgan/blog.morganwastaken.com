@@ -1,7 +1,7 @@
 #+title: Machine Learning and Computer Vision in Heliophysics
 #+author: Jay Morgan
 #+date: <2023-03-19 Sun>
-#+include: ../template.org
+#+include: ../../template.org
 
 We'll be presenting a poster at the [[https://mosaiics.astro.bas.bg/?page_id=165][Machine Learning and Computer
 Vision in Heliophysics international workshop]], Sofia, Bulgaria.
