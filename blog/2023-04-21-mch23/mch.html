@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2023-05-07 Sun 09:28 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MCH2023 - A retrospective</title>
+<meta name="generator" content="Org mode">
+<meta name="author" content="Jay Paul Morgan">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 class="title">MCH2023 - A retrospective</h1>
+          <p class="subtitle">2023-04-21 Fri 00:00</p>
+</div>
+<div id="content">
+<h1 class="title">MCH2023 - A retrospective</h1>
+<div id="topbar">
+<img id="profile-picture" src="/images/profile.jpg" alt="Jay Paul Morgan profile picture" width="200px"/>
+<h3>Dr. Jay Paul Morgan</h3>
+<a href="/">About</a>
+<a href="/blog">Blog Posts</a>
+<a href="https://pageperso.lis-lab.fr/jay.morgan/teaching.html">Teaching</a>
+<p id="social-links">
+<a href="https://scholar.google.com/citations?user=AO1az5YAAAAJ&hl=fr"><img src="/images/google-scholar.png" alt="Jay Paul Morgan google scholar publication" width="30px" height="30px"/></a>
+<a rel="me" href="https://emacs.ch/@jaymorgan"><img src="/images/mastodon.png" alt="Jay Paul Morgan Mastodon" width="30px" height="30px"/></a>
+<a href="https://github.com/jaypmorgan"><img src="/images/github.png" alt="Jay Paul Morgan jaypmorgan github link" width="30px" height="30px"/></a>
+<a href="https://orcid.org/my-orcid?orcid=0000-0003-3719-362X"><img src="/images/orcid.png" alt="Jay Paul Morgan orcid link" width="30px" height="30px"/></a>
+<a href="https://www.researchgate.net/profile/Jay-Morgan?ev=hdr_xprf"><img src="/images/researchgate.png" alt="Jay Paul Morgan research gate social link" width="30px" height="30px"/></a>
+</p>
+</div>
+
+<p>
+The <a href="https://mosaiics.astro.bas.bg/?page_id=165">2023 Machine Learning and Computer Vision in Heliophysics</a>
+conference, hosted in the luxurious Millennium hotel, Sofia, Bulgaria,
+has now concluded after 3 days of interesting and thought-provoking
+lectures.
+</p>
+
+<p>
+Following this conference, I wanted to highlight some of the talks, as
+well as drawing and picking up common threads that were interwoven
+through all the presentations. From this, I hope to better understand
+what the current research is, more than one would gain for looking at
+each work in its isolation.
+</p>
+
+
+<div id="org0b1cc97" class="figure">
+<p><img src="images/20230419_085440.jpg" alt="20230419_085440.jpg" width="500px">
+</p>
+<p><span class="figure-number">Figure 1: </span>2023 Machine Learning and Computer Vision in Heliophyics conference introduction.</p>
+</div>
+
+<p>
+For a full list of the conference program, you can <a href="https://mosaiics.astro.bas.bg/wp-content/uploads/2023/04/MCH23_Workshop_Schedule_FULL.pdf">find it here</a>.
+</p>
+
+<p>
+If you were at this conference and you think that I've missed
+something that should be covered in this discussion, please do get in
+touch and let me know!
+</p>
+
+<div id="outline-container-org83ace35" class="outline-2">
+<h2 id="org83ace35">Simple models are useful models</h2>
+<div class="outline-text-2" id="text-org83ace35">
+<p>
+Much of the work showed thoughtful feature extraction, coupled with
+domain knowledge, and selection of traditional machine learning models
+can still produce reliable models upon which to make
+predictions. Take, for example, <a href="https://www.kuleuven.be/wieiswie/en/person/00132801">Hanne Baeke</a>'s talk where active
+regions are classified using the magnetic properties. A small number
+of features were selected by evaluating the usefulness and duplication
+of information present in all the features. After a sparse autoencoder
+was used to encode a slightly larger representation, that was
+classified using a \(k\) -NN model in a supervised way, and \(k\) -means
+in a unsupervised way.
+</p>
+
+<p>
+But while, we have seen such use of traditional machine learning, Deep
+Neural Networks (DNNs) also make their appearance. I noticed a use of
+common models through applications. In particular, we saw many
+applications using either U-Net or YOLO.
+</p>
+
+<p>
+<a href="https://www.researchgate.net/profile/Andrea-Diercke">Andrea Diercke</a> created a labelled (the labels being bounding-boxes)
+dataset of filaments in the H-&alpha; wavelength. These labels were
+used to train a YOLO model to recognise the presence of filaments so
+other, more computationally expensive algorithms but potentially more
+accurate, could be used to create segmentation masks on smaller
+regions of the images.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org342be41" class="outline-2">
+<h2 id="org342be41">More data is better data</h2>
+<div class="outline-text-2" id="text-org342be41">
+<p>
+Heliophyics is no exception in the world where more data is needed to
+adequately train ML models. Despite many satellites, telescopes, and
+other sensoring equipment constantly gathering data, a very large
+percentage of the data being recorded contains nothing
+interesting. For example, take <a href="https://www.linkedin.com/in/alin-razvan-paraschiv/">Alin Razvan Paraschiv</a>'s talk in which
+they would like to classify whether, based on a small number of
+features, a cosmic mass ejection (CME) will interact with the Earth
+(geoeffective). In this talk, 99.3% of all data is
+non-geoeffective. Class-imbalance is then a persistent problem. The
+disruptive events we want to detect and predict happen very rarely. In
+<a href="https://www.linkedin.com/in/vanessa-mercea-a13091105">Vanessa Mercea</a>'s talk on the detection of sunquakes, these type of
+events only happen around 2 times per year. Given then length of time
+since they've been discovered, we haven't observed a whole lot of
+them.
+</p>
+
+<p>
+To combat the issue of small samples of positive data, the <a href="https://www.jair.org/index.php/jair/article/view/10302">Synthetic
+Minority Oversampling Technique (SMOTE)</a> algorithm was very often
+used to generate synthetic examples.
+</p>
+
+<p>
+Other cases used a DNN to generate data. Take, for example, <a href="https://www.linkedin.com/in/francesco-pio-ramunno-a03a20158/?originalSubdomain=it">Francesco
+Pio Ramunno</a> demonstrating a very interesting method of generating
+solar disk images that contain desired solar features using a
+Diffusion Probabilistic Model (DDPM). Others like <a href="https://www.linkedin.com/in/juan-esteban-agudelo-ortiz-5a34741b5?originalSubdomain=co">Juan Esteban Agudelo
+Ortiz</a> used a GAN architecture to generate stokes parameters.
+</p>
+
+<p>
+As the events we're interested in happen very infrequently, but we're
+recording all of the time, we are essentially wasting our storage with
+useless data. <a href="https://homepages.dias.ie/murphp30/">Pearse Murphy</a> used a U-Net trained to segment type-II and
+type-III solar bursts so that data could be automatically binned and
+we reduce the storage costs by restricting the saving data closer to
+solar events.
+</p>
+
+
+<div id="org4455462" class="figure">
+<p><img src="images/20230420_163823.jpg" alt="20230420_163823.jpg" width="500px">
+</p>
+<p><span class="figure-number">Figure 2: </span>Adeline Paiement presenting our working on removing cloud shadows from ground-based imaging.</p>
+</div>
+
+<p>
+Instead of generating data, DNNs were used to clean existing data. For
+example <a href="https://www.researchgate.net/profile/Jeremiah-Scully">Jeremiah Scully</a> 's work in cleaning of radio frequency
+interference using GANs. Or, <a href="https://adelinepaiement.github.io/">Adeline Paiement</a> presenting <a href="https://github.com/jaypmorgan/cloud-removal">our work</a> on
+the cleaning of cloud contaminants from H-&alpha; and Ca-II imaging. We
+used a U-Net model in a C-GAN architecture to learn the cloud
+transmittance. The transmittance values could then be added to the
+solar disk, resulting in a cleaned image. You can find out <a href="https://github.com/jaypmorgan/presentations/tree/main/2023-04-19-Cloud-removal">poster at
+on my github</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3c90476" class="outline-2">
+<h2 id="org3c90476">Other talks</h2>
+<div class="outline-text-2" id="text-org3c90476">
+<p>
+Not all of the talks fit into my classification here. But I wanted to
+highlight some other interesting talks that do not follow the trend
+placed above, though this in itself is not an exhaustive list.
+</p>
+
+
+<div id="orgcd2dea8" class="figure">
+<p><img src="images/20230419_102413.jpg" alt="20230419_102413.jpg" width="500px">
+</p>
+<p><span class="figure-number">Figure 3: </span><a href="https://scholar.google.es/citations?user=fzGHAccAAAAJ&amp;hl=en">Manuel Luna</a> presenting his work on the characterisation on the oscillisation of filaments.</p>
+</div>
+
+<p>
+First we have <a href="https://scholar.google.es/citations?user=fzGHAccAAAAJ&amp;hl=en">Manuel Luna</a>'s work of detecting the oscillation of
+filament structures and its characterisation over a 6-month
+period. Secondlly, we have Benoit's talk of creating a 3d-simulation
+of the sun by predicting the image of the solar disk from angles where
+there are no satellites. Other works include <a href="https://www.bu.edu/astronomy/profile/connor-obrien/">Connor O'Brien's</a> lecture
+on the probabilisitc determination of solar wind propagation using an
+RNN model.
+</p>
+
+
+<div id="orgeb046a7" class="figure">
+<p><img src="images/20230419_173438.jpg" alt="20230419_173438.jpg" width="500px">
+</p>
+<p><span class="figure-number">Figure 4: </span>Benoit demonstrating an example of a 3d-simulation of the Sun's south pole.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-04-21 Fri 00:00</p>
+<p class="author">Author: Jay Paul Morgan</p>
+<p class="date">Created: 2023-05-07 Sun 09:28</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
