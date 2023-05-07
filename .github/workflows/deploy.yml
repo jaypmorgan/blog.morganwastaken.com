@@ -28,7 +28,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Make html files
-        run: make
+        run: make publish
       - name: Force push to destination branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
