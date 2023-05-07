@@ -1,6 +1,6 @@
 .PHONY: all publish publish_no_init
 
-all: publish
+all: clean publish serve
 
 publish: includes/publish.el
 	@echo "Publishing... with --no-init."
@@ -16,4 +16,4 @@ clean:
 	@rm -rvf ~/.org-timestamps/*
 
 serve:
-	cd public && python -m http.server 8000
+	cd public && python3 -m http.server 8000
