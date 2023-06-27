@@ -1,6 +1,8 @@
 #+title: Domain-informed graph neural networks: a quantum chemistry case study
 #+author: Jay Paul Morgan
 #+date: <2023-06-27 Tue>
+#+options: toc:nil num:nil
+#+include: ../../template.org
 
 I would like to bring to attention that our (Jay Paul Morgan, Adeline
 Paiement, and Christian Klinke) paper 'Domain-informed graph neural networks: a quantum chemistry case study
