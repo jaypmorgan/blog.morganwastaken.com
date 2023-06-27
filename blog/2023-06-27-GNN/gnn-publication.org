@@ -1,0 +1,26 @@
+#+title: Domain-informed graph neural networks: a quantum chemistry case study
+#+author: Jay Paul Morgan
+#+date: <2023-06-27 Tue>
+
+I would like to bring to attention that our (Jay Paul Morgan, Adeline
+Paiement, and Christian Klinke) paper 'Domain-informed graph neural networks: a quantum chemistry case study
+' has been accepted for publication in the journal 'Neural Networks',
+while we are waiting for the article to become available, we may
+direct you to an archive version at: https://hal.science/hal-04142152
+
+In this paper, we investigate strategies to incoporate domain
+knowledge of atomic interaction processes into the design of graph
+neural networks. These take form of two overall strategies: an
+indirect but easier to implementation version of multi-task method;
+and a more direct but more successful method of learning modulation
+parameters for different edge relations of chemical bonds.
+
+We show how these designs lead to concrete implementations in various
+neural network archictectures, such as message-passing, or
+convolutional networks.
+
+Finally, we evaluate these different implementations and demonstrate
+how prior domain knowledge can help neural networks to improve in
+accuracy, while providing some means of explainability in results, and
+being more robust to tasks adjacent to ones the neural network was
+trained on.
