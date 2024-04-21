@@ -45,8 +45,7 @@ framework by the guiding principles:
 	2. Unbiased analysis of results
 	3. Open sharing of methods, code, data.
 	4. Correct citation and refrain from plagiarism or stealing of ideas.
-	5. Moral obligations to society in general, and, in some disciplines,
-       responsibility in weighing the rights of human and animal subjects.
+	5. Moral obligations to society in general, and, in some disciplines, responsibility in weighing the rights of human and animal subjects.
 
 To be a scientist is to follow these guiding principles. To go against these
 principles is to not act ethically, and therefore not rational. Someone who does
