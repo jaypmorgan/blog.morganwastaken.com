@@ -1,0 +1,78 @@
+#+title: On Scientific Ethics
+#+author: Jay Paul Morgan
+#+date: <2024-04-21 Sun>
+#+options: toc:nil num:nil
+#+include: ../../template.org
+
+/“I am a scientist, and I solve problems. I don’t have to care about ethics!”/
+
+This statement concerns the ethics of scientists – scientific ethics. To
+understand whether the person making this statement is correct or not in their
+view, we must first understand the contents of the statement. Namely, the nature
+of ethics, and what it means to be a scientist.
+
+To begin, let us look at ethics.
+
+Ethics comes from the ancient Greek word, ethos, meaning character; personal
+disposition. Ethics by definition are the moral principles that guides the
+behavior or conducting of an activity. But what are these principles? Immanuel
+Kant believed there were universal principles. He believed that our ethical
+framework is not situational-dependent and personal, such as making ourselves
+happy, but there were laws by which a rational actor behaves. Therefore to act
+ethically is to act rationally as expressed by following of the ethical
+principles.
+
+Aristotle agrees with the relation of rationality and ethical standards. In his
+series of lectures, nichomachean ethics, Aristotle explains the absurdity of
+letting barbarians massacre your family without any fight. Aristotle was a
+strong believer that there is a middle ground to all things and situations, and
+a person who acts rationally always strives to determine this middle
+ground. But, like in the situation of barbarians, the middle ground does not
+simply mean a neutrality and apathy and not doing anything potentially bad, but
+it means to the right thing at the right time. As agreed by Dante 'There is a
+special place in hell for people who, in a time of a moral crisis, maintain
+their neutrality'. Sometimes we must act in order to act rationally and
+ethically given the circumstance and situation.
+
+Let us now turn to the subject of the circumstance: being a scientist.
+
+The Science Council defines a scientist as someone who systematically gathers
+and uses evidence, to make a hypothesis and test them, to gain and share
+understanding and knowledge. In this way, we may define the scientific ethical
+framework by the guiding principles:
+
+	1. Honesty in scientific reporting.
+	2. Unbiased analysis of results
+	3. Open sharing of methods, code, data.
+	4. Correct citation and refrain from plagiarism or stealing of ideas.
+	5. Moral obligations to society in general, and, in some disciplines,
+       responsibility in weighing the rights of human and animal subjects.
+
+To be a scientist is to follow these guiding principles. To go against these
+principles is to not act ethically, and therefore not rational. Someone who does
+not care about ethics is acting with absurdity, and by definition not a
+scientist.
+
+But our statement concerns someone who wishes to disregard ethics in pursuit of
+'solving problems'. This person is following the hedonistic view that their
+desires of solving problems overrides those of any moral principles and ethical
+concerns. This, in nature, in very unscientific as their interest is not in the
+scientific method, but in the result of having 'solved a problem'.
+
+Someone who claims to be a scientist to want to solve problems, must do so with
+accordance to the ethical principles therein. Acting ethically, is not a chain
+with which we bind ourselves, but a compass that guides us to do correct
+science. To solve problems we must find a hypothesis and method of testing it
+that follows our ethical principles of science. Solving problems does not
+require us to throw away our ethics—for that would not be science. To act
+against these ethical codes would not be scientific and therefore
+irrational. From this we may conclude that the statement presented paints a
+picture of someone who is living paradoxically with their desired character of
+scientist.
+
+Finally, I would like to end my argument with a quote from Albert Einstein, who
+says 'Most people say that it is the intellect which makes a great
+scientist. They are wrong: it is character.' When we understand that in ancient
+Greek 'character' was 'ethos', we see this quote to be correct.
+
+
