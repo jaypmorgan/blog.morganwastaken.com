@@ -59,6 +59,11 @@ body {
     padding-right:2px;
 }
 
+#topbar > a:after {
+    content: "\a";
+    white-space: pre;
+}
+
 .org-src-container {
     background: #f4f4f4;
     padding: 10px;

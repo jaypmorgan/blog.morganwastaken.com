@@ -3,8 +3,9 @@
 #+include: ./template.org
 #+HTML_HEAD: <meta name="description" content="Dr. Jay Paul Morgan is a Machine Learning research currently in the University of Toulon France. I am focusing on using Machine Learning applications for Heliophyics problems.">
 
-Hello, my name is Jay Paul Morgan. I am a Machine Learning
-post-doctoral researcher, specifically Deep Learning, in the
-[[https://www.univ-tln.fr/-University-of-Toulon-.html][University of Toulon]]. I am part of the [[https://www.lis-lab.fr/dyni/][LIS/DYNI]] lab there.
+Hello, my name is Jay Paul Morgan. I am a tutor in Computer Science at [[https://www.swansea.ac.uk/staff/j.p.morgan/][Swansea
+University]]. My research focuses on the integration of domain knowledge into
+the design of deep neural networks.
 
-I like to hack on Emacs, you can find my config [[https://github.com/jaypmorgan/dotfiles][here]]!
+I conducted my post-doc research as part of the the [[https://www.lis-lab.fr/dyni/][LIS/DYNI]] lab in the
+[[https://www.univ-tln.fr/-University-of-Toulon-.html][University of Toulon]].
