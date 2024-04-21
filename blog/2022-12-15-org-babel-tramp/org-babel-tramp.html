@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 2023-06-27 Tue 12:31 -->
+<!-- 2024-04-21 Sun 17:17 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Using a remote Python process in Org-mode files</title>
@@ -43,10 +43,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org519a97a">1. Introduction</a></li>
-<li><a href="#orgb9fd3d9">2. Setup</a></li>
-<li><a href="#org38c1578">3. Changing the Python Interpreter</a></li>
-<li><a href="#orgda44b44">4. Plotting</a></li>
+<li><a href="#org17dcf0b">1. Introduction</a></li>
+<li><a href="#orge1b6351">2. Setup</a></li>
+<li><a href="#org65a1efc">3. Changing the Python Interpreter</a></li>
+<li><a href="#org17abbde">4. Plotting</a></li>
 </ul>
 </div>
 </div>
@@ -65,8 +65,8 @@
 </p>
 </div>
 
-<div id="outline-container-org519a97a" class="outline-2">
-<h2 id="org519a97a"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-org17dcf0b" class="outline-2">
+<h2 id="org17dcf0b"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Sometimes the work we do requires a lot of horse-power &#x2013; a lot of compute
@@ -81,8 +81,8 @@ execute computations via a remote python process.
 </div>
 </div>
 
-<div id="outline-container-orgb9fd3d9" class="outline-2">
-<h2 id="orgb9fd3d9"><span class="section-number-2">2</span> Setup</h2>
+<div id="outline-container-orge1b6351" class="outline-2">
+<h2 id="orge1b6351"><span class="section-number-2">2</span> Setup</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 First, we setup the location of remote server, and where the python process will be
@@ -90,7 +90,7 @@ started. I do this within the top of the org-mode file so that all python code b
 will use this location by default. We set this up using the <code>#+PROPERTY:</code> argument:
 </p>
 
-<pre class="example" id="orge594ddd">
+<pre class="example" id="org9279832">
 #+PROPERTY: header-args:python :dir /ssh:&lt;server&gt;:/path/to/dir
 </pre>
 
@@ -107,7 +107,7 @@ out which python is being used by printing the hostname of the machine running t
 python process, and the path to the python executable:
 </p>
 
-<pre class="example" id="orgdc1d0da">
+<pre class="example" id="org997719f">
 #+begin_src python :results output
 import sys
 import socket
@@ -118,8 +118,8 @@ print(sys.executable)
 </div>
 </div>
 
-<div id="outline-container-org38c1578" class="outline-2">
-<h2 id="org38c1578"><span class="section-number-2">3</span> Changing the Python Interpreter</h2>
+<div id="outline-container-org65a1efc" class="outline-2">
+<h2 id="org65a1efc"><span class="section-number-2">3</span> Changing the Python Interpreter</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 By default, the python code blocks will be executed using the first "python" command
@@ -133,7 +133,7 @@ manually change the <code>org-babel-python-command</code> to the path of the vir
 to use:
 </p>
 
-<pre class="example" id="orga254595">
+<pre class="example" id="orga72f1dd">
 #+begin_src emacs-lisp
 (setq org-babel-python-command "venv/bin/python")
 #+end_src
@@ -144,7 +144,7 @@ We can then confirm that the correct virtual environment is being used by printi
 the path to the executable again.
 </p>
 
-<pre class="example" id="org9ad1de3">
+<pre class="example" id="orgde3421d">
 #+begin_src python :results output
 import socket
 print(sys.executable)
@@ -153,8 +153,8 @@ print(sys.executable)
 </div>
 </div>
 
-<div id="outline-container-orgda44b44" class="outline-2">
-<h2 id="orgda44b44"><span class="section-number-2">4</span> Plotting</h2>
+<div id="outline-container-org17abbde" class="outline-2">
+<h2 id="org17abbde"><span class="section-number-2">4</span> Plotting</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Alas there is still a pain point: plotting. When we execute a code block and specify
@@ -163,7 +163,7 @@ the local machine. Of course, this doesn't exist as it was executed on the remot
 server. Take for example:
 </p>
 
-<pre class="example" id="org84c3e10">
+<pre class="example" id="orgffae091">
 #+begin_src python :results file
 import matplotlib.pyplot as plt
 import numpy as np
@@ -183,7 +183,7 @@ This will not work. Instead, a workaround I've created is creating a named code 
 to save and return the remote path:
 </p>
 
-<pre class="example" id="orge18efd3">
+<pre class="example" id="org6a4daa4">
 #+name: savefig
 #+begin_src python :session testing :var filename="/tmp/plot.png"
 f"""
@@ -204,7 +204,7 @@ plt.close()
 Then when we want to create a plot:
 </p>
 
-<pre class="example" id="orgf9e73eb">
+<pre class="example" id="org376cf9b">
 #+begin_src python :results file :noweb strip-export
 import matplotlib.pyplot as plt
 import numpy as np
@@ -229,7 +229,7 @@ for the moment.
 <div id="postamble" class="status">
 <p class="date">Date: 2022-12-15</p>
 <p class="author">Author: Jay Morgan</p>
-<p class="date">Created: 2023-06-27 Tue 12:31</p>
+<p class="date">Created: 2024-04-21 Sun 17:17</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
