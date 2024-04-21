@@ -15,7 +15,7 @@ To begin, let us look at ethics.
 
 Ethics comes from the ancient Greek word, ethos, meaning character; personal
 disposition. Ethics by definition are the moral principles that guides the
-behavior or conducting of an activity. But what are these principles? Immanuel
+behaviour or conducting of an activity. But what are these principles? Immanuel
 Kant believed there were universal principles. He believed that our ethical
 framework is not situational-dependent and personal, such as making ourselves
 happy, but there were laws by which a rational actor behaves. Therefore to act
@@ -23,7 +23,7 @@ ethically is to act rationally as expressed by following of the ethical
 principles.
 
 Aristotle agrees with the relation of rationality and ethical standards. In his
-series of lectures, nichomachean ethics, Aristotle explains the absurdity of
+series of lectures, Nicomachean ethics, Aristotle explains the absurdity of
 letting barbarians massacre your family without any fight. Aristotle was a
 strong believer that there is a middle ground to all things and situations, and
 a person who acts rationally always strives to determine this middle
