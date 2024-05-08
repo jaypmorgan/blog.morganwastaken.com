@@ -35,7 +35,7 @@
 	 :publishing-function org-publish-attachment)
     ("resources"
      :base-directory "resources/"
-     :base-extension "ttf"
+     :base-extension "ttf\\|woff"
      :publishing-directory "public/resources"
      :publishing-function org-publish-attachment)
 	("images"

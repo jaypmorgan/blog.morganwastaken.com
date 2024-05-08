@@ -1,6 +1,7 @@
 #+title: How I utilise the word utilise.
 #+author: Jay Paul Morgan
 #+date: <2024-05-08 Wed>
+#+include: ../../template.org
 
 To put it simply: I don’t. I don’t like the word utilise. Instead, I /use/ the
 word use. It’s a great word, use, it’s very short—one syllable, and easily
