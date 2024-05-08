@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,500;1,800&display=swap');
 
-@font-family {
+@font-face {
     font-family: 'Darwin';
     src: url("/resources/DarwinSerif-Regular.woff");
 }
