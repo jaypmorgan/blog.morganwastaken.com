@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;1,500;1,800&display=swap');
 
+@font-family {
+    font-family: "Darwin";
+    src: url("/resources/DarwinSerif-Regular.ttf");
+}
+
 h1,h2,h3 {
     font-style: italic;
 }
@@ -9,7 +14,7 @@ a {
 }
 
 html {
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Darwin';
     color: #222222;
     background-color: #f9f9f9;
     font-style: normal;

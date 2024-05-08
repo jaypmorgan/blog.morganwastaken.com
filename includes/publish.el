@@ -33,6 +33,10 @@
 	 :base-extension "css"
 	 :publishing-directory "public/css"
 	 :publishing-function org-publish-attachment)
+    ("resources"
+     :base-directory "resources/"
+     :publishing-directory "public/resources"
+     :publishing-function org-publish-attachment)
 	("images"
 	 :base-directory "./"
 	 :base-extension "png\\|jpg\\|jpeg"
