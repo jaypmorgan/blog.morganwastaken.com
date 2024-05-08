@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Darwin';
-    src: url("/resources/DarwinSerif-Regular.woff");
+    src: url("/resources/DarwinSerif-Regular.ttf");
 }
 
 h1,h2,h3 {
