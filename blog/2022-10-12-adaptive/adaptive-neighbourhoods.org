@@ -5,7 +5,7 @@
 #+include: ../../template.org
 
 Talk prepared for the AISB Workshop on Explainability and Transparency in AI,
-XTAI 2022.
+[[http://va7.myqnapcloud.com/WordPress/xtai-2022/][XTAI 2022]].
 
 *Presentation Abstract*
 
