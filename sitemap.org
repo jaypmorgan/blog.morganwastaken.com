@@ -1,25 +1,25 @@
 #+begin_src emacs-lisp :eval yes :results output raw :exports results
   (defun print-link (filepath)
-    (format "- [[file:%s][%s]]\n" filepath filepath))
+    (format "- [[file:%s][%s]]\n" filepath (string-remove-suffix ".org" filepath)))
 
   (dolist (el (directory-files-recursively "./" ".org$"))
     (princ (print-link el)))
 #+end_src
 
 #+RESULTS:
-- [[file:./blog/2019-06-27-membership-functions/membership-functions.org][./blog/2019-06-27-membership-functions/membership-functions.org]]
-- [[file:./blog/2020-03-05-makefile/makefile.org][./blog/2020-03-05-makefile/makefile.org]]
-- [[file:./blog/2021-03-29-bctcs/bctcs-conf.org][./blog/2021-03-29-bctcs/bctcs-conf.org]]
-- [[file:./blog/2022-10-12-adaptive/adaptive-neighbourhoods.org][./blog/2022-10-12-adaptive/adaptive-neighbourhoods.org]]
-- [[file:./blog/2022-12-15-org-babel-tramp/org-babel-tramp.org][./blog/2022-12-15-org-babel-tramp/org-babel-tramp.org]]
-- [[file:./blog/2023-03-18-Org-babel-remote-images/remote.org][./blog/2023-03-18-Org-babel-remote-images/remote.org]]
-- [[file:./blog/2023-03-19-MCH23/mch23.org][./blog/2023-03-19-MCH23/mch23.org]]
-- [[file:./blog/2023-04-21-mch23/mch.org][./blog/2023-04-21-mch23/mch.org]]
-- [[file:./blog/2023-06-27-GNN/gnn-publication.org][./blog/2023-06-27-GNN/gnn-publication.org]]
-- [[file:./blog/2024-04-21-scientific-ethics/2024-04-21-scientific-ethics.org][./blog/2024-04-21-scientific-ethics/2024-04-21-scientific-ethics.org]]
-- [[file:./blog/2024-05-08-utilise/utilise.org][./blog/2024-05-08-utilise/utilise.org]]
-- [[file:./blog/index.org][./blog/index.org]]
-- [[file:./index.org][./index.org]]
-- [[file:./sitemap.org][./sitemap.org]]
-- [[file:./template.org][./template.org]]
+- [[file:./blog/2019-06-27-membership-functions/membership-functions.org][./blog/2019-06-27-membership-functions/membership-functions]]
+- [[file:./blog/2020-03-05-makefile/makefile.org][./blog/2020-03-05-makefile/makefile]]
+- [[file:./blog/2021-03-29-bctcs/bctcs-conf.org][./blog/2021-03-29-bctcs/bctcs-conf]]
+- [[file:./blog/2022-10-12-adaptive/adaptive-neighbourhoods.org][./blog/2022-10-12-adaptive/adaptive-neighbourhoods]]
+- [[file:./blog/2022-12-15-org-babel-tramp/org-babel-tramp.org][./blog/2022-12-15-org-babel-tramp/org-babel-tramp]]
+- [[file:./blog/2023-03-18-Org-babel-remote-images/remote.org][./blog/2023-03-18-Org-babel-remote-images/remote]]
+- [[file:./blog/2023-03-19-MCH23/mch23.org][./blog/2023-03-19-MCH23/mch23]]
+- [[file:./blog/2023-04-21-mch23/mch.org][./blog/2023-04-21-mch23/mch]]
+- [[file:./blog/2023-06-27-GNN/gnn-publication.org][./blog/2023-06-27-GNN/gnn-publication]]
+- [[file:./blog/2024-04-21-scientific-ethics/2024-04-21-scientific-ethics.org][./blog/2024-04-21-scientific-ethics/2024-04-21-scientific-ethics]]
+- [[file:./blog/2024-05-08-utilise/utilise.org][./blog/2024-05-08-utilise/utilise]]
+- [[file:./blog/index.org][./blog/index]]
+- [[file:./index.org][./index]]
+- [[file:./sitemap.org][./sitemap]]
+- [[file:./template.org][./template]]
 
