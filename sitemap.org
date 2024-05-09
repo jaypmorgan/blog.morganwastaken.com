@@ -17,6 +17,9 @@
 - [[file:./blog/2023-04-21-mch23/mch.org][./blog/2023-04-21-mch23/mch.org]]
 - [[file:./blog/2023-06-27-GNN/gnn-publication.org][./blog/2023-06-27-GNN/gnn-publication.org]]
 - [[file:./blog/2024-04-21-scientific-ethics/2024-04-21-scientific-ethics.org][./blog/2024-04-21-scientific-ethics/2024-04-21-scientific-ethics.org]]
+- [[file:./blog/2024-05-08-utilise/utilise.org][./blog/2024-05-08-utilise/utilise.org]]
 - [[file:./blog/index.org][./blog/index.org]]
 - [[file:./index.org][./index.org]]
+- [[file:./sitemap.org][./sitemap.org]]
+- [[file:./template.org][./template.org]]
 
