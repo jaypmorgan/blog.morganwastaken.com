@@ -9,6 +9,7 @@
 <h3>Dr. Jay Paul Morgan</h3>
 <a href="/">About</a>
 <a href="/blog">Blog Posts</a>
+<a href="/publications">Publications</a>
 <a href="https://pageperso.lis-lab.fr/jay.morgan/teaching.html">Teaching</a>
 <a href="https://www.swansea.ac.uk/staff/j.p.morgan/">Swansea University</a>
 <p id="social-links">

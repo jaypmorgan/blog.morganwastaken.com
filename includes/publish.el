@@ -23,6 +23,11 @@
 	 :base-extension "txt"
 	 :publishing-directory "./public/"
 	 :publishing-function org-publish-attachment)
+    ("html"
+     :base-directory "./publications"
+     :base-extension "html"
+     :publishing-directory "./public/publications"
+     :publishing-function org-publish-attachment)
 	("news"
 	 :base-directory "./news"
 	 :base-extension "org"
@@ -35,7 +40,7 @@
 	 :publishing-function org-publish-attachment)
     ("resources"
      :base-directory "resources/"
-     :base-extension "ttf\\|woff"
+     :base-extension "ttf\\|woff\\|pdf"
      :publishing-directory "public/resources"
      :publishing-function org-publish-attachment)
 	("images"
