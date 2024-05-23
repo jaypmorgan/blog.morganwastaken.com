@@ -1,0 +1,42 @@
+#publications > h1 {
+    color: darkgray;
+    font-style: italic;
+    border-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.publication > img {
+    float: left;
+    height: 100px;
+    width: 100px;
+    margin-left: -120px;
+}
+
+.publication > h1 {
+    border-bottom: 0px;
+    font-size: 1.5em;
+    margin-bottom: 0px;
+}
+
+.publication {
+    padding-left: 120px;
+}
+
+.publication > h2 {
+    font-style: italic;
+    color: darkgray;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.publication > a.button {
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 6px 6px 6px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  border-radius: 5px;
+}
